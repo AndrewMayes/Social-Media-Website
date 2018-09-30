@@ -1,0 +1,80 @@
+.header {
+	background-color: black;
+	height: 38px;
+	border-bottom: 0px;
+	padding-left: auto;
+	padding-right: auto;
+	width: 100%;
+}
+
+#wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+#menu {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 50px;
+	padding-top: 19px;
+	padding-right: 100px;
+}
+
+#menu a {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 14px;
+	background-repeat: no-repeat;
+	padding-top: 19px;
+	padding-bottom: 22px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#menu a:hover {}
+
+#logo {
+	position: static;
+	top: 0px;
+	right: 0px;
+	height: 50px;
+	padding-top: 6px;
+	padding-right: 30px;
+}
+
+#logo t {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 25px;
+	background-repeat: no-repeat;
+	padding-top: 19px;
+	padding-bottom: 22px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+h2 {
+	font-family: 'PT Sans', sans-serif;
+}
+
+input[type="text"] {
+	background-color: #FFFFFF;
+	border: 1px solid #E2E2E2;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 15 px;
+	padding: 5px;
+	width: 300px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	outline: none;
+}
+
+input [type="text"]:hover {
+	border: 1px solid red;
+}
