@@ -12,14 +12,13 @@
 					<t> Social Media </t>
 				</div>
 				<div id="menu">
-					<a href="#" />Home</a>
 					<a href="#" />Sign Up</a>
 					<a href="#" />Sign In</a>
 				</div>
 			</div>
 		</div>	
 		
-		<table align="center">
+		<table>
 			<tr>
 				<td>
 					<h2 align="center"> Join Now! </h2>

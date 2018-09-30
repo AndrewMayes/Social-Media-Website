@@ -1,6 +1,11 @@
+* {
+	margin: auto;
+	padding: auto;
+}
+
 .header {
-	background-color: black;
-	height: 38px;
+	background-image: url(img/black16.jpg);
+	height: 56px;
 	border-bottom: 0px;
 	padding-left: auto;
 	padding-right: auto;
@@ -8,6 +13,7 @@
 }
 
 #wrapper {
+	background-image: url(img/black16.jpg);
 	margin-left: auto;
 	margin-right: auto;
 	width: 1000px;
@@ -16,15 +22,17 @@
 }
 
 #menu {
+	background-image: url(img/black16.jpg);
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	height: 50px;
+	height: 37px;
 	padding-top: 19px;
 	padding-right: 100px;
 }
 
 #menu a {
+	
 	color: #FFFFFF;
 	text-decoration: none;
 	font-family: 'PT Sans', sans-serif;
@@ -39,28 +47,33 @@
 #menu a:hover {}
 
 #logo {
+	background-image: url(img/black16.jpg);
 	position: static;
 	top: 0px;
 	right: 0px;
-	height: 50px;
-	padding-top: 6px;
+	height: 40px;
+	padding-top: 15px;
 	padding-right: 30px;
 }
 
 #logo t {
+	background-image: url(img/black16.jpg);
 	color: #FFFFFF;
 	text-decoration: none;
 	font-family: 'PT Sans', sans-serif;
 	font-size: 25px;
 	background-repeat: no-repeat;
 	padding-top: 19px;
-	padding-bottom: 22px;
+	padding-bottom: 12px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
+
 h2 {
 	font-family: 'PT Sans', sans-serif;
+	padding-top: 19px;
+	padding-bottom: 12px;
 }
 
 input[type="text"] {
@@ -76,5 +89,5 @@ input[type="text"] {
 }
 
 input [type="text"]:hover {
-	border: 1px solid red;
+	border: 1px solid black;
 }
