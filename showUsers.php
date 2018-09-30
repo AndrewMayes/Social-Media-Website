@@ -5,7 +5,7 @@ References: https://github.com/jbrunelle/ODUCS418F18/blob/master/examples/testmy
 
 $servername = "localhost";
 $username = "admin";
-$password = "monarchs";
+$password = "M0n@rch$";
 $dbname = "cs418";
 
 // Create connection
