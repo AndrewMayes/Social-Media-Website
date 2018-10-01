@@ -88,6 +88,6 @@ input[type="text"] {
 	outline: none;
 }
 
-input [type="text"]:hover {
+input [type ="text"]:hover {
 	border: 1px solid black;
 }

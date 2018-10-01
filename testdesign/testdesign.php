@@ -9,7 +9,7 @@
 		<div class="header">
 			<div id="wrapper">
 				<div id="logo">
-					<t> Social Media </t>
+					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
 					<a href="#" />Sign Up</a>
