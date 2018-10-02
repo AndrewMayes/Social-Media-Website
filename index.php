@@ -12,7 +12,7 @@ References:
 <html>
 	<head>
 		<title>Social Media Prototype Testing</title>
-		<link rel="stylesheet" type="text/css" href="./testdesign/style.css?">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 	</head>
 	<body>
@@ -23,7 +23,7 @@ References:
 				</div>
 				<div id="menu">
 					<a href="testdesign.php" />Sign Up</a>
-					<a href="testsignin.php" />Sign In</a>
+					<a href="index.php" />Log In</a>
 				</div>
 			</div>
 		</div>	
@@ -33,8 +33,8 @@ References:
 				<td>
 					<h2 align="center"> Log In </h2>
 					<form action="index.php" method="POST">
-					<input type="text" name="email" value="" placeholder="Email"><br>
-					<input type="password" name="password" value="" placeholder="Password"> 
+					<input type="text" name="email" value="" placeholder="Email"><br /><br />
+					<input type="password" name="password" value="" placeholder="Password"><br /><br />
 					<input type="submit" name="submit" value="Log In!">    
 					</form> 
 				</td>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Social Media Prototype Testing</title>
-		<link rel="stylesheet" type="text/css" href="test.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 	</head>
 	<body>
@@ -13,7 +13,7 @@
 				</div>
 				<div id="menu">
 					<a href="testdesign.php" />Sign Up</a>
-					<a href="testsignin.php" />Sign In</a>
+					<a href="index.php" />Log In</a>
 				</div>
 			</div>
 		</div>	
