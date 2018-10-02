@@ -3,7 +3,7 @@
 	<head>
 		<title>Social Media Prototype Testing</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 	</head>
 	<body>
 		<div class="header">
@@ -21,7 +21,7 @@
 		<table>
 			<tr>
 				<td>
-					<h2 align="center"> Join Now! </h2>
+					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Join Now! </h2>
 					<form action="#" method="POST">
 						<input type="text" name="fname" size="25" placeholder="First Name" /> <br /><br />
 						<input type="text" name="lname" size="25" placeholder="Last Name" /> <br /><br />
@@ -33,5 +33,9 @@
 				</td>
 			</tr>
 		</table>
+		<div class="footer">
+				<p>":Social Media:": A CS418 Project</p><br/>
+				<p>Created by: Andrew Mayes and James Lopez</p>
+		</div>
 	</body>
 </html>
