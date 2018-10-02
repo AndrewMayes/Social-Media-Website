@@ -47,7 +47,7 @@ References:
 
 	$servername = "localhost";
 	$username = "admin";
-	$password = "M0n@rch$";
+	$password = "monarchs";
 	$dbname = "cs418";
 
 	// Create connection
