@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Social Media Prototype Testing</title>
-		<link rel="stylesheet" type="text/css" href="./testDesign/style.css?<?php echo time(); ?>" />
+		<link rel="stylesheet" type="text/css" href="./testdesign/style.css?">
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 	</head>
 	<body>
