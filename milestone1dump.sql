@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 30, 2018 at 02:01 AM
+-- Generation Time: Oct 02, 2018 at 12:58 AM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -25,16 +25,68 @@ USE `cs418`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE `groups` (
+  `group_id` int(10) UNSIGNED NOT NULL,
+  `group_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_users`
+--
+
+DROP TABLE IF EXISTS `group_users`;
+CREATE TABLE `group_users` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `group_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `msg_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `msg` varchar(280) NOT NULL,
+  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `group_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_groups`
+--
+
+DROP TABLE IF EXISTS `sub_groups`;
+CREATE TABLE `sub_groups` (
+  `sg_id` int(10) UNSIGNED NOT NULL,
+  `group_name` varchar(50) NOT NULL,
+  `group_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` int(4) UNSIGNED ZEROFILL NOT NULL,
-  `fname` varchar(32) NOT NULL,
-  `lname` varchar(32) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `email` text NOT NULL
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -42,16 +94,44 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`) VALUES
-(0001, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov'),
-(0002, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov'),
-(0003, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov'),
-(0004, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org'),
-(0005, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com'),
-(0006, 'Chick', 'Hicks', '@chick', 'chinga@cars.com');
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov'),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov'),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov'),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org'),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com'),
+(6, 'Chick', 'Hicks', '@chick', 'chinga@cars.com');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `group_users`
+--
+ALTER TABLE `group_users`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `group_id` (`group_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`msg_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `group_id` (`group_id`);
+
+--
+-- Indexes for table `sub_groups`
+--
+ALTER TABLE `sub_groups`
+  ADD PRIMARY KEY (`sg_id`),
+  ADD KEY `group_id` (`group_id`);
 
 --
 -- Indexes for table `users`
@@ -64,10 +144,49 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `group_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sub_groups`
+--
+ALTER TABLE `sub_groups`
+  MODIFY `sg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `group_users`
+--
+ALTER TABLE `group_users`
+  ADD CONSTRAINT `group_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `group_users_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
+
+--
+-- Constraints for table `sub_groups`
+--
+ALTER TABLE `sub_groups`
+  ADD CONSTRAINT `sub_groups_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
