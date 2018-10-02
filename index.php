@@ -22,7 +22,7 @@ References:
 					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
-					<a href="testdesign.php" />Sign Up</a>
+					<a href="signup.php" />Sign Up</a>
 					<a href="index.php" />Log In</a>
 				</div>
 			</div>
