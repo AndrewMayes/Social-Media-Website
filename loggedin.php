@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Social Media Prototype Testing</title>
-		<link rel="stylesheet" type="text/css" href="./testdesign/style.css?">
-		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 	</head>
 	<body>
 		<div class="header">
@@ -12,14 +12,29 @@
 					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
-					<a href="#">Sign Up</a>
-					<a href="#">Sign In</a>
+					<a href="signup.php" />Sign Up</a>
+					<a href="index.php" />Log In</a>
 				</div>
 			</div>
 		</div>	
+		
+		<?php
+			echo "<h1 class= " . "notfound" . ">Congratulations. You logged in!</h1><br /> <br />";
+		?>
+		<table>
+			<tr>
+				<td>
+					<form action="#" method="POST">
+						<input type="text" name="post" size="25" placeholder="Post Your Status..." /> <br />
+						<input type="submit" name="submit" value="Post"/>
+					</form>
+				</td>
+			</tr>		
+		</table>
+		<div class="footer">
+				<p>":Social Media:": A CS418 Project</p><br/>
+				<p>Created by: Andrew Mayes and James Lopez</p>
+		</div>
 	</body>
 </html>
 
-<?php
-echo "<h1 class= " . "notfound" . ">Congratulations. You logged in!</h1>";
-?>

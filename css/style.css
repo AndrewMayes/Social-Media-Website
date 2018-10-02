@@ -4,7 +4,7 @@
 }
 
 .header {
-	background-image: url(img/black16.jpg);
+	background-color: #2D2C2E;
 	height: 56px;
 	border-bottom: 0px;
 	padding-left: auto;
@@ -13,7 +13,7 @@
 }
 
 #wrapper {
-	background-image: url(img/black16.jpg);
+	background-color: #2D2C2E;
 	margin-left: auto;
 	margin-right: auto;
 	width: 1000px;
@@ -22,7 +22,7 @@
 }
 
 #menu {
-	background-image: url(img/black16.jpg);
+	background-color: #2D2C2E;
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -35,7 +35,7 @@
 	
 	color: #FFFFFF;
 	text-decoration: none;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Exo 2', sans-serif;
 	font-size: 14px;
 	background-repeat: no-repeat;
 	padding-top: 19px;
@@ -44,10 +44,12 @@
 	padding-right: 10px;
 }
 
-#menu a:hover {}
+#menu a:hover{
+	color: #D2CCD9;
+}
 
 #logo {
-	background-image: url(img/black16.jpg);
+	background-color: #2D2C2E;
 	position: static;
 	top: 0px;
 	right: 0px;
@@ -57,51 +59,70 @@
 }
 
 #logo t {
-	background-image: url(img/black16.jpg);
+	background-color: #2D2C2E;
 	color: #FFFFFF;
 	text-decoration: none;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Exo 2', sans-serif;
 	font-size: 25px;
 	background-repeat: no-repeat;
 	padding-top: 19px;
-	padding-bottom: 12px;
+	padding-bottom: 11px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
 
 h2 {
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Exo 2', sans-serif;
 	padding-top: 19px;
 	padding-bottom: 12px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
 	background-color: #FFFFFF;
-	border: 1px solid #E2E2E2;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 15 px;
-	padding: 5px;
-	width: 300px;
-	margin-bottom: 3px;
-	margin-top: 3px;
-	outline: none;
-}
-
-input[type="password"] {
-	background-color: #FFFFFF;
-	border: 1px solid #E2E2E2;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 15 px;
-	padding: 5px;
-	width: 300px;
-	margin-bottom: 3px;
-	margin-top: 3px;
-	outline: none;
-}
-
-input [type ="text"]:hover {
 	border: 1px solid black;
+	font-family: 'Exo 2', sans-serif;
+	font-size: 15 px;
+	padding: 5px;
+	width: 300px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border: 1 px black;
+	border-radius: 4px;
+	outline: none;
+}
+
+input[type="submit"]{
+	font-family: 'Exo 2', sans-serif;
+	font-size: 15 px;
+	padding: 5px;
+	width: 312px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border: 1px;
+	border-radius: 4px;
+	outline: none;
+}
+
+input[type=submit]:hover {
+    background-color: #D2CCD9;
+}
+
+body {
+	background-color: whitesmoke;
+}
+
+.footer {
+   position: fixed;
+   padding-top: 15px;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #2D2C2E;
+   font-family: 'Exo 2', sans-serif;
+   font-size: 13px;
+   color: white;
+   text-align: center;
 }
 
 .notfound {

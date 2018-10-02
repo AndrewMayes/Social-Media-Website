@@ -12,8 +12,8 @@ References:
 <html>
 	<head>
 		<title>Social Media Prototype Testing</title>
-		<link rel="stylesheet" type="text/css" href="./testdesign/style.css?">
-		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/style.css?">
+		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 	</head>
 	<body>
 		<div class="header">
@@ -22,8 +22,8 @@ References:
 					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
-					<a href="testdesign.php" />Sign Up</a>
-					<a href="testsignin.php" />Sign In</a>
+					<a href="signup.php" />Sign Up</a>
+					<a href="index.php" />Log In</a>
 				</div>
 			</div>
 		</div>	
@@ -31,15 +31,20 @@ References:
 		<table>
 			<tr>
 				<td>
-					<h2 align="center"> Log In </h2>
+					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Log In </h2>
 					<form action="index.php" method="POST">
-					<input type="text" name="email" value="" placeholder="Email"><br>
-					<input type="password" name="password" value="" placeholder="Password"> 
+					<input type="text" name="email" value="" placeholder="Email"><br /><br />
+					<input type="password" name="password" value="" placeholder="Password"><br /><br />
 					<input type="submit" name="submit" value="Log In!">    
 					</form> 
 				</td>
 			</tr>
 		</table>
+		
+		<div class="footer">
+			<p>":Social Media:": A CS418 Project</p><br/>
+			<p>Created by: Andrew Mayes and James Lopez</p>
+		</div>
 	</body>
 </html>
 
