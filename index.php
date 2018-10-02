@@ -53,7 +53,7 @@ References:
 	$servername = "localhost";
 	$username = "admin";
 	$password = "monarchs";
-	$dbname = "social_users";
+	$dbname = "cs418";
 
 	// Create connection
 	$conn = new mysqli($servername,$username,$password,$dbname);
