@@ -73,7 +73,7 @@
 
 
 h2 {
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Exo 2', sans-serif;
 	padding-top: 19px;
 	padding-bottom: 12px;
 }
@@ -123,106 +123,6 @@ body {
    font-size: 13px;
    color: white;
    text-align: center;
-}
-
-.notfound {
-	color: black;
-	text-align: center;
-}
-* {
-	margin: auto;
-	padding: auto;
-}
-
-.header {
-	background-image: url(img/black16.jpg);
-	height: 56px;
-	border-bottom: 0px;
-	padding-left: auto;
-	padding-right: auto;
-	width: 100%;
-}
-
-#wrapper {
-	background-image: url(img/black16.jpg);
-	margin-left: auto;
-	margin-right: auto;
-	width: 1000px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-
-#menu {
-	background-image: url(img/black16.jpg);
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	height: 37px;
-	padding-top: 19px;
-	padding-right: 100px;
-}
-
-#menu a {
-	
-	color: #FFFFFF;
-	text-decoration: none;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 14px;
-	background-repeat: no-repeat;
-	padding-top: 19px;
-	padding-bottom: 22px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-#logo {
-	background-image: url(img/black16.jpg);
-	position: static;
-	top: 0px;
-	right: 0px;
-	height: 40px;
-	padding-top: 15px;
-	padding-right: 30px;
-}
-
-#logo t {
-	background-image: url(img/black16.jpg);
-	color: #FFFFFF;
-	text-decoration: none;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 25px;
-	background-repeat: no-repeat;
-	padding-top: 19px;
-	padding-bottom: 12px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-
-h2 {
-	font-family: 'PT Sans', sans-serif;
-	padding-top: 19px;
-	padding-bottom: 12px;
-}
-
-input[type="text"], input[type="password"] {
-	background-color: #FFFFFF;
-	border: 1px solid black;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 15 px;
-	padding: 5px;
-	width: 300px;
-	margin-bottom: 3px;
-	margin-top: 3px;
-	outline: none;
-}
-
-input [type ="text"]:hover {
-	border: 1px solid red;
-}
-
-body {
-	background-color: whitesmoke;
 }
 
 .notfound {
