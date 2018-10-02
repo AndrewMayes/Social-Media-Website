@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2018 at 12:58 AM
+-- Generation Time: Oct 02, 2018 at 03:10 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -34,6 +34,16 @@ CREATE TABLE `groups` (
   `group_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`group_id`, `group_name`) VALUES
+(1, 'Global'),
+(2, 'Gaming'),
+(3, 'Sports'),
+(4, 'Movies');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +55,24 @@ CREATE TABLE `group_users` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `group_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `group_users`
+--
+
+INSERT INTO `group_users` (`user_id`, `group_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 4),
+(2, 1),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 4),
+(4, 1),
+(5, 1),
+(6, 3),
+(6, 4);
 
 -- --------------------------------------------------------
 
@@ -60,6 +88,17 @@ CREATE TABLE `messages` (
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `group_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES
+(1, 1, 'Hello. This is a test message.', '2018-10-02 18:00:48', 1),
+(2, 1, 'Is anyone there?', '2018-10-02 18:02:08', 1),
+(3, 2, 'Hi! You are not alone.', '2018-10-02 18:03:00', 1),
+(4, 1, 'Is this the gaming group?', '2018-10-02 19:03:09', 2),
+(5, 3, 'Yes it is. Welcome!', '2018-10-02 19:04:06', 2);
 
 -- --------------------------------------------------------
 
@@ -115,6 +154,7 @@ ALTER TABLE `groups`
 -- Indexes for table `group_users`
 --
 ALTER TABLE `group_users`
+  ADD PRIMARY KEY (`user_id`,`group_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `group_id` (`group_id`);
 
@@ -147,12 +187,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `group_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `group_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sub_groups`
 --
