@@ -15,8 +15,7 @@
 					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
-					<a href="signup.php" />Sign Up</a>
-					<a href="index.php" />Log In</a>
+					<a href="loggedout.php" />Log Out</a>
 				</div>
 			</div>
 		</div>	
