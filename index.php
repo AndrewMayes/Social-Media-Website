@@ -33,9 +33,9 @@ References:
 				<td>
 					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Log In </h2>
 					<form action="index.php" method="POST">
-					<input type="text" name="email" value="" placeholder="Email"><br /><br />
-					<input type="password" name="password" value="" placeholder="Password"><br /><br />
-					<input type="submit" name="submit" value="Log In!">    
+					<input id="loggin_text" type="text" name="email" value="" placeholder="Email"><br /><br />
+					<input id="loggin_text" type="password" name="password" value="" placeholder="Password"><br /><br />
+					<input id="loggin_submit" type="submit" name="submit" value="Log In!">    
 					</form> 
 				</td>
 			</tr>
