@@ -12,18 +12,9 @@
 	width: 100%;
 }
 
-#wrapper {
-	background-color: #2D2C2E;
-	margin-left: auto;
-	margin-right: auto;
-	width: 1000px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
 
 #menu {
 	background-color: #2D2C2E;
-	position: absolute;
 	top: 0px;
 	right: 0px;
 	height: 37px;
@@ -32,13 +23,13 @@
 }
 
 #menu a {
-	
+	float: right;
 	color: #FFFFFF;
 	text-decoration: none;
 	font-family: 'Exo 2', sans-serif;
 	font-size: 14px;
 	background-repeat: no-repeat;
-	padding-top: 19px;
+	padding-top: 1px;
 	padding-bottom: 22px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -50,12 +41,12 @@
 
 #logo {
 	background-color: #2D2C2E;
-	position: static;
+	float:left;
 	top: 0px;
 	right: 0px;
 	height: 40px;
 	padding-top: 15px;
-	padding-right: 30px;
+	padding-left: 150px;
 }
 
 #logo t {
@@ -71,14 +62,44 @@
 	padding-right: 10px;
 }
 
+ul {
+	font-family: 'Exo 2', sans-serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #2D2C2E;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li a {
+	font-family: 'Exo 2', sans-serif;
+    display: block;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+
+.dropdown1 {
+	display: none;
+	
+}
+
+li:hover .dropdown1 {
+	display: block;
+}
 
 h2 {
 	font-family: 'Exo 2', sans-serif;
 	padding-top: 19px;
+	margin-left: 250px;
 	padding-bottom: 12px;
 }
 
-input[type="text"], input[type="password"] {
+#loggin_text {
 	background-color: #FFFFFF;
 	border: 1px solid black;
 	font-family: 'Exo 2', sans-serif;
@@ -86,20 +107,54 @@ input[type="text"], input[type="password"] {
 	padding: 5px;
 	width: 300px;
 	margin-bottom: 3px;
+	margin-left: 250px;
 	margin-top: 3px;
 	border: 1 px black;
 	border-radius: 4px;
 	outline: none;
 }
 
-input[type="submit"]{
+#loggin_submit{
 	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
 	width: 312px;
+	margin-left: 250px;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	border: 1px;
+	border-radius: 4px;
+	outline: none;
+}
+
+.posting {
+	margin-top: 545px;
+}
+
+#messeging {
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	font-family: 'Exo 2', sans-serif;
+	font-size: 15 px;
+	padding: 5px;
+	width: 1000px;
+	margin-bottom: 3px;
+	margin-left: 400px;
+	margin-top: 3px;
+	border: 1 px black;
+	border-radius: 4px;
+	height: 30px;
+	outline: none;
+}
+
+#msg_submit{
+	font-family: 'Exo 2', sans-serif;
+	font-size: 15 px;
+	padding: 5px;
+	width: 100px;
+	margin-bottom: 3px;
+	border: 1px;
+	height: 45px;
 	border-radius: 4px;
 	outline: none;
 }
@@ -111,6 +166,9 @@ input[type=submit]:hover {
 body {
 	background-color: whitesmoke;
 }
+
+
+
 
 .footer {
    position: fixed;
