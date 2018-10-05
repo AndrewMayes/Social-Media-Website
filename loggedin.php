@@ -13,39 +13,52 @@
 	</head>
 	<body>
 		<div class="header">
-			<div id="wrapper">
 				<div id="logo">
 					<t> :Social Media:</t>
 				</div>
 				<div id="menu">
 					<a href="loggedout.php" />Log Out</a>
 				</div>
-			</div>
 		</div>	
-		
-		<ul>
-			<li><a href="#">Account</a></li>
-			<li><a href="#">Group</a>
-				<ul class='dropdown1'>
-					<li> <a href="#">Global</a></li>
-					<li> <a href="#">League of Legends</a></li>
-					<li> <a href="#">Dota 2</a></li>
-					<li> <a href="#">CS:GO</a></li>
-				</ul>
-			</li>
-		</ul>
-		
-		<form action="loggedin.php" method="POST">
-			<div class="posting">
-				<input id="messeging" type="text" name="message" value="" placeholder="Post Your Status...">
-				<input id="msg_submit" type="submit" name="submit" value="Post!">
-			</div>
-		</form> 
+		<div class= "sidenav">
+				<a href="#">Account</a>
+				<button class="dropdown1">Group</button>
+					<div class="dropdown_menu1">
+						<a href="#">Global</a>
+						<a href="#">League of Legends</a>
+						<a href="#">Dota 2</a>
+						<a href="#">CS:GO</a>
+					</div>
+				
+		</div>
+		<div class="posting">
+			<form action="loggedin.php" method="POST">
+					<input id="messeging" type="text" name="message" value="" placeholder="Post Your Status...">
+					<input id="msg_submit" type="submit" name="submit" value="Post!">
+			</form> 
+		</div>
 		
 		<div class="footer">
 				<p>":Social Media:": A CS418 Project</p><br/>
 				<p>Created by: Andrew Mayes and James Lopez</p>
 		</div>
+		
+		<script>
+			var dropdown = document.getElementsByClassName("dropdown1");
+			var i;
+
+			for (i = 0; i < dropdown.length; i++) {
+			  dropdown[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var dropdownContent = this.nextElementSibling;
+				if (dropdownContent.style.display === "block") {
+				  dropdownContent.style.display = "none";
+				} else {
+				  dropdownContent.style.display = "block";
+				}
+			  });
+			}
+		</script>
 	</body>
 </html>
 
