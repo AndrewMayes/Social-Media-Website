@@ -6,6 +6,12 @@ References:
             https://www.w3schools.com/html/html_forms.asp
             https://www.w3schools.com/tags/att_input_placeholder.asp
 */
+
+	session_start();
+	
+	if(isset($_SESSION['email'])){
+		header("Location: loggedin.php?msg=" . urlencode('already_logged_in'));
+	}  
 ?>
 
 <!doctype HTML>
@@ -66,6 +72,7 @@ References:
 				$dbpassword = $row['password'];
 			}
 			if ($dbemail == $email) {
+				$_SESSION['email'] = $email;
 				header("Location: loggedin.php");
 			} 
 		} else {

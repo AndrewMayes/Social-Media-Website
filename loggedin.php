@@ -2,6 +2,10 @@
 	include ('connection.php');
 
 	session_start();
+	
+	if(!isset($_SESSION['email'])){
+		header("Location: index.php?msg=" . urlencode('needs_to_log_in'));
+	}
 ?>
 
 <!doctype HTML>
