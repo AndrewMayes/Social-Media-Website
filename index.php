@@ -68,10 +68,14 @@ References:
 			echo $email . "<br>";
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
+				$dbfname = $row['fname'];
+				$dblname = $row['lname'];
 				$dbemail = $row['email'];
 				$dbpassword = $row['password'];
 			}
 			if ($dbemail == $email) {
+				$_SESSION['fname'] = $dbfname;
+				$_SESSION['lname'] = $dblname;
 				$_SESSION['email'] = $email;
 				header("Location: loggedin.php");
 			} 

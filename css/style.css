@@ -35,7 +35,7 @@
 	padding-right: 10px;
 }
 
-#menu a:hover{
+#menu a:hover,.sidenav a:hover, .dropdown1:hover {
 	color: #D2CCD9;
 }
 
@@ -173,6 +173,10 @@ input[type=submit]:hover {
 
 body {
 	background-color: whitesmoke;
+}
+
+.dd_active {
+	color: #D2CCD9;
 }
 
 .footer {

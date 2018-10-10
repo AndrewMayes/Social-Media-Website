@@ -17,9 +17,14 @@
 	</head>
 	<body>
 		<div class="header">
-				<div id="logo">
-					<t> :Social Media:</t>
-				</div>
+				<?php 
+					echo "<div id='logo'>";
+							echo "<t>";
+								echo $_SESSION['fname'];
+								echo " " . $_SESSION['lname'];
+							echo "</t>";
+					echo "</div>"  ;
+				?>
 				<div id="menu">
 					<a href="loggedout.php" />Log Out</a>
 				</div>
@@ -53,7 +58,7 @@
 
 			for (i = 0; i < dropdown.length; i++) {
 			  dropdown[i].addEventListener("click", function() {
-				this.classList.toggle("active");
+				this.classList.toggle("dd_active");
 				var dropdownContent = this.nextElementSibling;
 				if (dropdownContent.style.display === "block") {
 				  dropdownContent.style.display = "none";
