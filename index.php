@@ -23,25 +23,22 @@ References:
 	</head>
 	<body>
 		<div class="header">
-			<div id="wrapper">
-				<div id="logo">
-					<t> :Social Media:</t>
+				<div id="logo">:Social Media:</div>
+				<div class="menu">
+					<ul>
+						<li><a href="loggedin.php">Sign Up</a></li>
+						<li><a href="loggedin.php">Log In</a></li>
+					</ul>
 				</div>
-				<div id="menu">
-					<a href="signup.php" />Sign Up</a>
-					<a href="index.php" />Log In</a>
-				</div>
-			</div>
 		</div>	
-
 		<table>
 			<tr>
 				<td>
-					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Log In </h2>
+					<h2 style="text-align: center;"> Log In </h2>
 					<form action="index.php" method="POST">
-					<input id="loggin_text" type="text" name="email" value="" placeholder="Email"><br /><br />
-					<input id="loggin_text" type="password" name="password" value="" placeholder="Password"><br /><br />
-					<input id="loggin_submit" type="submit" name="submit" value="Log In!">    
+						<input id="loggin_text" type="text" name="email" value="" placeholder="Email"><br /><br />
+						<input id="loggin_text" type="password" name="password" value="" placeholder="Password"><br /><br />
+						<input id="loggin_submit" type="submit" name="submit" value="Log In!">    
 					</form> 
 				</td>
 			</tr>
@@ -55,6 +52,7 @@ References:
 </html>
 
 <?php
+
 	include 'connection.php';
 
 	if (isset($_POST['submit'])) {
