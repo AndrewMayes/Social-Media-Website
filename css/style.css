@@ -1,6 +1,6 @@
 * {
-	margin: auto;
-	padding: auto;
+	margin: 0;
+	padding: 0;
 }
 
 .header {
@@ -12,94 +12,94 @@
 	width: 100%;
 }
 
-
-#menu {
+#logo {
 	background-color: #2D2C2E;
+	float: left;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-family: 'Exo 2', sans-serif;
+	font-size: 30px;
+	padding: 6px 8px 6px 16px;
+	background-repeat: no-repeat;
+}
+
+.menu {
+	background-color: #2D2C2E;
+	text-decoration: none;
 	top: 0px;
 	right: 0px;
 	height: 37px;
-	padding-top: 19px;
-	padding-right: 100px;
+	padding-top: 17px;
+	padding-right: 25px;
 }
 
-#menu a {
+.menu ul{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.menu a{
 	float: right;
 	color: #FFFFFF;
 	text-decoration: none;
 	font-family: 'Exo 2', sans-serif;
 	font-size: 14px;
 	background-repeat: no-repeat;
-	padding-top: 1px;
-	padding-bottom: 22px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-#menu a:hover,.sidenav a:hover, .dropdown1:hover {
+.menu a:hover,.sidemenu a:hover{
 	color: #D2CCD9;
 }
 
-#logo {
-	background-color: #2D2C2E;
-	float:left;
-	top: 0px;
-	right: 0px;
-	height: 40px;
-	padding-top: 15px;
-	padding-left: 150px;
-}
-
-#logo t {
-	background-color: #2D2C2E;
+.sidemenu {
+	font-family: 'Exo 2', sans-serif;
+	font-size: 20px;
+	width: 25%;
+	padding: 0;	
+	float: left;
 	color: #FFFFFF;
-	text-decoration: none;
-	font-family: 'Exo 2', sans-serif;
-	font-size: 25px;
-	background-repeat: no-repeat;
-	padding-top: 19px;
-	padding-bottom: 11px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.sidenav{
-	font-family: 'Exo 2', sans-serif;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 25%;
     background-color: #2D2C2E;
     position: fixed;
     height: 100%;
-    overflow: auto;
 }
 
-.sidenav a, .dropdown1 {
-	font-family: 'Exo 2', sans-serif;
+.sidemenu ul {
+	list-style-type: none;
+}
+
+.sidemenu li a {
+	display: block;
 	padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    display: block;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
+	text-decoration: none;
+	color: #FFFFFF;
 }
 
-.dropdown_menu1{
-    display: none;
-    background-color: #2D2C2E;
-    padding-left: 15px;
+span {
+	display: block;
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+}
+
+#submenu ul{
+	padding-left: 15px;
+}
+
+li.active > a {
+	color: #909090;
 }
 
 h2 {
 	font-family: 'Exo 2', sans-serif;
 	padding-top: 19px;
-	margin-left: 250px;
 	padding-bottom: 12px;
+}
+
+table {
+	margin: 0px auto;
 }
 
 #loggin_text {
@@ -110,7 +110,6 @@ h2 {
 	padding: 5px;
 	width: 300px;
 	margin-bottom: 3px;
-	margin-left: 250px;
 	margin-top: 3px;
 	border: 1 px black;
 	border-radius: 4px;
@@ -122,7 +121,6 @@ h2 {
 	font-size: 15 px;
 	padding: 5px;
 	width: 312px;
-	margin-left: 250px;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	border: 1px;
@@ -133,6 +131,7 @@ h2 {
 .posting {
 	position: fixed;
 	bottom: 80px;
+	left: 190px;
 	width: 100%;
 	font-size: 13px;
 	color: white;
@@ -147,7 +146,6 @@ h2 {
 	padding: 5px;
 	width: 980px;
 	margin-bottom: 3px;
-	margin-left: 390px;
 	margin-top: 3px;
 	border: 1 px black;
 	border-radius: 4px;
@@ -173,10 +171,6 @@ input[type=submit]:hover {
 
 body {
 	background-color: whitesmoke;
-}
-
-.dd_active {
-	color: #D2CCD9;
 }
 
 .footer {
