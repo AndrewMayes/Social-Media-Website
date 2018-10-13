@@ -6,6 +6,37 @@
 	if(!isset($_SESSION['email'])){
 		header("Location: index.php?msg=" . urlencode('needs_to_log_in'));
 	}
+
+	//getUserID();
+	//turn these into functions soon.
+	//retrieve UserID from database
+	$userEmail = $_SESSION['email'];
+	$queryID = "SELECT id FROM users WHERE email = " . "'$userEmail';";
+	$userEmail = $conn->query($queryID);
+
+	if ($userEmail->num_rows > 0) { 
+		// output data of each row
+		while($row = $userEmail->fetch_assoc()) {
+			$userID = $row['id'];  
+		} 
+	}
+
+	//groups need to be worked on
+	if (isset($_POST['submit'])) {
+		$message = mysqli_real_escape_string($conn, $_POST['message']);
+
+		//$userid = getUserID();
+		//$userid = 6;
+		
+
+		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '1');";
+
+		$conn->query($query);
+
+		header("Location: loggedin.php"); //temporary so that a user's message does not get posted twice when they refresh the page
+
+		$conn->close();
+	}
 ?>
 
 <!doctype HTML>
