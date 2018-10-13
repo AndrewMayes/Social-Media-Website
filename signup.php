@@ -7,15 +7,13 @@
 	</head>
 	<body>
 		<div class="header">
-			<div id="wrapper">
-				<div id="logo">
-					<t> :Social Media:</t>
+				<div id="logo">:Social Media:</div>
+				<div class="menu">
+					<ul>
+						<li><a href="signup.php">Sign Up</a></li>
+						<li><a href="index.php">Log In</a></li>
+					</ul>
 				</div>
-				<div id="menu">
-					<a href="signup.php" />Sign Up</a>
-					<a href="index.php" />Log In</a>
-				</div>
-			</div>
 		</div>	
 		
 		<table>
