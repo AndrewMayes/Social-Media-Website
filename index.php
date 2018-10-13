@@ -26,8 +26,8 @@ References:
 				<div id="logo">:Social Media:</div>
 				<div class="menu">
 					<ul>
-						<li><a href="loggedin.php">Sign Up</a></li>
-						<li><a href="loggedin.php">Log In</a></li>
+						<li><a href="signup.php">Sign Up</a></li>
+						<li><a href="index.php">Log In</a></li>
 					</ul>
 				</div>
 		</div>	
