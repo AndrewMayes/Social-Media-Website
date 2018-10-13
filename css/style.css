@@ -58,7 +58,7 @@
 .sidemenu {
 	font-family: 'Exo 2', sans-serif;
 	font-size: 20px;
-	width: 25%;
+	width: 20%;
 	padding: 0;	
 	float: left;
 	color: #FFFFFF;
@@ -189,4 +189,8 @@ body {
 .notfound {
 	color: black;
 	text-align: center;
+}
+
+.feed {
+	text-align: center;	
 }

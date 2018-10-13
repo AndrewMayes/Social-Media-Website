@@ -37,6 +37,7 @@
 
 		$conn->close();
 	}
+	//$conn->close();
 ?>
 
 <!doctype HTML>
@@ -83,6 +84,22 @@
 					</ul>
 				</li>
 			</ul>
+		</div>
+
+		<div class = "feed">
+			<?php
+				$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id ORDER BY msg_id DESC";
+				$result = $conn->query($postFeed);
+
+				if ($result->num_rows > 0) { 
+					// output data of each row
+					while($row = $result->fetch_assoc()) {
+						echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . " Posted at: " . $row['post_time'] . "</h2>" . "\n";
+					} 
+				} else {
+					echo "<h2>No messages in this channel yet. Come back soon!</h2>";
+				}
+			?>
 		</div>
 
 		<div class="posting">
