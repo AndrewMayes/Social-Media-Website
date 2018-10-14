@@ -3,7 +3,16 @@
 	padding: 0;
 }
 
+html, body {
+	font-family: 'Exo 2', sans-serif;
+	height: 100%;
+	width: 100%;
+	background-color: whitesmoke;
+}
+
 .header {
+	position: fixed;
+	top: 0;
 	background-color: #2D2C2E;
 	height: 56px;
 	border-bottom: 0px;
@@ -17,7 +26,6 @@
 	float: left;
 	color: #FFFFFF;
 	text-decoration: none;
-	font-family: 'Exo 2', sans-serif;
 	font-size: 30px;
 	padding: 6px 8px 6px 16px;
 	background-repeat: no-repeat;
@@ -44,7 +52,6 @@
 	float: right;
 	color: #FFFFFF;
 	text-decoration: none;
-	font-family: 'Exo 2', sans-serif;
 	font-size: 14px;
 	background-repeat: no-repeat;
 	padding-left: 10px;
@@ -56,15 +63,13 @@
 }
 
 .sidemenu {
-	box-sizing: border-box;
-	font-family: 'Exo 2', sans-serif;
+	position: fixed;
+	top: 50px;
 	font-size: 20px;
 	width: 20%;
-	padding: 0;	
-	float: left;
 	color: #FFFFFF;
+	display: inline-block;
     background-color: #2D2C2E;
-    position: fixed;
     height: 100%;
 }
 
@@ -85,6 +90,10 @@ span {
 	text-decoration: none;
 }
 
+span.active {
+	color: #909090;
+}
+
 #submenu ul{
 	padding-left: 15px;
 }
@@ -95,13 +104,11 @@ li.active > a {
 
 
 #userName {
-	font-family: 'Exo 2', sans-serif;
 	padding-top: 25px;
 	padding-bottom: 5px;
 }
 
 .time {
-	font-family: 'Exo 2', sans-serif;
 	font-size: 10px;
 }
 
@@ -109,12 +116,12 @@ li.active > a {
 
 table {
 	margin: 0px auto;
+	padding-top: 70px;
 }
 
 #loggin_text {
 	background-color: #FFFFFF;
 	border: 1px solid black;
-	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
 	width: 300px;
@@ -126,7 +133,6 @@ table {
 }
 
 #loggin_submit{
-	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
 	width: 312px;
@@ -138,10 +144,9 @@ table {
 }
 
 .posting {
-	box-sizing: border-box;
 	position: fixed;
+	left: 165px;
 	bottom: 80px;
-	left: 150px;
 	width: 100%;
 	font-size: 13px;
 	color: white;
@@ -151,10 +156,9 @@ table {
 #messeging {
 	background-color: #FFFFFF;
 	border: 1px solid black;
-	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
-	width: 1000px;
+	width: 65%;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	border: 1 px black;
@@ -164,7 +168,6 @@ table {
 }
 
 #msg_submit{
-	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
 	width: 100px;
@@ -179,18 +182,12 @@ input[type=submit]:hover {
     background-color: #D2CCD9;
 }
 
-body {
-	background-color: whitesmoke;
-}
-
 .footer {
    position: fixed;
    padding-top: 15px;
-   left: 0;
    bottom: 0; 	
    width: 100%;
    background-color: #2D2C2E;
-   font-family: 'Exo 2', sans-serif;
    font-size: 13px;
    color: white;
    text-align: center;
@@ -202,17 +199,17 @@ body {
 }
 
 .position{
-	display: table;
-	box-sizing: border-box;
+	position: fixed;
+	
 }
 
 .feed {
-	top: 73px;
 	position: fixed;
-	padding-top: 15px;
+	margin-top: 80px;
 	left: 23%;	
-	height: 68%;
+	height: 69%;
 	width: 75%;
+	overflow-y:auto;
 	overflow: auto;
 	border: 1px solid #666;
 	border-radius: 10px;

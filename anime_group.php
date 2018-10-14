@@ -94,7 +94,8 @@
 				if ($result->num_rows > 0) { 
 					// output data of each row
 					while($row = $result->fetch_assoc()) {
-						echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . " Posted at: " . $row['post_time'] . "</h2>" . "\n";
+						echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
+						echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
 					} 
 				} else {
 					echo "<h2>No messages in this channel yet. Come back soon!</h2>";
