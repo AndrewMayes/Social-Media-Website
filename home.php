@@ -33,7 +33,7 @@
 
 		$conn->query($query);
 
-		header("Location: loggedin.php"); //temporary so that a user's message does not get posted twice when they refresh the page
+		header("Location: home.php"); //temporary so that a user's message does not get posted twice when they refresh the page
 
 		$conn->close();
 	}
@@ -68,7 +68,7 @@
 
 		<div class="sidemenu">
 			<ul>
-				<li class="active"><a href="loggedin.php">Home</a></li>
+				<li class="active"><a href="home.php">Home</a></li>
 			</ul>
 
 			<ul>
@@ -105,7 +105,7 @@
 			</div>
 		</div>
 		<div class="posting">
-			<form action="loggedin.php" method="POST">
+			<form action="home.php" method="POST">
 				<input id="messeging" type="text" name="message" value="" placeholder="Post Your Status...">
 				<input id="msg_submit" type="submit" name="submit" value="Post!">
 			</form> 
