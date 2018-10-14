@@ -79,9 +79,9 @@
 				<li>
 					<span>Groups</span>
 					<ul>
-						<li><a href="global_group.php">Global</a></li>
-						<li><a href="#">Games</a></li>            
-						<li><a href="#">Sports</a></li>
+						<li><a href="gaming_group.php">Gaming</a></li>
+						<li><a href="sports_group.php">Sports</a></li>            
+						<li><a href="anime_group.php">Anime</a></li>
 					</ul>
 				</li>
 			</ul>
