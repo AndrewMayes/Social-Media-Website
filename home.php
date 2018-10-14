@@ -88,7 +88,7 @@
 
 		<div class = "feed">
 			<?php
-				$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id ORDER BY msg_id DESC";
+				$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = 1 ORDER BY msg_id DESC";
 				$result = $conn->query($postFeed);
 
 				if ($result->num_rows > 0) { 
