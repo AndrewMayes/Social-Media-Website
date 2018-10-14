@@ -10,7 +10,7 @@ References:
 	session_start();
 	
 	if(isset($_SESSION['email'])){
-		header("Location: loggedin.php?msg=" . urlencode('already_logged_in'));
+		header("Location: home.php?msg=" . urlencode('already_logged_in'));
 	}  
 ?>
 
@@ -75,7 +75,7 @@ References:
 				$_SESSION['fname'] = $dbfname;
 				$_SESSION['lname'] = $dblname;
 				$_SESSION['email'] = $email;
-				header("Location: loggedin.php");
+				header("Location: home.php");
 			} 
 		} else {
 			echo "<p class= " . "notfound" . ">User not found</p>";

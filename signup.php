@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(isset($_SESSION['email'])){
+		header("Location: home.php?msg=" . urlencode('already_has_account'));
+	} 
+?>
+
 <!doctype HTML>
 <html>
 	<head>
