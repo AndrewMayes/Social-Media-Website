@@ -56,6 +56,7 @@
 }
 
 .sidemenu {
+	box-sizing: border-box;
 	font-family: 'Exo 2', sans-serif;
 	font-size: 20px;
 	width: 20%;
@@ -92,11 +93,19 @@ li.active > a {
 	color: #909090;
 }
 
-h2 {
+
+#userName {
 	font-family: 'Exo 2', sans-serif;
-	padding-top: 19px;
-	padding-bottom: 12px;
+	padding-top: 25px;
+	padding-bottom: 5px;
 }
+
+.time {
+	font-family: 'Exo 2', sans-serif;
+	font-size: 10px;
+}
+
+
 
 table {
 	margin: 0px auto;
@@ -129,9 +138,10 @@ table {
 }
 
 .posting {
+	box-sizing: border-box;
 	position: fixed;
 	bottom: 80px;
-	left: 190px;
+	left: 150px;
 	width: 100%;
 	font-size: 13px;
 	color: white;
@@ -144,7 +154,7 @@ table {
 	font-family: 'Exo 2', sans-serif;
 	font-size: 15 px;
 	padding: 5px;
-	width: 980px;
+	width: 1000px;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	border: 1 px black;
@@ -177,7 +187,7 @@ body {
    position: fixed;
    padding-top: 15px;
    left: 0;
-   bottom: 0;
+   bottom: 0; 	
    width: 100%;
    background-color: #2D2C2E;
    font-family: 'Exo 2', sans-serif;
@@ -191,6 +201,40 @@ body {
 	text-align: center;
 }
 
+.position{
+	display: table;
+	box-sizing: border-box;
+}
+
 .feed {
-	text-align: center;	
+	top: 73px;
+	position: fixed;
+	padding-top: 15px;
+	left: 23%;	
+	height: 68%;
+	width: 75%;
+	overflow: auto;
+	border: 1px solid #666;
+	border-radius: 10px;
+	background-color: #FFFFFF;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #666; 
 }

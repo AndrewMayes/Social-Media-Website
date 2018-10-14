@@ -33,7 +33,7 @@
 
 		$conn->query($query);
 
-		header("Location: home.php"); //temporary so that a user's message does not get posted twice when they refresh the page
+		header("Location: loggedin.php"); //temporary so that a user's message does not get posted twice when they refresh the page
 
 		$conn->close();
 	}
@@ -43,6 +43,7 @@
 <!doctype HTML>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 		<title>Social Media Prototype Testing</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
@@ -67,7 +68,7 @@
 
 		<div class="sidemenu">
 			<ul>
-				<li class="active"><a href="home.php">Home</a></li>
+				<li class="active"><a href="loggedin.php">Home</a></li>
 			</ul>
 
 			<ul>
@@ -78,32 +79,33 @@
 				<li>
 					<span>Groups</span>
 					<ul>
-						<li><a href="gaming_group.php">Gaming</a></li>
-						<li><a href="sports_group.php">Sports</a></li>            
-						<li><a href="anime_group.php">Anime</a></li>
+						<li><a href="global_group.php">Global</a></li>
+						<li><a href="#">Games</a></li>            
+						<li><a href="#">Sports</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
+		<div class="position">
+			<div class = "feed">
+				<?php
+					$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = 1 ORDER BY msg_id DESC";
+					$result = $conn->query($postFeed);
 
-		<div class = "feed">
-			<?php
-				$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = 1 ORDER BY msg_id DESC";
-				$result = $conn->query($postFeed);
-
-				if ($result->num_rows > 0) { 
-					// output data of each row
-					while($row = $result->fetch_assoc()) {
-						echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . " Posted at: " . $row['post_time'] . "</h2>" . "\n";
-					} 
-				} else {
-					echo "<h2>No messages in this channel yet. Come back soon!</h2>";
-				}
-			?>
+					if ($result->num_rows > 0) { 
+						// output data of each row
+						while($row = $result->fetch_assoc()) {
+							echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
+							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
+						} 
+					} else {
+						echo "<h2>No messages in this channel yet. Come back soon!</h2>";
+					}
+				?>
+			</div>
 		</div>
-
 		<div class="posting">
-			<form action="home.php" method="POST">
+			<form action="loggedin.php" method="POST">
 				<input id="messeging" type="text" name="message" value="" placeholder="Post Your Status...">
 				<input id="msg_submit" type="submit" name="submit" value="Post!">
 			</form> 
