@@ -3,8 +3,9 @@
 References: 
             https://github.com/jbrunelle/ODUCS418F18/blob/master/examples/userinputs/greetMe.php
             https://github.com/jbrunelle/ODUCS418F18/blob/master/examples/userinputs/forms.html
-            https://www.w3schools.com/html/html_forms.asp
-            https://www.w3schools.com/tags/att_input_placeholder.asp
+			https://www.w3schools.com/html/html_forms.asp
+			https://www.w3schools.com/tags/att_input_placeholder.asp
+			https://stackoverflow.com/questions/35108708/how-to-prevent-browser-from-going-back-to-login-form-page-once-user-is-logged-in
 */
 
 	session_start();
