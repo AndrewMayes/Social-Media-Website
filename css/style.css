@@ -153,8 +153,8 @@ table {
 
 .posting {
 	position: fixed;
-	left: 165px;
-	bottom: 80px;
+	margin-top: 80px;
+	left: 105px;
 	width: 100%;
 	font-size: 13px;
 	color: white;
@@ -212,7 +212,7 @@ input[type=submit]:hover {
 
 .feed {
 	position: fixed;
-	margin-top: 80px;
+	margin-top: 160px;
 	left: 20%;	
 	height: 75%;
 	width: 75%;
