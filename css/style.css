@@ -66,7 +66,7 @@ html, body {
 	position: fixed;
 	top: 50px;
 	font-size: 20px;
-	width: 20%;
+	width: 15%;
 	color: #FFFFFF;
 	display: inline-block;
     background-color: #2D2C2E;
@@ -98,6 +98,10 @@ span.active {
 	padding-left: 15px;
 }
 
+#submenu span {
+	cursor: pointer;
+}
+
 li.active > a {
 	color: #909090;
 }
@@ -106,10 +110,14 @@ li.active > a {
 #userName {
 	padding-top: 25px;
 	padding-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .time {
 	font-size: 10px;
+	margin-left: 5px;
+	margin-bottom: 5px;
 }
 
 
@@ -200,14 +208,13 @@ input[type=submit]:hover {
 
 .position{
 	position: fixed;
-	
 }
 
 .feed {
 	position: fixed;
 	margin-top: 80px;
-	left: 23%;	
-	height: 69%;
+	left: 20%;	
+	height: 75%;
 	width: 75%;
 	overflow-y:auto;
 	overflow: auto;
@@ -215,6 +222,12 @@ input[type=submit]:hover {
 	border-radius: 10px;
 	background-color: #FFFFFF;
 }
+
+/*
+	References:
+		https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+*/
+
 ::-webkit-scrollbar {
     width: 10px;
 }

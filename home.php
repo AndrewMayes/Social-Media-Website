@@ -96,6 +96,7 @@
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
 							echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
+							//echo "<a id ='userName'>" . $row['fname'] . " " . $row['lname'] . ":<span id='msg'> " . htmlspecialchars($row['msg']) . "</span></a>";
 							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
 						} 
 					} else {
@@ -111,10 +112,7 @@
 			</form> 
 		</div>
 		
-		<div class="footer">
-			<p>":Social Media:": A CS418 Project</p><br/>
-			<p>Created by: Andrew Mayes and James Lopez</p>
-		</div>
+
 	</body>
 </html>
 
