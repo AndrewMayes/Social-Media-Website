@@ -100,7 +100,7 @@
 							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
 						} 
 					} else {
-						echo "<h2>No messages in this channel yet. Come back soon!</h2>";
+						echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
 					}
 				?>
 			</div>

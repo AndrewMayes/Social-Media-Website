@@ -98,7 +98,7 @@
 						echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
 					} 
 				} else {
-					echo "<h2>No messages in this channel yet. Come back soon!</h2>";
+					echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
 				}
 			?>
 		</div>
@@ -110,10 +110,7 @@
 			</form> 
 		</div>
 		
-		<div class="footer">
-			<p>":Social Media:": A CS418 Project</p><br/>
-			<p>Created by: Andrew Mayes and James Lopez</p>
-		</div>
+
 	</body>
 </html>
 
