@@ -7,6 +7,15 @@
 		header("Location: index.php?msg=" . urlencode('needs_to_log_in'));
 	}
 
+	if(isset($_GET['id'])) {
+		$groupID = $_GET['id'];	
+	} else {
+		$groupID = "1";
+	}
+
+	$test = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '1', 'testingthisstuff', CURRENT_TIMESTAMP, '" . $groupID . "');";
+	
+
 	//getUserID();
 	//turn these into functions soon.
 	//retrieve UserID from database
@@ -21,23 +30,33 @@
 		} 
 	}
 
-	//groups need to be worked on
+	//Finds the groups that a user is in
+	$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
+	$userGroups = $conn->query($queryGroups);
+
+	if ($userGroups->num_rows > 0) { 
+		// output data of each row
+		while($row = $userGroups->fetch_assoc()) {
+			$groupNames[] = $row['group_name'];
+			$groupIDs[] = $row['group_id'];
+		} 
+	}
+
+	$countNames = count($groupNames);
+	$countIDs = count($groupIDs);
+
+
 	if (isset($_POST['submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['message']);
 
-		//$userid = getUserID();
-		//$userid = 6;
-		
-
-		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '1');";
+		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "');";
 
 		$conn->query($query);
 
-		header("Location: home.php"); //temporary so that a user's message does not get posted twice when they refresh the page
+		header("Location: home.php?id=" . $groupID . ""); 
 
 		$conn->close();
 	}
-	//$conn->close();
 ?>
 
 <!doctype HTML>
@@ -79,9 +98,14 @@
 				<li>
 					<span>Groups</span>
 					<ul>
-						<li><a href="gaming_group.php">Gaming</a></li>
-						<li><a href="sports_group.php">Sports</a></li>            
-						<li><a href="anime_group.php">Anime</a></li>
+						<?php
+							for ($x = 1; $x < $countNames; $x++) {
+								echo "<li><a href='./home.php?name=" . $groupNames[$x] ."'>" . $groupNames[$x] . "</a></li>";
+							}
+							for ($x = 1; $x < $countIDs; $x++) {
+								echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupIDs[$x] . "</a></li>";
+							}
+						?>
 					</ul>
 				</li>
 			</ul>
@@ -89,7 +113,7 @@
 		<div class="position">
 			<div class = "feed">
 				<?php
-					$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = 1 ORDER BY msg_id DESC";
+					$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$result = $conn->query($postFeed);
 
 					if ($result->num_rows > 0) { 
@@ -106,13 +130,17 @@
 			</div>
 		</div>
 		<div class="posting">
-			<form action="home.php" method="POST">
-				<input id="messeging" type="text" name="message" value="" placeholder="Post Your Status...">
-				<input id="msg_submit" type="submit" name="submit" value="Post!">
-			</form> 
+		<?php
+			echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+				<input id='messeging' type='text' name='message' value='' placeholder='Post Your Status...'>
+				<input id='msg_submit' type='submit' name='submit' value='Post!'>
+				</form>";
+		?>
 		</div>
-		
-
+		<?php
+		echo "<p>$groupID</p>";
+		echo "<p>$test</p>";
+		?>
 	</body>
 </html>
 
