@@ -99,11 +99,11 @@
 					<span>Groups</span>
 					<ul>
 						<?php
-							for ($x = 1; $x < $countNames; $x++) {
-								echo "<li><a href='./home.php?name=" . $groupNames[$x] ."'>" . $groupNames[$x] . "</a></li>";
-							}
 							for ($x = 1; $x < $countIDs; $x++) {
-								echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupIDs[$x] . "</a></li>";
+								echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupNames[$x] . "</a></li>";
+							}
+							if ($countIDs == 1) {
+								echo "<li><a href='./home.php'>User is only in the global group</a></li>";
 							}
 						?>
 					</ul>
@@ -137,10 +137,6 @@
 				</form>";
 		?>
 		</div>
-		<?php
-		echo "<p>$groupID</p>";
-		echo "<p>$test</p>";
-		?>
 	</body>
 </html>
 
