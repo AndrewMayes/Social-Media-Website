@@ -27,12 +27,10 @@
 			<tr>
 				<td>
 					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Join Now! </h2>
-					<form action="#" method="POST">
-						<input id="loggin_text" type="text" name="fname" size="25" placeholder="First Name" /> <br /><br />
-						<input id="loggin_text" type="text" name="lname" size="25" placeholder="Last Name" /> <br /><br />
-						<input id="loggin_text" type="text" name="username" size="25" placeholder="Username" /> <br /><br />
-						<input id="loggin_text" type="text" name="email" size="25" placeholder="Email Address" /> <br /><br />
-						<input id="loggin_text" type="text" name="password" size="25" placeholder="Password" /> <br /><br />
+					<form action="signup.php" method="POST">
+						<input id="loggin_text" type="text" name="signupusername" size="25" placeholder="Username" /> <br /><br />
+						<input id="loggin_text" type="text" name="signupemail" size="25" placeholder="Email Address" /> <br /><br />
+						<input id="loggin_text" type="text" name="signuppassword" size="25" placeholder="Password" /> <br /><br />
 						<input id="loggin_submit" type="submit" name="submit" value="Sign Up"/>
 					</form>
 				</td>
@@ -44,3 +42,49 @@
 		</div>
 	</body>
 </html>
+
+<?php
+
+include 'connection.php';
+
+if (isset($_POST['submit'])) {
+	$signupusername = mysqli_real_escape_string($conn, $_POST['signupusername']);
+	$signupemail = mysqli_real_escape_string($conn, $_POST['signupemail']);
+	$signuppassword = mysqli_real_escape_string($conn, $_POST['signuppassword']);
+	
+	$querySearchUsername = "SELECT username FROM users WHERE username = '".$signupusername."'";
+	$resultSearch1 = $conn->query($querySearchUsername);
+	
+	if ($resultSearch1->num_rows > 0) {
+		while($row = $resultSearch1->fetch_assoc()) {
+			$searchedusername = $row['username'];
+
+		}
+	}
+
+	if(!$signupusername == $searchedusername) {
+		$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES (NULL, '', '', '".$signuppassword."', '".$signupemail."', '".$signupusername."')";
+		$conn->query($query1);
+		$queryID = "SELECT id FROM users WHERE email ='".$signupemail."'";
+		$resultID = $conn->query($queryID);
+		if ($resultID->num_rows > 0) {
+			while($row = $resultID->fetch_assoc()) {
+				$ID = $row['id'];
+				$query2 = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('".$ID."', '1')";
+				$conn->query($query2);
+				$_SESSION['email'] = $signupemail;
+				$_SESSION['username'] = $signupusername;
+				header("Location: home.php");
+			}
+		}
+	} else {
+		echo "<p class= " . "notfound" . ">Username already exists</p>";
+	}
+
+
+	
+}
+
+$conn->close();
+
+?>

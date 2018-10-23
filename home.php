@@ -95,8 +95,7 @@
 		<div class="header">
 			<?php 
 				echo "<div id='logo'>";
-					echo $_SESSION['fname'];
-					echo " " . $_SESSION['lname'];
+					echo $_SESSION['username'];
 				echo "</div>";
 			?>
 
@@ -135,13 +134,13 @@
 		<div class="position">
 			<div class = "feed">
 				<?php
-					$postFeed = "SELECT fname,lname, msg, post_time, msg_id, likes from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					$postFeed = "SELECT username, msg, post_time, msg_id, likes from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$result = $conn->query($postFeed);
 
 					if ($result->num_rows > 0) { 
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
-							echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
+							echo "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
 							//echo "<a id ='userName'>" . $row['fname'] . " " . $row['lname'] . ":<span id='msg'> " . htmlspecialchars($row['msg']) . "</span></a>";
 							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
 							echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
