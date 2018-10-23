@@ -1,4 +1,9 @@
 <?php
+/*
+	References: https://www.youtube.com/watch?v=pfFdbpPgg4M&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG&index=14
+				https://www.youtube.com/watch?v=tVLHGHshNdU&index=15&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG
+	I referenced these 2 videos when writing the 'likes' code 
+*/
 	include ('connection.php');
 
 	session_start();
@@ -13,9 +18,6 @@
 		$groupID = "1";
 	}
 
-	$test = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '1', 'testingthisstuff', CURRENT_TIMESTAMP, '" . $groupID . "');";
-	
-
 	//getUserID();
 	//turn these into functions soon.
 	//retrieve UserID from database
@@ -28,6 +30,26 @@
 		while($row = $userEmail->fetch_assoc()) {
 			$userID = $row['id'];  
 		} 
+	}
+
+	if (isset($_GET['liked'])) {
+		$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
+		$userLiked = $conn->query($hasUserLikedQuery);
+
+		if (!$userLiked->num_rows > 0) { 
+			// output data of each row
+			$likedQuery = "UPDATE `messages` SET `likes` = `likes`+1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+			$postLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['liked'] . "', '" . $userID . "')";
+			$conn->query($likedQuery);
+			$conn->query($postLikesQuery);
+			header("Location: home.php?id=" . $groupID . "");
+		} else {
+			$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+			$postunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['liked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
+			$conn->query($unlikedQuery);
+			$conn->query($postunLikesQuery);
+			header("Location: home.php?id=" . $groupID . "");
+		}
 	}
 
 	//Finds the groups that a user is in
@@ -49,7 +71,7 @@
 	if (isset($_POST['submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['message']);
 
-		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "');";
+		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0);";
 
 		$conn->query($query);
 
@@ -91,7 +113,7 @@
 			</ul>
 
 			<ul>
-				<li><a href="#">Account</a></li>
+				<li><a href="profile.php">Profile</a></li>
 			</ul>
 
 			<ul id="submenu">
@@ -113,7 +135,7 @@
 		<div class="position">
 			<div class = "feed">
 				<?php
-					$postFeed = "SELECT fname,lname, msg, post_time, msg_id from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					$postFeed = "SELECT fname,lname, msg, post_time, msg_id, likes from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$result = $conn->query($postFeed);
 
 					if ($result->num_rows > 0) { 
@@ -122,6 +144,10 @@
 							echo "<h2 id ='userName'>" . $row['fname'] . " " . $row['lname'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
 							//echo "<a id ='userName'>" . $row['fname'] . " " . $row['lname'] . ":<span id='msg'> " . htmlspecialchars($row['msg']) . "</span></a>";
 							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
+							echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
+							<input id='msg_submit' type='submit' name='like' value='Like'>
+							<span>".$row['likes']." likes</span>
+							</form>";
 						} 
 					} else {
 						echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
