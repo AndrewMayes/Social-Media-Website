@@ -150,19 +150,20 @@ CREATE TABLE `users` (
   `fname` varchar(50) NOT NULL,
   `lname` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov'),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov'),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov'),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org'),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com');
+INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater'),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally'),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc'),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile'),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen');
 
 --
 -- Indexes for dumped tables
