@@ -219,15 +219,27 @@ input[type=submit]:hover {
 	font-size: 13px;
 	color: white;
  }
+
 .pro_group {
 	margin: 0px auto;
-	padding-top: 150px;
-	padding-bottom: 150px;
+	padding-top: 80px;
+	padding-bottom: 80px;
 	width: 50%;
 	background-color: #D2CCD9;
 	font-size: 13px;
 	color: white;
  }
+
+ .pro_info {
+	margin: 0px auto;
+	padding-top: 150px;
+	padding-bottom: 150px;
+	width: 50%;
+	background-color: #666;
+	font-size: 13px;
+	color: white;
+ }
+ 
 
  #pro_username {
 	margin-top: 150px;

@@ -123,6 +123,11 @@
 			</div>
 			
 			<div class="pro_group">
+
+			</div>
+
+			<div class="pro_info">
+			
 			</div>
 		</div>
 	</body>
