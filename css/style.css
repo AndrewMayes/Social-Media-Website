@@ -206,8 +206,38 @@ input[type=submit]:hover {
 	text-align: center;
 }
 
-.position{
-	position: fixed;
+.profile_pos{
+	padding-left: 200px;
+}
+.profile {
+	margin: 0px auto;
+	margin-top: 100px;
+	padding-top: 100px;
+	padding-bottom: 0px;
+	width: 50%;
+	background-color: #2D2C2E;
+	font-size: 13px;
+	color: white;
+ }
+.pro_group {
+	margin: 0px auto;
+	padding-top: 150px;
+	padding-bottom: 150px;
+	width: 50%;
+	background-color: #D2CCD9;
+	font-size: 13px;
+	color: white;
+ }
+
+ #pro_username {
+	margin-top: 150px;
+	background-color: #2D2C2E;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 30px;
+	padding: 6px 8px 6px 8px;
+	background-repeat: no-repeat;
+
 }
 
 .feed {

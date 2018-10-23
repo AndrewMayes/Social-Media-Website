@@ -91,7 +91,7 @@
 			</ul>
 
 			<ul>
-				<li><a href="#">Account</a></li>
+				<li><a href="profile.php">Profile</a></li>
 			</ul>
 
 			<ul id="submenu">
