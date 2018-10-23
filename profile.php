@@ -73,8 +73,7 @@
 		<div class="header">
 			<?php 
 				echo "<div id='logo'>";
-					echo $_SESSION['fname'];
-					echo " " . $_SESSION['lname'];
+					echo $_SESSION['username'];
 				echo "</div>";
 			?>
 
