@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2018 at 10:42 PM
+-- Generation Time: Oct 22, 2018 at 11:00 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -71,7 +71,8 @@ INSERT INTO `group_users` (`user_id`, `group_id`) VALUES
 (3, 2),
 (3, 4),
 (4, 1),
-(5, 1);
+(5, 1),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -89,6 +90,22 @@ CREATE TABLE `messages` (
   `likes` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`) VALUES
+(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1),
+(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0),
+(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0),
+(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0),
+(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0),
+(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 0),
+(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0),
+(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0),
+(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0),
+(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -100,6 +117,13 @@ CREATE TABLE `messages_likes` (
   `msg_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages_likes`
+--
+
+INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES
+(1, 5);
 
 -- --------------------------------------------------------
 
@@ -200,7 +224,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `sub_groups`
 --
@@ -233,8 +257,8 @@ ALTER TABLE `messages`
 -- Constraints for table `messages_likes`
 --
 ALTER TABLE `messages_likes`
-  ADD CONSTRAINT `messages_likes_ibfk_1` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`),
-  ADD CONSTRAINT `messages_likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `messages_likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `messages_likes_ibfk_3` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`);
 
 --
 -- Constraints for table `sub_groups`
