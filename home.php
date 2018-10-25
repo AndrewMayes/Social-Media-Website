@@ -52,22 +52,6 @@
 		}
 	}
 
-	//Finds the groups that a user is in
-	$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
-	$userGroups = $conn->query($queryGroups);
-
-	if ($userGroups->num_rows > 0) { 
-		// output data of each row
-		while($row = $userGroups->fetch_assoc()) {
-			$groupNames[] = $row['group_name'];
-			$groupIDs[] = $row['group_id'];
-		} 
-	}
-
-	$countNames = count($groupNames);
-	$countIDs = count($groupIDs);
-
-
 	if (isset($_POST['submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['message']);
 
@@ -79,6 +63,9 @@
 
 		$conn->close();
 	}
+
+
+
 ?>
 
 <!doctype HTML>
@@ -120,11 +107,17 @@
 					<span>Groups</span>
 					<ul>
 						<?php
-							for ($x = 1; $x < $countIDs; $x++) {
-								echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupNames[$x] . "</a></li>";
-							}
-							if ($countIDs == 1) {
-								echo "<li><a href='./home.php'>User is only in the global group</a></li>";
+							//Finds the groups that a user is in
+							$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
+							$userGroups = $conn->query($queryGroups);
+
+							if ($userGroups->num_rows > 0) { 
+								// output data of each row
+								while($row = $userGroups->fetch_assoc()) {
+									if($row['group_id'] != 1) {
+										echo "<li><a href='./home.php?id=" . $row['group_id'] ."'>" . $row['group_name'] . "</a></li>";
+									} 
+								} 
 							}
 						?>
 					</ul>
