@@ -54,32 +54,46 @@ if (isset($_POST['submit'])) {
 	
 	$querySearchUsername = "SELECT username FROM users WHERE username = '".$signupusername."'";
 	$resultSearch1 = $conn->query($querySearchUsername);
+	$querySearchEmail = "SELECT email FROM users WHERE email = '".$signupemail."'";
+	$resultSearch2 = $conn->query($querySearchEmail);
 	
 	if ($resultSearch1->num_rows > 0) {
 		while($row = $resultSearch1->fetch_assoc()) {
 			$searchedusername = $row['username'];
-
 		}
 	}
 
-	if(!$signupusername == $searchedusername) {
-		$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES (NULL, '', '', '".$signuppassword."', '".$signupemail."', '".$signupusername."')";
-		$conn->query($query1);
-		$queryID = "SELECT id FROM users WHERE email ='".$signupemail."'";
-		$resultID = $conn->query($queryID);
-		if ($resultID->num_rows > 0) {
-			while($row = $resultID->fetch_assoc()) {
-				$ID = $row['id'];
-				$query2 = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('".$ID."', '1')";
-				$conn->query($query2);
-				$_SESSION['email'] = $signupemail;
-				$_SESSION['username'] = $signupusername;
-				header("Location: home.php");
-			}
+	if ($resultSearch2->num_rows > 0) {
+		while($row = $resultSearch2->fetch_assoc()) {
+			$searchedemail = $row['email'];
+		}
+	}
+
+	if(empty($signuppassword) || empty($signupemail) || empty($signupusername)) {
+		echo "<p class= " . "notfound" . ">You left out part of the form. Please enter all information</p>";
+	} else if(!$signupusername == $searchedusername) {
+		if(!$signupemail == $searchedemail) {
+			$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES (NULL, '', '', '".$signuppassword."', '".$signupemail."', '".$signupusername."')";
+			$conn->query($query1);
+			$queryID = "SELECT id FROM users WHERE email ='".$signupemail."'";
+			$resultID = $conn->query($queryID);
+			if ($resultID->num_rows > 0) {
+				while($row = $resultID->fetch_assoc()) {
+					$ID = $row['id'];
+					$query2 = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('".$ID."', '1')";
+					$conn->query($query2);
+					$_SESSION['email'] = $signupemail;
+					$_SESSION['username'] = $signupusername;
+					header("Location: home.php");
+				}
+			} 
+		} else {
+			echo "<p class= " . "notfound" . ">Email already exists</p>";
 		}
 	} else {
 		echo "<p class= " . "notfound" . ">Username already exists</p>";
 	}
+
 
 
 	
