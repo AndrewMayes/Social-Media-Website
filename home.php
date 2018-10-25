@@ -116,7 +116,9 @@
 								while($row = $userGroups->fetch_assoc()) {
 									if($row['group_id'] != 1) {
 										echo "<li><a href='./home.php?id=" . $row['group_id'] ."'>" . $row['group_name'] . "</a></li>";
-									} 
+									} else {
+										echo "<li><a href='./home.php'>User is only in the global group</a></li>";
+									}
 								} 
 							}
 						?>
