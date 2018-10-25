@@ -32,6 +32,51 @@
 		} 
 	}
 
+	/*
+		Section of code which restricts user's access to groups which they are not members of or which are private
+		/
+		/
+		/
+		/
+		/
+	*/
+	$getAccessGroupIDs = "select b.group_id from users a, groups b, group_users c where a.id = c.user_id and b.group_id = c.group_id and a.id = ".$userID." union select group_id from groups where type = 'public'";
+	$resultAccessGroupIDs = $conn->query($getAccessGroupIDs);
+
+	if ($resultAccessGroupIDs->num_rows > 0) {
+		while ($row = $resultAccessGroupIDs->fetch_assoc()) {
+			$accessGroupIDsArray[] = $row['group_id'];
+		}
+	}
+
+	$getAllGroupIDs = "select group_id from groups";
+	$resultAllGroupIDs = $conn->query($getAllGroupIDs);
+
+	if ($resultAllGroupIDs->num_rows > 0) {
+		while ($row = $resultAllGroupIDs->fetch_assoc()) {
+			$allGroupIDsArray[] = $row['group_id'];
+		}
+	}
+
+	$restrictedGroupIDs = array_diff($allGroupIDsArray,$accessGroupIDsArray);
+
+	$_SESSION['restricted'] = $restrictedGroupIDs;
+
+	foreach ($_SESSION['restricted'] as $key=>$value) {
+		$restrictedID = $value;
+		if ($groupID == $restrictedID) {
+			header("Location: home.php?msg=" . urlencode('access_denied'));
+		}
+	}
+
+	/*
+		Section of code which deals with 'likes'. Reference for this section of code is found at the top of this file
+		/
+		/
+		/
+		/
+		/
+	*/
 	if (isset($_GET['liked'])) {
 		$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
 		$userLiked = $conn->query($hasUserLikedQuery);
@@ -63,8 +108,6 @@
 
 		$conn->close();
 	}
-
-
 
 ?>
 
@@ -108,7 +151,7 @@
 					<ul>
 						<?php
 							//Finds the groups that a user is in
-							$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
+							$queryGroups = "SELECT groups.group_id,groups.group_name,groups.type FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " .$userID."";
 							$userGroups = $conn->query($queryGroups);
 
 							if ($userGroups->num_rows > 0) { 
@@ -116,7 +159,7 @@
 								while($row = $userGroups->fetch_assoc()) {
 									$count++;
 									if($row['group_id'] != 1) {
-										echo "<li><a href='./home.php?id=" . $row['group_id'] ."'>" . $row['group_name'] . "</a></li>";
+										echo "<li><a href='./home.php?id=" . $row['group_id'] ."&type=".$row['type']."'>" . $row['group_name'] . "</a></li>";
 									}
 								} 
 								if ($count == 1) {
