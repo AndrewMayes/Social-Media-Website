@@ -112,6 +112,7 @@ li.active > a {
 	padding-bottom: 5px;
 	margin-left: 5px;
 	margin-right: 5px;
+	word-break: break-word;
 }
 
 .time {
@@ -263,6 +264,7 @@ input[type=submit]:hover {
 	border: 1px solid #666;
 	border-radius: 10px;
 	background-color: #FFFFFF;
+	
 }
 
 /*
