@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2018 at 08:53 PM
--- Server version: 5.7.23-0ubuntu0.16.04.1
+-- Generation Time: Oct 25, 2018 at 09:21 PM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -31,18 +31,19 @@ USE `cs418`;
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `group_id` int(10) UNSIGNED NOT NULL,
-  `group_name` varchar(50) NOT NULL
+  `group_name` varchar(50) NOT NULL,
+  `type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`group_id`, `group_name`) VALUES
-(1, 'Global'),
-(2, 'Gaming'),
-(3, 'Sports'),
-(4, 'Anime');
+INSERT INTO `groups` (`group_id`, `group_name`, `type`) VALUES
+(1, 'Global', 'public'),
+(2, 'Gaming', 'private'),
+(3, 'Sports', 'private'),
+(4, 'Anime', 'private');
 
 -- --------------------------------------------------------
 
