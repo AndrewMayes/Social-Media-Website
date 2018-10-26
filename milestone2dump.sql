@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2018 at 09:30 PM
+-- Generation Time: Oct 26, 2018 at 05:43 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -167,11 +167,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', ''),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', ''),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', ''),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', ''),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '');
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'Mater_(Cars).png'),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', 'sally-cars-3-81.7.jpg'),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', '149548-1532336916.jpg'),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', 'finn-mcmissile-cars-2-68.6.jpg'),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '0409LM.jpg');
 
 --
 -- Indexes for dumped tables
