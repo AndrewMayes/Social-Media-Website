@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2018 at 09:21 PM
+-- Generation Time: Oct 25, 2018 at 09:30 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages` (
   `msg_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `msg` varchar(280) NOT NULL,
+  `msg` varchar(6000) NOT NULL,
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `group_id` int(10) UNSIGNED NOT NULL,
   `likes` int(10) UNSIGNED NOT NULL
@@ -107,7 +107,7 @@ INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `li
 (9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0),
 (10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0),
 (11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2),
-(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0);
+(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,8 @@ INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES
 (1, 5),
 (6, 1),
 (11, 1),
-(11, 5);
+(11, 5),
+(12, 1);
 
 -- --------------------------------------------------------
 
