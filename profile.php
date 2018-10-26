@@ -110,15 +110,39 @@
 			</ul>
 		</div>
 		<div class="profile_pos">
-			<div class="profile">
-					<center>
-					<?php 
-						echo "<div id='pro_username'>";
-							echo $_SESSION['fname'];
-							echo " " . $_SESSION['lname'];
-							echo "</div>";
-					?>
-					</center>
+		<div class="profile">
+			<center>
+                <?php
+
+                        if(isset($_POST['upload'])){
+                            move_uploaded_file($_FILES['file']['tmp_name'],"uploads/".$_FILES['file']['name']);
+                            $result = mysqli_query($conn,"UPDATE users SET img = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
+                        }
+
+                        $result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $_SESSION['username'] . "'");
+                        while($row_img = mysqli_fetch_assoc($result_img)){
+                                
+                                if($row_img['img'] == ''){
+                                        echo "<img width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
+                                } else {
+                                        echo "<img width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
+                                }
+                                echo "<br>";
+                        }
+                ?>
+				
+				<form action="" method="post" enctype="multipart/form-data">
+                        <input id="upload" type="file" name="file">
+                        <input id="up_submit" type="submit" name="upload" value="Upload">
+                </form>
+               
+				<?php 
+					echo "<div id='pro_username'>";
+						echo $_SESSION['fname'];
+						echo " " . $_SESSION['lname'];
+						echo "</div>";
+				?>
+				</center>
 			</div>
 			
 			<div class="pro_group">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2018 at 11:00 PM
+-- Generation Time: Oct 25, 2018 at 08:53 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -100,11 +100,13 @@ INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `li
 (3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0),
 (4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0),
 (5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0),
-(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 0),
+(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1),
 (7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0),
 (8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0),
 (9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0),
-(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0);
+(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0),
+(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2),
+(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +125,10 @@ CREATE TABLE `messages_likes` (
 --
 
 INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES
-(1, 5);
+(1, 5),
+(6, 1),
+(11, 1),
+(11, 5);
 
 -- --------------------------------------------------------
 
@@ -151,19 +156,20 @@ CREATE TABLE `users` (
   `lname` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL
+  `username` varchar(50) NOT NULL,
+  `img` varchar(580) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater'),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally'),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc'),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile'),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen');
+INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', ''),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', ''),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', ''),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', ''),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '');
 
 --
 -- Indexes for dumped tables
@@ -225,7 +231,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `sub_groups`
 --

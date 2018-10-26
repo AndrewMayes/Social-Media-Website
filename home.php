@@ -180,12 +180,17 @@
 					if ($result->num_rows > 0) { 
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
-							echo "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg']) . "</h2>";
-							//echo "<a id ='userName'>" . $row['fname'] . " " . $row['lname'] . ":<span id='msg'> " . htmlspecialchars($row['msg']) . "</span></a>";
-							echo "<div class='time'>" . $row['post_time'] . "</div>"."\n";
+							$result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $row['username'] . "'");
+							while($row_img = mysqli_fetch_assoc($result_img)){
+									
+									if($row_img['img'] == ''){
+											echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";;
+									} else {
+											echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_img['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";;
+									}
+							}
 							echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
-							<input id='msg_submit' type='submit' name='like' value='Like'>
-							<span>".$row['likes']." likes</span>
+							<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row['likes']." likes</div>
 							</form>";
 						} 
 					} else {

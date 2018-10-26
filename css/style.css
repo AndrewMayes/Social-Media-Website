@@ -108,6 +108,7 @@ li.active > a {
 
 
 #userName {
+	display: inline;
 	padding-top: 25px;
 	padding-bottom: 5px;
 	margin-left: 5px;
@@ -116,12 +117,24 @@ li.active > a {
 }
 
 .time {
-	font-size: 10px;
-	margin-left: 5px;
-	margin-bottom: 5px;
+	display: inline;
+	font-size: 15px;
+	margin-top: 45px;
+	float: right;
 }
 
+.likeys {
+	margin-left: 15px;
 
+}
+
+#like_input{
+	font-size: 15px;
+	width: 50px;
+	border: 1px solid #D2CCD9;
+	border-radius: 4px;
+	margin-bottom: 30px;
+}
 
 table {
 	margin: 0px auto;
@@ -221,6 +234,14 @@ input[type=submit]:hover {
 	color: white;
  }
 
+ #up_submit {
+	font-size: 15 px;
+	padding: 5px;
+	width: 50px;
+	border: 0px;
+	border-radius: 4px;
+ }
+
 .pro_group {
 	margin: 0px auto;
 	padding-top: 80px;
@@ -241,9 +262,16 @@ input[type=submit]:hover {
 	color: white;
  }
  
+ input[type='file'] {
+	color: transparent;
+  }
+
+#chat_avatar {
+	border-radius: 50%;
+}
 
  #pro_username {
-	margin-top: 150px;
+	margin-top: 0px;
 	background-color: #2D2C2E;
 	color: #FFFFFF;
 	text-decoration: none;
