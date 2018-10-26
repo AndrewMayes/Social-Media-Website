@@ -192,6 +192,9 @@
 							echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
 							<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row['likes']." likes</div>
 							</form>";
+
+							echo "<div class='underline'>";
+							echo "</div>";
 						} 
 					} else {
 						echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";

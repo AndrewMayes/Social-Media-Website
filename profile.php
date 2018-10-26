@@ -113,22 +113,53 @@
 		<div class="profile">
 			<center>
                 <?php
+					if(isset($_POST['upload'])){
 
-                        if(isset($_POST['upload'])){
-                            move_uploaded_file($_FILES['file']['tmp_name'],"uploads/".$_FILES['file']['name']);
-                            $result = mysqli_query($conn,"UPDATE users SET img = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
-                        }
+						$file = $_FILES['file'];
 
-                        $result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $_SESSION['username'] . "'");
-                        while($row_img = mysqli_fetch_assoc($result_img)){
-                                
-                                if($row_img['img'] == ''){
-                                        echo "<img width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
-                                } else {
-                                        echo "<img width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
-                                }
-                                echo "<br>";
-                        }
+						$fileName = $_FILES['file']['name'];
+						$fileTmpName = $_FILES['file']['tmp_name'];
+						$fileSize = $_FILES['file']['size'];
+						$fileError = $_FILES['file']['error'];
+						$fileType= $_FILES['file']['type'];
+
+						$fileExt = explode('.', $fileName);
+						$fileActualExt = strtolower(end($fileExt));
+
+						$allowed = array('jpg', 'jpeg', 'gif', 'png');
+
+						if(in_array($fileActualExt, $allowed)) {
+							if ($fileError === 0) {
+								if ($fileSize < 1000000) {
+									$fileDestination = 'uploads/'.$fileName;
+									move_uploaded_file($fileTmpName, $fileDestination);
+									$result = mysqli_query($conn,"UPDATE users SET img = '".$fileName."' WHERE username = '".$_SESSION['username']."'");
+									header("Location: profile.php?upload_success");
+								} else {
+									echo "Your file is too big!";
+									echo "<br></br>";
+								}
+								
+							} else {
+								echo "There was an errpr uploading your file!";
+								echo "<br></br>";
+							}
+						} else {
+							echo "You cannot upload this type of file!";
+							echo "<br></br>";
+						}
+					}
+	
+					$result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $_SESSION['username'] . "'");
+					while($row_img = mysqli_fetch_assoc($result_img)){
+							
+							if($row_img['img'] == ''){
+									echo "<img width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
+							} else {
+									echo "<img width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
+							}
+							echo "<br>";
+					}
                 ?>
 				
 				<form action="" method="post" enctype="multipart/form-data">
@@ -146,9 +177,27 @@
 			</div>
 			
 			<div class="pro_group">
+				<ul>
+					<?php
+						//Finds the groups that a user is in
+						$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
+						$userGroups = $conn->query($queryGroups);
 
+						if ($userGroups->num_rows > 0) { 
+							// output data of each row
+							while($row = $userGroups->fetch_assoc()) {
+								$count++;
+								if($row['group_id'] != 1) {
+									echo "<li>". $row['group_name'] . "</li>";
+								}
+							} 
+							if ($count == 1) {
+								echo "User is only in the global group";
+							}
+						}
+					?>
+				</ul>
 			</div>
-
 			<div class="pro_info">
 			
 			</div>
