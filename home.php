@@ -108,7 +108,7 @@
 
 		$conn->close();
 	}
-
+/*
 	if (isset($_POST['reply_submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['reply']);
 
@@ -119,7 +119,7 @@
 		header("Location: home.php?id=" . $groupID . ""); 
 
 		$conn->close();
-	}
+	}*/
 
 ?>
 
@@ -209,6 +209,21 @@
 							$postsArray[$countP]->likes = $row['likes'];
 							$postsArray[$countP]->parent_id = $row['parent_id'];
 
+							if (isset($_POST['reply_submit'])) {
+								$message = mysqli_real_escape_string($conn, $_POST['reply']);
+						
+								$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,".$row['msg_id'].");";
+						
+								$query2 = "UPDATE `messages` SET `hasChildren` = '1' WHERE `messages`.`msg_id` = ".$row['msg_id']."";
+
+								$conn->query($query);
+								$conn->query($query2);
+						
+								header("Location: home.php?id=" . $groupID . ""); 
+						
+								$conn->close();
+							}
+
 							$countP++;
 						} 
 					} else {
@@ -225,15 +240,15 @@
 									if($row_reply['img'] == '') {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
 										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form>";
+										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+										</form>";
 									} else {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
 										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form>";
+										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+										</form>";
 									}
 									
 									echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
