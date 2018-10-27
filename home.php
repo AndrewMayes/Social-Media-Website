@@ -239,16 +239,16 @@
 									//prints out posts that have replies
 									if($row_reply['img'] == '') {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
-										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-										</form>";
+										</form></div>";
 									} else {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
-										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-										</form>";
+										</form></div>";
 									}
 									
 									echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
@@ -262,16 +262,16 @@
 									//prints out the replies to the above post
 									if($row_reply['img'] == '') {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $value->username . ": " . htmlspecialchars($value->msg)."</h2>" . "<div class='time'>" . $value->post_time . "</div>"."</span>";
-										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-										</form>";
+										</form></div>";
 									} else {
 										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $value->username . ": " . htmlspecialchars($value->msg)."</h2>" . "<div class='time'>" . $value->post_time . "</div>"."</span>";
-										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-										</form>";
+										</form></div>";
 									}
 	
 									
@@ -286,16 +286,16 @@
 							if ($row_reply['parent_id'] == 0 && $row_reply['hasChildren'] == 0) {
 								if($row_reply['img'] == '') {
 									echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
-									echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+									echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 									<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 									<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-									</form>";
+									</form></div>";
 								} else {
 									echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
-									echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+									echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
 									<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
 									<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-									</form>";
+									</form></div>";
 								}
 									
 								echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
