@@ -109,6 +109,18 @@
 		$conn->close();
 	}
 
+	if (isset($_POST['reply_submit'])) {
+		$message = mysqli_real_escape_string($conn, $_POST['reply']);
+
+		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,".$row['msg_id'].");";
+
+		$conn->query($query);
+
+		header("Location: home.php?id=" . $groupID . ""); 
+
+		$conn->close();
+	}
+
 ?>
 
 <!doctype HTML>
@@ -174,30 +186,111 @@
 		<div class="position">
 			<div class = "feed">
 				<?php
-					$postFeed = "SELECT username, msg, post_time, msg_id, likes from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					class Post {
+						public $username;
+						public $msg;
+						public $post_time;
+						public $msg_id;
+						public $likes;
+						public $parent_id;
+					}
+					$postFeed = "SELECT username, msg, post_time, msg_id, likes, parent_id, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$result = $conn->query($postFeed);
-
+					$countP = 0;
 					if ($result->num_rows > 0) { 
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
-							$result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $row['username'] . "'");
-							while($row_img = mysqli_fetch_assoc($result_img)){
-									
-									if($row_img['img'] == ''){
-											echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";;
-									} else {
-											echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_img['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";;
-									}
-							}
-							echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
-							<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row['likes']." likes</div>
-							</form>";
 
-							echo "<div class='underline'>";
-							echo "</div>";
+							$postsArray[$countP] = new Post();
+							$postsArray[$countP]->username = $row['username'];
+							$postsArray[$countP]->msg = htmlspecialchars($row['msg']);
+							$postsArray[$countP]->post_time = $row['post_time'];
+							$postsArray[$countP]->msg_id = $row['msg_id'];
+							$postsArray[$countP]->likes = $row['likes'];
+							$postsArray[$countP]->parent_id = $row['parent_id'];
+
+							$countP++;
 						} 
 					} else {
 						echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
+					}
+					$replyFeed = "SELECT username, msg, post_time, msg_id, likes, parent_id, hasChildren, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					$resultFeed = $conn->query($replyFeed);
+
+					if ($resultFeed->num_rows > 0) {
+						while ($row_reply = $resultFeed->fetch_assoc()) {
+							foreach ($postsArray as $value) {
+								if ($value->parent_id == $row_reply['msg_id']) {
+									//prints out posts that have replies
+									if($row_reply['img'] == '') {
+										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
+										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+							</form>";
+									} else {
+										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
+										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+							</form>";
+									}
+									
+									echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
+									<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
+									</form>";
+
+									echo "<div class='underline'>";
+									echo "</div>";
+									
+
+									//prints out the replies to the above post
+									if($row_reply['img'] == '') {
+										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $value->username . ": " . htmlspecialchars($value->msg)."</h2>" . "<div class='time'>" . $value->post_time . "</div>"."</span>";
+										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+										</form>";
+									} else {
+										echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $value->username . ": " . htmlspecialchars($value->msg)."</h2>" . "<div class='time'>" . $value->post_time . "</div>"."</span>";
+										echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+										<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+										<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+										</form>";
+									}
+	
+									
+									echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
+									<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
+									</form>";
+
+									echo "<div class='underline'>";
+									echo "</div>";
+								}
+							}
+							if ($row_reply['parent_id'] == 0 && $row_reply['hasChildren'] == 0) {
+								if($row_reply['img'] == '') {
+									echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
+									echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+									<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+									<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+									</form>";
+								} else {
+									echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row_reply['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row_reply['username'] . ": " . htmlspecialchars($row_reply['msg'])."</h2>" . "<div class='time'>" . $row_reply['post_time'] . "</div>"."</span>";
+									echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+									<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+									<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+									</form>";
+								}
+									
+								echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
+								<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
+								</form>";
+
+								echo "<div class='underline'>";
+								echo "</div>";
+							}
+						}
 					}
 				?>
 			</div>

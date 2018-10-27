@@ -169,8 +169,7 @@
                
 				<?php 
 					echo "<div id='pro_username'>";
-						echo $_SESSION['fname'];
-						echo " " . $_SESSION['lname'];
+						echo $_SESSION['username'];
 						echo "</div>";
 				?>
 				</center>
