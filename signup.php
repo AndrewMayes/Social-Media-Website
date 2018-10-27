@@ -28,6 +28,8 @@
 				<td>
 					<h2 align="center" style="font-family: 'Exo 2', sans-serif;"> Join Now! </h2>
 					<form action="signup.php" method="POST">
+						<input id="loggin_text" type="text" name="signupfirstname" size="25" placeholder="First Name" /> <br /><br />
+						<input id="loggin_text" type="text" name="signuplastname" size="25" placeholder="Last Name" /> <br /><br />
 						<input id="loggin_text" type="text" name="signupusername" size="25" placeholder="Username" /> <br /><br />
 						<input id="loggin_text" type="text" name="signupemail" size="25" placeholder="Email Address" /> <br /><br />
 						<input id="loggin_text" type="text" name="signuppassword" size="25" placeholder="Password" /> <br /><br />
@@ -48,6 +50,8 @@
 include 'connection.php';
 
 if (isset($_POST['submit'])) {
+	$signupfirstname = mysqli_real_escape_string($conn, $_POST['signupfirstname']);
+	$signuplastname = mysqli_real_escape_string($conn, $_POST['signuplastname']);
 	$signupusername = mysqli_real_escape_string($conn, $_POST['signupusername']);
 	$signupemail = mysqli_real_escape_string($conn, $_POST['signupemail']);
 	$signuppassword = mysqli_real_escape_string($conn, $_POST['signuppassword']);
@@ -69,11 +73,11 @@ if (isset($_POST['submit'])) {
 		}
 	}
 
-	if(empty($signuppassword) || empty($signupemail) || empty($signupusername)) {
+	if(empty($signuppassword) || empty($signupemail) || empty($signupusername) || empty($signupfirstname) || empty($signuplastname)) {
 		echo "<p class= " . "notfound" . ">You left out part of the form. Please enter all information</p>";
 	} else if(!$signupusername == $searchedusername) {
 		if(!$signupemail == $searchedemail) {
-			$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES (NULL, '', '', '".$signuppassword."', '".$signupemail."', '".$signupusername."')";
+			$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES (NULL, '".$signupfirstname."', '".$signuplastname."', '".$signuppassword."', '".$signupemail."', '".$signupusername."','')";
 			$conn->query($query1);
 			$queryID = "SELECT id FROM users WHERE email ='".$signupemail."'";
 			$resultID = $conn->query($queryID);

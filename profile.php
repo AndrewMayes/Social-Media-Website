@@ -13,9 +13,6 @@
 		$groupID = "1";
 	}
 
-	$test = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`) VALUES (NULL, '1', 'testingthisstuff', CURRENT_TIMESTAMP, '" . $groupID . "');";
-	
-
 	//getUserID();
 	//turn these into functions soon.
 	//retrieve UserID from database
