@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2018 at 01:56 AM
+-- Generation Time: Oct 27, 2018 at 01:58 AM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -169,11 +169,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'Mater_(Cars).png'),
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', ''),
 (2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', ''),
 (3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', ''),
 (4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', ''),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '0409LM.jpg');
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '');
 
 --
 -- Indexes for dumped tables
