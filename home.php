@@ -97,7 +97,7 @@
 		}
 	}
 
-	if (isset($_POST['submit'])) {
+	if (isset($_POST['submit']) && !empty($_POST['message'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['message']);
 
 		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0);";
@@ -209,7 +209,7 @@
 							$postsArray[$countP]->likes = $row['likes'];
 							$postsArray[$countP]->parent_id = $row['parent_id'];
 
-							if (isset($_POST['reply_submit'])) {
+							if (isset($_POST['reply_submit']) && !empty($_POST['reply'])) {
 								$message = mysqli_real_escape_string($conn, $_POST['reply']);
 						
 								$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,".$row['msg_id'].",0);";
