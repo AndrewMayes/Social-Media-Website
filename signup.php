@@ -86,6 +86,8 @@ if (isset($_POST['submit'])) {
 					$ID = $row['id'];
 					$query2 = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('".$ID."', '1')";
 					$conn->query($query2);
+					$_SESSION['fname'] = $signupfirstname;
+					$_SESSION['lname'] = $signuplastname;
 					$_SESSION['email'] = $signupemail;
 					$_SESSION['username'] = $signupusername;
 					header("Location: home.php");
