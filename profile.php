@@ -151,28 +151,48 @@
 					while($row_img = mysqli_fetch_assoc($result_img)){
 							
 							if($row_img['img'] == ''){
-									echo "<img width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
+									echo "<img id='avatar' width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
 							} else {
-									echo "<img width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
+									echo "<img id='avatar' width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
 							}
 							echo "<br>";
 					}
                 ?>
-				
-				<form action="" method="post" enctype="multipart/form-data">
-                        <input id="upload" type="file" name="file">
-                        <input id="up_submit" type="submit" name="upload" value="Upload">
-                </form>
-               
+				<a href="#modal" class="modal-trigger">Change Picture</a>
+
+				<div class="modal" id="modal">
+					<div class="modal__dialog">
+						<section class="modal__content">
+							<header class="modal__header">
+								Change Profile Picture
+								<a href="#" class="modal__close">Close</a>
+							</header>
+
+							<div class="modal__body">
+								<form action="" method="post" enctype="multipart/form-data">
+										<input id="upload" type="file" name="file">
+										<input id="up_submit" type="submit" name="upload" value="Upload">
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+
+				<b>
 				<?php 
 					echo "<div id='pro_username'>";
-						echo $_SESSION['username'];
-						echo "</div>";
+						echo $_SESSION['fname'];
+						echo " " . $_SESSION['lname'];
+					echo "</div>";
 				?>
+				</b>
 				</center>
 			</div>
 			
 			<div class="pro_group">
+				<div class="profile_underline"></div>
+				
+				<b><u><span align="center"> My Groups </span></u></b>
 				<ul>
 					<?php
 						//Finds the groups that a user is in
@@ -184,7 +204,7 @@
 							while($row = $userGroups->fetch_assoc()) {
 								$count++;
 								if($row['group_id'] != 1) {
-									echo "<li>". $row['group_name'] . "</li>";
+									echo "<span>"."<li>". $row['group_name'] . "</li>"."</span>";
 								}
 							} 
 							if ($count == 1) {
@@ -194,8 +214,16 @@
 					?>
 				</ul>
 			</div>
+
 			<div class="pro_info">
-			
+				<div class="profile_underline"></div>
+				<b><u><span align="center"> My Info </span></u></b>
+
+				<?php 
+						echo "<span>". "Name: ". $_SESSION['fname'] . " " . $_SESSION['lname']."</span>";
+						echo "<span>". "Username: ". $_SESSION['username'] . "</span>";
+						echo "<span>". "Email Address: ". $_SESSION['email'] . "</span>";
+				?>
 			</div>
 		</div>
 	</body>
