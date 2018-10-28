@@ -465,3 +465,16 @@ input[type=submit]:hover {
 		bottom: 0px;
 	}
 }
+
+.bottom {
+	position: fixed;
+	margin-top: 600px;
+	left: 20%;	
+	height: 25%;
+	width: 75%;
+	overflow-y:auto;
+	overflow: auto;
+	border: 1px solid #666;
+	border-radius: 10px;
+	background-color: #FFFFFF;	
+}
