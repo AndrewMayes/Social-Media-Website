@@ -137,7 +137,19 @@
 		<div class="header">
 			<?php 
 				echo "<div id='logo'>";
-					echo $_SESSION['username'];
+					echo $_SESSION['username'].": ";
+
+					$queryGroups = "SELECT groups.group_id,groups.group_name FROM groups WHERE groups.group_id = ".$groupID."";
+					$userGroups = $conn->query($queryGroups);
+
+					if ($userGroups->num_rows > 0) { 
+					// output data of each row
+						while($row = $userGroups->fetch_assoc()) {
+							if($row['group_id']) {
+								echo  $row['group_name']. " Group";
+							}
+						}
+					} 
 				echo "</div>";
 			?>
 
