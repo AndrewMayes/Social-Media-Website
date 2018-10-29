@@ -137,8 +137,10 @@
 		<div class="header">
 			<?php 
 				echo "<div id='logo'>";
-					echo $_SESSION['username'].": ";
+					echo $_SESSION['username'];
+				echo "</div>";
 
+				echo "<div id='group_logo'>";
 					$queryGroups = "SELECT groups.group_id,groups.group_name FROM groups WHERE groups.group_id = ".$groupID."";
 					$userGroups = $conn->query($queryGroups);
 
@@ -150,6 +152,7 @@
 							}
 						}
 					} 
+
 				echo "</div>";
 			?>
 

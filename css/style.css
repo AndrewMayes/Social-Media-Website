@@ -31,7 +31,17 @@ html, body {
 	background-repeat: no-repeat;
 }
 
+#group_logo {
+	background-color: #2D2C2E;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 30px;
+	padding: 6px 8px 6px 16px;
+	background-repeat: no-repeat;
+}
+
 .menu {
+	position: fixed;
 	background-color: #2D2C2E;
 	text-decoration: none;
 	top: 0px;
