@@ -72,6 +72,37 @@ html, body {
 	color: #D2CCD9;
 }
 
+.index_menu {
+	background-color: #2D2C2E;
+	text-decoration: none;
+	top: 0px;
+	right: 0px;
+	height: 37px;
+	padding-top: 17px;
+	padding-right: 25px;
+}
+
+.index_menu ul{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.index_menu a{
+	float: right;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 14px;
+	background-repeat: no-repeat;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.index_menu a:hover,.sidemenu a:hover{
+	color: #D2CCD9;
+}
+
 .sidemenu {
 	position: fixed;
 	top: 50px;
@@ -603,4 +634,17 @@ input[type=submit]:hover {
 	border: 1px solid #666;
 	border-radius: 10px;
 	background-color: #FFFFFF;
+}
+
+.groupSearch {
+	position: fixed;
+	margin-top: 600px;
+	left: 55%;	
+	height: 25%;
+	width: 40%;
+	overflow-y:auto;
+	overflow: auto;
+	border: 1px solid #666;
+	border-radius: 10px;
+	background-color: #FFFFFF;	
 }

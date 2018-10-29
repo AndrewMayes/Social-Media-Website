@@ -15,7 +15,7 @@
 	<body>
 		<div class="header">
 				<div id="logo">:Social Media:</div>
-				<div class="menu">
+				<div class="index_menu">
 					<ul>
 						<li><a href="signup.php">Sign Up</a></li>
 						<li><a href="index.php">Log In</a></li>

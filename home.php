@@ -148,7 +148,7 @@
 					// output data of each row
 						while($row = $userGroups->fetch_assoc()) {
 							if($row['group_id']) {
-								echo  $row['group_name']. " Group";
+								echo  $row['group_name']. "";
 							}
 						}
 					} 
