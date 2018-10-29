@@ -100,7 +100,8 @@
             
             <ul>
                 <li><a href="invite_groups.php">Groups Invites</a></li>
-                <li class="active"><a href="create_groups.php">Create Groups</a></li>
+				<li class="active"><a href="create_groups.php">Create Groups</a></li>
+				<li><a href="search_groups.php">Search Groups</a></li>
             </ul>
 		</div>
         <div class = "my_group">

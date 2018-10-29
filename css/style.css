@@ -516,6 +516,16 @@ input[type=submit]:hover {
 	text-align: center;
 }
 
+.group_search{
+	position: fixed;
+	margin-top: 80px;
+	left: 105px;
+	width: 100%;
+	font-size: 13px;
+	color: black;
+	text-align: center;
+}
+
 .my_group {
 	position: fixed;
 	margin-top: 180px;
@@ -634,17 +644,4 @@ input[type=submit]:hover {
 	border: 1px solid #666;
 	border-radius: 10px;
 	background-color: #FFFFFF;
-}
-
-.groupSearch {
-	position: fixed;
-	margin-top: 600px;
-	left: 55%;	
-	height: 25%;
-	width: 40%;
-	overflow-y:auto;
-	overflow: auto;
-	border: 1px solid #666;
-	border-radius: 10px;
-	background-color: #FFFFFF;	
 }
