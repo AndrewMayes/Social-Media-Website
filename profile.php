@@ -201,8 +201,8 @@
 				<b><u><span align="center"> My Groups </span></u></b>
 				<ul>
 					<?php
-						//Finds the groups that a user is in
-						$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
+						//Finds the public groups that a user is in
+						$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID' AND type = 'public';";
 						$userGroups = $conn->query($queryGroups);
 
 						if ($userGroups->num_rows > 0) { 
