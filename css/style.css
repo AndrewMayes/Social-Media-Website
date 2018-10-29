@@ -130,6 +130,7 @@ li.active > a {
 }
 
 .reply_pos{
+	position: relative;
 	float: right;
 	display: inline;
 	margin-right: 500px;
@@ -216,7 +217,7 @@ table {
 	margin-top: 3px;
 	border: 1 px black;
 	border-radius: 4px;
-	height: 30px;
+	height: 43px;
 	outline: none;
 }
 
@@ -339,7 +340,6 @@ input[type=submit]:hover {
 	border: 1px solid #666;
 	border-radius: 10px;
 	background-color: #FFFFFF;
-	
 }
 
 .underline {
@@ -465,16 +465,132 @@ input[type=submit]:hover {
 		bottom: 0px;
 	}
 }
-
-.bottom {
+.group_invite{
 	position: fixed;
-	margin-top: 600px;
+	margin-top: 80px;
+	left: 105px;
+	width: 100%;
+	font-size: 13px;
+	color: black;
+	text-align: center;
+}
+
+.my_group {
+	position: fixed;
+	margin-top: 180px;
 	left: 20%;	
-	height: 25%;
+	height: 65%;
 	width: 75%;
 	overflow-y:auto;
 	overflow: auto;
 	border: 1px solid #666;
 	border-radius: 10px;
-	background-color: #FFFFFF;	
+	background-color: #FFFFFF;
+}
+
+.my_group a {
+	text-decoration: none;
+	color: black;
+}
+
+.my_group a:hover{
+	color: #666;
+}
+
+.form_groups_pos{
+	margin: auto;
+	margin-left: 60px;
+}
+
+#group_input {
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	font-size: 15 px;
+	padding: 5px;
+	width: 65%;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border: 1 px black;
+	border-radius: 4px;
+	height: 50px;
+	outline: none;
+}
+
+#group_submit{
+	font-size: 15 px;
+	padding: 5px;
+	width: 100px;
+	margin-bottom: 3px;
+	border: 1px;
+	height: 45px;
+	border-radius: 4px;
+	outline: none;
+}
+
+#invites_input_1 {
+	position: fixed;
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	font-size: 15 px;
+	padding: 5px;
+	width: 65%;
+	margin-bottom: 3px;
+	margin-top: 0px;
+	border: 1 px black;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#invites_input_2 {
+	background-color: #FFFFFF;
+	border: 1px solid black;
+	font-size: 15 px;
+	padding: 5px;
+	width: 65%;
+	margin-bottom: 3px;
+	margin-top: 40px;
+	border: 1 px black;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#invites_submit{
+	font-size: 15 px;
+	padding: 5px;
+	width: 100px;
+	margin-bottom: 3px;
+	border: 1px;
+	height: 32px;
+	border-radius: 4px;
+}
+
+.posting_invite{
+	position: fixed;
+	margin-top: 80px;
+	left: 105px;
+	width: 100%;
+	font-size: 13px;
+	color: black;
+}
+
+.form_invite{
+	margin-top: 5px;
+	left: 105px;
+	width: 100%;
+	font-size: 13px;
+	color: black;
+	text-align: center;
+}
+
+.my_group_invite {
+	position: fixed;
+	margin-top: 30px;
+	left: 20%;	
+	height: 65%;
+	width: 75%;
+	overflow-y:auto;
+	overflow: auto;
+	border: 1px solid #666;
+	border-radius: 10px;
+	background-color: #FFFFFF;
 }

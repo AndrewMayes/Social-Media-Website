@@ -83,11 +83,11 @@
 
 		<div class="sidemenu">
 			<ul>
-				<li class="active"><a href="home.php">Home</a></li>
+				<li><a href="home.php">Home</a></li>
 			</ul>
 
 			<ul>
-				<li><a href="profile.php">Profile</a></li>
+				<li class="active"><a href="profile.php">Profile</a></li>
 			</ul>
 
 			<ul id="submenu">
@@ -105,6 +105,11 @@
 					</ul>
 				</li>
 			</ul>
+
+			 <ul>
+			 	<li><a href="invite_groups.php">Groups Invites</a></li>
+                <li><a href="create_groups.php">Create Groups</a></li>
+            </ul>
 		</div>
 		<div class="profile_pos">
 		<div class="profile">
