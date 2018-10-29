@@ -32,7 +32,7 @@
 						<input id="loggin_text" type="text" name="signuplastname" size="25" placeholder="Last Name" /> <br /><br />
 						<input id="loggin_text" type="text" name="signupusername" size="25" placeholder="Username" /> <br /><br />
 						<input id="loggin_text" type="text" name="signupemail" size="25" placeholder="Email Address" /> <br /><br />
-						<input id="loggin_text" type="text" name="signuppassword" size="25" placeholder="Password" /> <br /><br />
+						<input id="loggin_text" type="password" name="signuppassword" size="25" placeholder="Password" /> <br /><br />
 						<input id="loggin_submit" type="submit" name="submit" value="Sign Up"/>
 					</form>
 				</td>

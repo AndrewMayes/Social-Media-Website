@@ -256,19 +256,20 @@
                 echo "<center><span>You have no group invites</span></center>";
             } else {
                 while($row = $resultInvites->fetch_assoc()) {
+                    $fixedGroupName = addslashes($row['group_name']);
+                    $getGroupID = "SELECT group_id FROM groups WHERE group_name = '".$fixedGroupName."'";
+                    $resultID = $conn->query($getGroupID);
+                    if ($resultID->num_rows > 0) { 
+                        // output data of each row
+                        while($row2 = $resultID->fetch_assoc()) {
+                            $groupID = $row2['group_id'];
+                        } 
+                    }
                     echo "<span>You were invited to <b>".$row['group_name']."</b></span>";
-                    echo "<span><form method='POST'><input id='invites_submit' type='submit' name='join_group' value='Join Group'></form></span>";
+                    echo "<span><form method='POST'><input id='invites_submit' type='submit' name='$groupID' value='Join Group'></form></span>";
                     echo "<div class='underline'></div>";
-                    if (isset($_POST['join_group'])) {
-                        $fixedGroupName = addslashes($row['group_name']);
-                        $getGroupID = "SELECT group_id FROM groups WHERE group_name = '".$fixedGroupName."'";
-                        $resultID = $conn->query($getGroupID);
-                        if ($resultID->num_rows > 0) { 
-                            // output data of each row
-                            while($row = $resultID->fetch_assoc()) {
-                                $groupID = $row['group_id'];
-                            } 
-                        }
+                    if (isset($_POST["$groupID"])) {
+
     
                         $queryJoin = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('$userID', '$groupID');";
                         $conn->query($queryJoin);
