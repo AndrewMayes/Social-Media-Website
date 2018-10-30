@@ -167,14 +167,21 @@ li.active > a {
 .likeys {
 	margin-top: 5px;
 	margin-left: 15px;
+	float: left;
+	display: inline;
 
+}
+
+.dislikeys {
+	margin-top: 5px;
+	margin-left: 15px;
 }
 
 .reply_pos{
 	position: relative;
 	float: right;
 	display: inline;
-	margin-right: 500px;
+	margin-right: 400px;
 }
 
 #reply{
@@ -203,11 +210,21 @@ li.active > a {
 
 #like_input{
 	font-size: 15px;
-	width: 50px;
+	padding: 2px;
 	border: 1px solid #D2CCD9;
 	border-radius: 4px;
 	margin-bottom: 30px;
 }
+
+#dislike_input{
+	font-size: 15px;
+	padding: 2px;
+	border: 1px solid #D2CCD9;
+	border-radius: 4px;
+	margin-bottom: 30px;
+	margin-left: 10px;
+}
+
 
 table {
 	margin: 0px auto;

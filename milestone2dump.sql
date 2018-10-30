@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 28, 2018 at 03:32 AM
--- Server version: 5.7.24-0ubuntu0.16.04.1
+-- Generation Time: Oct 30, 2018 at 01:08 AM
+-- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -103,6 +103,7 @@ CREATE TABLE `messages` (
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `group_id` int(10) UNSIGNED NOT NULL,
   `likes` int(10) UNSIGNED NOT NULL,
+  `dislikes` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `hasChildren` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -111,19 +112,19 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`, `hasChildren`) VALUES
-(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0),
-(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0),
-(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0),
-(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0),
-(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0),
-(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0),
-(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0),
-(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0),
-(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0),
-(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0),
-(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0),
-(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 1, 0, 0);
+INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES
+(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0, 0),
+(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0, 0),
+(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0, 0),
+(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0, 0),
+(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0, 0),
+(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0, 0),
+(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0, 0),
+(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0, 0),
+(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0, 0),
+(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0, 0),
+(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0, 0),
+(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -145,8 +146,7 @@ INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES
 (1, 5),
 (6, 1),
 (11, 1),
-(11, 5),
-(12, 1);
+(11, 5);
 
 -- --------------------------------------------------------
 

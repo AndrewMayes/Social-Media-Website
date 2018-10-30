@@ -84,8 +84,10 @@
 		if (!$userLiked->num_rows > 0) { 
 			// output data of each row
 			$likedQuery = "UPDATE `messages` SET `likes` = `likes`+1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+			$dislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
 			$postLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['liked'] . "', '" . $userID . "')";
 			$conn->query($likedQuery);
+			$conn->query($dislikedQuery);
 			$conn->query($postLikesQuery);
 			header("Location: home.php?id=" . $groupID . "");
 		} else {
@@ -97,10 +99,33 @@
 		}
 	}
 
+
+	if (isset($_GET['disliked'])) {
+		$hasUserDisLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['disliked'] . " AND `user_id` = " . $userID . "";
+		$userDisLiked = $conn->query($hasUserDisLikedQuery);
+
+		if (!$userDisLiked->num_rows > 0) { 
+			// output data of each row
+			$DislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`+1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+			$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+			$postDisLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['disliked'] . "', '" . $userID . "')";
+			$conn->query($DislikedQuery);
+			$conn->query($unlikedQuery);
+			$conn->query($postDisLikesQuery);
+			header("Location: home.php?id=" . $groupID . "");
+		} else {
+			$disunlikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+			$postdisunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['disliked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
+			$conn->query($disunlikedQuery);
+			$conn->query($postdisunLikesQuery);
+			header("Location: home.php?id=" . $groupID . "");
+		}
+	}
+
 	if (isset($_POST['submit']) && !empty($_POST['message'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['message']);
 
-		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0);";
+		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0);";
 
 		$conn->query($query);
 
@@ -154,6 +179,7 @@
 					} 
 
 				echo "</div>";
+
 			?>
 
 			<div class="menu">
@@ -198,14 +224,14 @@
 				</li>
 			</ul>
 
-			<ul>
-			 	<li><a href="invite_groups.php">Groups Invites</a></li>
-                <li><a href="create_groups.php">Create Groups</a></li>
+			 <ul>
+			 	<li><a href="invite_groups.php">Group Invites</a></li>
+				<li><a href="create_groups.php">Create Groups</a></li>
 				<li><a href="search_groups.php">Search Groups</a></li>
             </ul>
-		</div>
-		<div class="position">
-			<div class = "feed">
+		</div>		
+		
+		<div class = "feed">
 				<?php
 					class Post {
 						public $username;
@@ -213,9 +239,10 @@
 						public $post_time;
 						public $msg_id;
 						public $likes;
+						public $dislikes;
 						public $parent_id;
 					}
-					$postFeed = "SELECT username, msg, post_time, msg_id, likes, parent_id, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					$postFeed = "SELECT username, msg, post_time, msg_id, likes, dislikes, parent_id, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$result = $conn->query($postFeed);
 					$countP = 0;
 					if ($result->num_rows > 0) { 
@@ -228,12 +255,13 @@
 							$postsArray[$countP]->post_time = $row['post_time'];
 							$postsArray[$countP]->msg_id = $row['msg_id'];
 							$postsArray[$countP]->likes = $row['likes'];
+							$postsArray[$countP]->dislikes = $row['dislikes'];
 							$postsArray[$countP]->parent_id = $row['parent_id'];
 
 							if (isset($_POST['reply_submit']) && !empty($_POST['reply'])) {
 								$message = mysqli_real_escape_string($conn, $_POST['reply']);
 						
-								$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,".$row['msg_id'].",0);";
+								$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0".$row['msg_id'].",0);";
 						
 								$query2 = "UPDATE `messages` SET `hasChildren` = '1' WHERE `messages`.`msg_id` = ".$row['msg_id']."";
 
@@ -250,7 +278,7 @@
 					} else {
 						echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
 					}
-					$replyFeed = "SELECT username, msg, post_time, msg_id, likes, parent_id, hasChildren, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
+					$replyFeed = "SELECT username, msg, post_time, msg_id, likes, dislikes, parent_id, hasChildren, img from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
 					$resultFeed = $conn->query($replyFeed);
 
 					if ($resultFeed->num_rows > 0) {
@@ -276,6 +304,11 @@
 									<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
 									</form>";
 
+									echo "<form action='home.php?id=" . $groupID . "&disliked=" . $row_reply['msg_id'] . "' method='POST'>
+									<div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'>"." ".$row_reply['dislikes']." dislikes</div>
+									</form>";
+
+
 									echo "<div class='underline'>";
 									echo "</div>";
 									
@@ -298,6 +331,10 @@
 									
 									echo "<form action='home.php?id=" . $groupID . "&liked=" . $row_reply['msg_id'] . "' method='POST'>
 									<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
+									</form>";
+
+									echo "<form action='home.php?id=" . $groupID . "&disliked=" . $row_reply['msg_id'] . "' method='POST'>
+									<div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'>"." ".$row_reply['dislikes']." dislikes</div>
 									</form>";
 
 									echo "<div class='underline'>";
@@ -323,21 +360,25 @@
 								<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row_reply['likes']." likes</div>
 								</form>";
 
+								echo "<form action='home.php?id=" . $groupID . "&disliked=" . $row_reply['msg_id'] . "' method='POST'>
+								<div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'>"." ".$row_reply['dislikes']." dislikes</div>
+								</form>";
+
 								echo "<div class='underline'>";
 								echo "</div>";
 							}
 						}
 					}
 				?>
-			</div>
 		</div>
+
 		<div class="posting">
-		<?php
-			echo "<form action='home.php?id=" . $groupID . "' method='POST'>
-				<input id='messeging' type='text' name='message' value='' placeholder='Post Your Status...'>
-				<input id='msg_submit' type='submit' name='submit' value='Post!'>
-				</form>";
-		?>
+			<?php
+				echo "<form action='home.php?id=" . $groupID . "' method='POST'>
+					<input id='messeging' type='text' name='message' value='' placeholder='Post Your Status...'>
+					<input id='msg_submit' type='submit' name='submit' value='Post!'>
+					</form>";
+			?>
 		</div>
 	</body>
 </html>
