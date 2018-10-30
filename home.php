@@ -84,7 +84,6 @@
 		if (!$userLiked->num_rows > 0) { 
 			// output data of each row
 			$likedQuery = "UPDATE `messages` SET `likes` = `likes`+1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
-			$dislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
 			$postLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['liked'] . "', '" . $userID . "')";
 			$conn->query($likedQuery);
 			$conn->query($dislikedQuery);
@@ -107,7 +106,6 @@
 		if (!$userDisLiked->num_rows > 0) { 
 			// output data of each row
 			$DislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`+1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
-			$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
 			$postDisLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['disliked'] . "', '" . $userID . "')";
 			$conn->query($DislikedQuery);
 			$conn->query($unlikedQuery);
