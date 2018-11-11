@@ -93,6 +93,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 
 			<ul>
 				<li class="active"><a href="profile.php">Profile</a></li>
+				<li><a href="search_users.php">Search Users</a></li>
 			</ul>
 
 			<ul id="submenu">

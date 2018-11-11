@@ -189,6 +189,7 @@
 
 			<ul>
 				<li><a href="profile.php">Profile</a></li>
+				<li><a href="search_users.php">Search Users</a></li>
 			</ul>
 
 			<ul id="submenu">
