@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
 		echo "<p class= " . "notfound" . ">You left out part of the form. Please enter all information</p>";
 	} else if(!$signupusername == $searchedusername) {
 		if(!$signupemail == $searchedemail) {
-			$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES (NULL, '".$signupfirstname."', '".$signuplastname."', '".$signuppassword."', '".$signupemail."', '".$signupusername."','')";
+			$query1 = "INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`) VALUES (NULL, '".$signupfirstname."', '".$signuplastname."', '".$signuppassword."', '".$signupemail."', '".$signupusername."')";
 			$conn->query($query1);
 			$queryID = "SELECT id FROM users WHERE email ='".$signupemail."'";
 			$resultID = $conn->query($queryID);

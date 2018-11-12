@@ -2,7 +2,8 @@
 /*
 	References: https://www.youtube.com/watch?v=pfFdbpPgg4M&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG&index=14
 				https://www.youtube.com/watch?v=tVLHGHshNdU&index=15&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG
-	I referenced these 2 videos when writing the 'likes' code 
+				I referenced these 2 videos when writing the 'likes' code 
+				https://www.youtube.com/watch?v=82hnvUYY6QA   <- this one for ajax 
 */
 	include ('connection.php');
 	session_start();
@@ -154,6 +155,62 @@
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script src="script/dropdown.js" type="text/javascript"></script>
+		<script>
+/*
+			$(document).ready(function() {
+				$("#msg_submit").click(function() {
+					var message = {
+						message: $message.val();
+					};
+
+					$.ajax({
+						type: 'POST',
+						url: '',
+						data: message,
+						success: function(newMessage) {
+							$
+						}
+					});
+				})
+
+			});*/
+
+			//document.getElementById('msg_submit').addEventListener('')
+
+					function displayMessages() {
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET', 'messages.php', true);
+
+					xhr.onload = function (){
+						if(this.status == 200) {
+							var msgs = JSON.parse(this.responseText);
+							var output = '';
+
+
+							/*
+							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
+							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
+							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
+							</form></div>";
+							*/
+
+							var ID = "<?php echo $groupID ?>";
+							for(var i in msgs){
+								if (ID == msgs[i].group_id){
+									output+= "<span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form action='home.php?id="+ID+"' method='POST'><input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><div class='underline'></div>";
+								}
+							}
+
+							document.getElementsByClassName("feed")[0].innerHTML = output;
+						}
+					}
+
+					xhr.send();
+				}
+
+				window.onload=displayMessages;
+
+		</script>
 	</head>
 	<body>
 		<div class="header">
@@ -223,40 +280,7 @@
             </ul>
 		</div>
 		<div class = "feed">
-			<?php
-				$postFeed = "SELECT * from users inner join messages on users.id = messages.user_id WHERE group_id = " . $groupID . " ORDER BY msg_id DESC";
-				$result = $conn->query($postFeed);
-				if ($result->num_rows > 0) { 
-					// output data of each row
-					while($row = $result->fetch_assoc()) {
 
-						if($row['img'] == '') {
-							echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";
-							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form></div>";
-						} else {
-							echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";
-							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form></div>";
-						}
-						
-						echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
-						<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row['likes']." likes</div>
-						</form>";
-						echo "<form action='home.php?id=" . $groupID . "&disliked=" . $row['msg_id'] . "' method='POST'>
-						<div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'>"." ".$row['dislikes']." dislikes</div>
-						</form>";
-						echo "<div class='underline'>";
-						echo "</div>";
-					} 
-				} else {
-					echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
-				}
-			?>
 		</div>
 		
 		<div class="posting">
