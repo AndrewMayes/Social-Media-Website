@@ -73,55 +73,92 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 		<title>Social Media Prototype Testing</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="script/dropdown.js" type="text/javascript"></script>
 	</head>
 	<body>
-    <div class="header">
-			<?php 
-				echo "<div id='logo'>";
-					echo $_SESSION['username'];
-				echo "</div>";
-			?>
+		<div class="header">
+				<?php 
+					echo "<div id='logo'>";
+						echo $_SESSION['username'];
+					echo "</div>";
+				?>
 
-			<div class="menu">
+				<div class="menu">
+					<ul>
+						<li><a href="loggedout.php">Log Out</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="sidemenu">
 				<ul>
-					<li><a href="loggedout.php">Log Out</a></li>
+					<li><a href="home.php">Home</a></li>
+				</ul>
+
+				<ul>
+					<li><a href="profile.php">Profile</a></li>
+					<li class="active"><a href="search_users.php">Search Users</a></li>
+				</ul>
+
+				<ul id="submenu">
+					<li>
+						<span>Groups</span>
+						<ul>
+							<?php
+								for ($x = 1; $x < $countIDs; $x++) {
+									echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupNames[$x] . "</a></li>";
+								}
+								if ($countIDs == 1) {
+									echo "<li><a href='./home.php'>User is only in the global group</a></li>";
+								}
+							?>
+						</ul>
+					</li>
+				</ul>
+
+				<ul>
+					<li><a href="invite_groups.php">Groups Invites</a></li>
+					<li><a href="create_groups.php">Create Groups</a></li>
 				</ul>
 			</div>
-		</div>
 
-		<div class="sidemenu">
-			<ul>
-				<li><a href="home.php">Home</a></li>
-			</ul>
+			<div class='user_position'>
+				<form method='POST'>
+					<input type="text" id="search_text" placeholder="Search Users"/>
+				</form>
+				<div id="result"></div>
+			</div>
 
-			<ul>
-				<li><a href="profile.php">Profile</a></li>
-                <li class="active"><a href="search_users.php">Search Users</a></li>
-			</ul>
+	
 
-			<ul id="submenu">
-				<li>
-					<span>Groups</span>
-					<ul>
-						<?php
-							for ($x = 1; $x < $countIDs; $x++) {
-								echo "<li><a href='./home.php?id=" . $groupIDs[$x] ."'>" . $groupNames[$x] . "</a></li>";
-							}
-							if ($countIDs == 1) {
-								echo "<li><a href='./home.php'>User is only in the global group</a></li>";
-							}
-						?>
-					</ul>
-				</li>
-			</ul>
-
-			 <ul>
-			 	<li><a href="invite_groups.php">Groups Invites</a></li>
-                <li><a href="create_groups.php">Create Groups</a></li>
-            </ul>
 		</div>
 	</body>
 </html>
+
+<script>
+$(document).ready(function(){
+	function load_data(query)
+	{
+		$.ajax ({
+			url:"search_result.php",
+			method:"post",
+			data:{query:query},
+			success:function(data) {
+				$('#result').html(data);
+			}
+		});
+	}
+	
+	$('#search_text').keyup(function(){
+		var search = $(this).val();
+		if(search != '') {
+			load_data(search);
+		}
+		else {
+			load_data();			
+		}
+	});
+});
+</script>
 
