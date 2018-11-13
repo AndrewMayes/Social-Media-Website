@@ -130,7 +130,7 @@
 	}
 
 	
-	if (isset($_POST['msg']) && !empty($_POST['msg'])) {
+	if (isset($_POST['msg'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['msg']);
 		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0);";
 		$conn->query($query); 
@@ -160,14 +160,14 @@
 
 		function displayMessages() {
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'messages.php', true);
+			var ID = "<?php echo $groupID ?>";
+			xhr.open('GET', 'messages.php?gid='+ID, true);
 
 			xhr.onload = function (){
 				if(this.status == 200) {
 					var msgs = JSON.parse(this.responseText);
 					var output = '';
 
-					var ID = "<?php echo $groupID ?>";
 					for(var i in msgs){
 						if (ID == msgs[i].group_id){
 							output+= "<span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form action='home.php?id="+ID+"' method='POST'><input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><div class='underline'></div>";
@@ -175,6 +175,11 @@
 					}
 
 					document.getElementsByClassName("feed")[0].innerHTML = output;
+
+					if (msgs == null){
+						var noMsgs = "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
+						document.getElementsByClassName("feed")[0].innerHTML = noMsgs; 
+					}
 				}
 			}
 
@@ -259,7 +264,7 @@
 		<div class="posting">
 		<?php			
 			echo "<form id=enterMsg>
-			<input id='messeging' type='text' name='message' placeholder='Post Your Status...'>
+			<input id='messeging' type='text' required='required' name='message' placeholder='Post Your Status...'>
 			<input id='msg_submit' type='submit' name='submit' value='Post!'>
 			</form>";
 		?>
@@ -288,3 +293,10 @@
 		</script>
 	</body>
 </html>
+
+<?
+
+	
+
+
+?>

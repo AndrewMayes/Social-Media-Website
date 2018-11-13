@@ -5,11 +5,17 @@
     
     if(!isset($_SESSION['email'])){
 		header("Location: index.php?msg=" . urlencode('needs_to_log_in'));
-    }
+	}
+	
+	if(isset($_GET['gid'])) {
+		$groupID = $_GET['gid'];	
+	} else {
+		$groupID = "1";
+	}
     
 
 
-				$postFeed = "SELECT * from users inner join messages on users.id = messages.user_id ORDER BY msg_id DESC";
+				$postFeed = "SELECT * from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID ORDER BY msg_id DESC";
 				$result = $conn->query($postFeed);
 				if ($result->num_rows > 0) { 
 					// output data of each row
@@ -41,7 +47,7 @@
 						echo "</div>";*/
 					} 
 				} else {
-                    echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>"; 
+					//echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
 				}
 				
 				foreach ($messages as $key => $msg) {
@@ -51,4 +57,5 @@
 				$jsonMessages = json_encode($messages);
                 echo $jsonMessages;
 
+				$conn->close();
 			?>
