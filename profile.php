@@ -242,7 +242,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 								}
 							} 
 							if ($count == 1) {
-								echo "User is only in the global group";
+								echo "<span>"."User is only in the global group"."</span>";
 							}
 						}
 					?>
