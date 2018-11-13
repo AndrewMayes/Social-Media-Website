@@ -129,13 +129,13 @@
 		}
 	}
 
-	if (isset($_POST['submit']) && !empty($_POST['message'])) {
-		$message = mysqli_real_escape_string($conn, $_POST['message']);
+	
+	if (isset($_POST['msg']) && !empty($_POST['msg'])) {
+		$message = mysqli_real_escape_string($conn, $_POST['msg']);
 		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0);";
-		$conn->query($query);
-		header("Location: home.php?id=" . $groupID . ""); 
+		$conn->query($query); 
 		$conn->close();
-	}
+	}	
 /*
 	if (isset($_POST['reply_submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['reply']);
@@ -156,59 +156,32 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script src="script/dropdown.js" type="text/javascript"></script>
 		<script>
-/*
-			$(document).ready(function() {
-				$("#msg_submit").click(function() {
-					var message = {
-						message: $message.val();
-					};
-
-					$.ajax({
-						type: 'POST',
-						url: '',
-						data: message,
-						success: function(newMessage) {
-							$
-						}
-					});
-				})
-
-			});*/
-
-			//document.getElementById('msg_submit').addEventListener('')
-
-					function displayMessages() {
-					var xhr = new XMLHttpRequest();
-					xhr.open('GET', 'messages.php', true);
-
-					xhr.onload = function (){
-						if(this.status == 200) {
-							var msgs = JSON.parse(this.responseText);
-							var output = '';
 
 
-							/*
-							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form></div>";
-							*/
+		function displayMessages() {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'messages.php', true);
 
-							var ID = "<?php echo $groupID ?>";
-							for(var i in msgs){
-								if (ID == msgs[i].group_id){
-									output+= "<span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form action='home.php?id="+ID+"' method='POST'><input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><div class='underline'></div>";
-								}
-							}
+			xhr.onload = function (){
+				if(this.status == 200) {
+					var msgs = JSON.parse(this.responseText);
+					var output = '';
 
-							document.getElementsByClassName("feed")[0].innerHTML = output;
+					var ID = "<?php echo $groupID ?>";
+					for(var i in msgs){
+						if (ID == msgs[i].group_id){
+							output+= "<span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form action='home.php?id="+ID+"' method='POST'><input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><div class='underline'></div>";
 						}
 					}
 
-					xhr.send();
+					document.getElementsByClassName("feed")[0].innerHTML = output;
 				}
+			}
 
-				window.onload=displayMessages;
+			xhr.send();
+		}
+
+			window.onload=displayMessages;
 
 		</script>
 	</head>
@@ -284,12 +257,34 @@
 		</div>
 		
 		<div class="posting">
-		<?php
-			echo "<form action='home.php?id=" . $groupID . "' method='POST'>
-				<input id='messeging' type='text' name='message' value='' placeholder='Post Your Status...'>
-				<input id='msg_submit' type='submit' name='submit' value='Post!'>
-				</form>";
+		<?php			
+			echo "<form id=enterMsg>
+			<input id='messeging' type='text' name='message' placeholder='Post Your Status...'>
+			<input id='msg_submit' type='submit' name='submit' value='Post!'>
+			</form>";
 		?>
 		</div>
+		<script>
+		
+			document.getElementById('enterMsg').addEventListener('submit', postMessage);
+			document.getElementById('enterMsg').addEventListener('submit', displayMessages);
+
+			function postMessage(e) {
+				e.preventDefault();
+				
+				var msg = document.getElementById('messeging').value;
+				var params = "msg="+msg;
+
+				var ID = "<?php echo $groupID ?>";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'home.php?id='+ID,true);
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+				xhr.send(params);
+				document.getElementById('enterMsg').reset();
+			}
+	
+		</script>
 	</body>
 </html>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2018 at 07:49 PM
+-- Generation Time: Nov 12, 2018 at 08:18 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -229,7 +229,7 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `img` varchar(580) NOT NULL
+  `img` varchar(580) NOT NULL DEFAULT 'profiledefault.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -237,11 +237,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'Mater_(Cars).png'),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', ''),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', ''),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', ''),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '');
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'profiledefault.png'),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', 'profiledefault.png'),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', 'profiledefault.png'),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', 'profiledefault.png'),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', 'profiledefault.png');
 
 --
 -- Indexes for dumped tables
