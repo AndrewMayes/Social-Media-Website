@@ -283,7 +283,7 @@
 				var ID = "<?php echo $groupID ?>";
 
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', 'home.php?id='+ID,true);
+				xhr.open('POST', 'home.php?id='+ID,false);
 				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 				xhr.send(params);
