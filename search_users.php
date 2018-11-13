@@ -120,6 +120,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 				<ul>
 					<li><a href="invite_groups.php">Groups Invites</a></li>
 					<li><a href="create_groups.php">Create Groups</a></li>
+					<li><a href="search_groups.php">Search Groups</a></li>
 				</ul>
 			</div>
 
