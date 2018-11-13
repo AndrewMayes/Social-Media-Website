@@ -32,6 +32,22 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 		} 
 	}
 
+	if(!isset($_GET['id'])) {
+		header("Location: profile.php?id=". $userID . "");
+	}
+
+	$queryUserProfile = "SELECT * FROM users WHERE id ='" . $_GET['id']. "'";
+	$result_profile = $conn->query($queryUserProfile);
+	if($result_profile->num_rows > 0){	
+		while($row_profile = $result_profile->fetch_assoc()) {
+			$profileFname = $row_profile['fname'];
+			$profileLname = $row_profile['lname'];
+			$profileEmail = $row_profile['email'];
+			$profilePassword = $row_profile['password'];
+			$profileUsername = $row_profile['username'];
+		}
+	}
+
 	//Finds the groups that a user is in
 	$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID';";
 	$userGroups = $conn->query($queryGroups);
@@ -72,7 +88,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 		<script src="script/dropdown.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div class="header">
+	<div class="header">
 			<?php 
 				echo "<div id='logo'>";
 					echo $_SESSION['username'];
@@ -113,14 +129,20 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 			</ul>
 
 			 <ul>
-			 	<li><a href="invite_groups.php">Groups Invites</a></li>
+				<li><a href="invite_groups.php">Groups Invites</a></li>
                 <li><a href="create_groups.php">Create Groups</a></li>
 				<li><a href="search_groups.php">Search Groups</a></li>
             </ul>
 		</div>
+		
 		<div class="profile_pos">
-		<div class="profile">
+			<div class="profile">
 			<center>
+				<?php
+				if(isset($_SESSION['username'])) {
+
+				?>
+
                 <?php
 					if(isset($_POST['upload'])){
 
@@ -142,7 +164,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 								if ($fileSize < 1000000) {
 									$fileDestination = 'uploads/'.$fileName;
 									move_uploaded_file($fileTmpName, $fileDestination);
-									$result = mysqli_query($conn,"UPDATE users SET img = '".$fileName."' WHERE username = '".$_SESSION['username']."'");
+									$result = mysqli_query($conn,"UPDATE users SET img = '".$fileName."' WHERE username = '".$profileUsername."'");
 									header("Location: profile.php?upload_success");
 								} else {
 									echo "Your file is too big!";
@@ -159,7 +181,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						}
 					}
 	
-					$result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $_SESSION['username'] . "'");
+					$result_img = mysqli_query($conn,"SELECT * FROM users WHERE username ='" . $profileUsername . "'");
 					while($row_img = mysqli_fetch_assoc($result_img)){
 							
 							if($row_img['img'] == ''){
@@ -193,8 +215,8 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 				<b>
 				<?php 
 					echo "<div id='pro_username'>";
-						echo $_SESSION['fname'];
-						echo " " . $_SESSION['lname'];
+						echo $profileFname;
+						echo " " . $profileLname;
 					echo "</div>";
 				?>
 				</b>
@@ -207,8 +229,8 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 				<b><u><span align="center"> My Groups </span></u></b>
 				<ul>
 					<?php
-						//Finds the public groups that a user is in
-						$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = " . "'$userID' AND type = 'public';";
+						//Finds the groups that a user is in
+						$queryGroups = "SELECT groups.group_id,groups.group_name FROM users, groups, group_users WHERE users.id = group_users.user_id AND groups.group_id = group_users.group_id AND users.id = '" . $_GET['id']. "' AND type='public';";
 						$userGroups = $conn->query($queryGroups);
 
 						if ($userGroups->num_rows > 0) { 
@@ -232,9 +254,10 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 				<b><u><span align="center"> My Info </span></u></b>
 
 				<?php 
-						echo "<span>". "Name: ". $_SESSION['fname'] . " " . $_SESSION['lname']."</span>";
-						echo "<span>". "Username: ". $_SESSION['username'] . "</span>";
-						echo "<span>". "Email Address: ". $_SESSION['email'] . "</span>";
+						echo "<span>". "Name: ". $profileFname . " " . $profileLname."</span>";
+						echo "<span>". "Username: ". $profileUsername . "</span>";
+						echo "<span>". "Email Address: ". $profileEmail . "</span>";
+					}
 				?>
 			</div>
 		</div>
