@@ -12,11 +12,13 @@ $result = mysqli_query($conn, $query);
 if(mysqli_num_rows($result) > 0) {
     
 	while($row = mysqli_fetch_array($result)) {
+		$userID = $row['id']; 
+		
 		$output .= '
-				<span>'.$row["fname"].' '.$row["lname"].' | '.$row["username"].' | '.$row["email"].'</span>
+				<a href= profile.php?id='. $userID . '>'.$row["fname"].' '.$row["lname"].' | '.$row["username"].' | '.$row["email"].'</a>
 			<br />
 		';
-    }
+	}
 	echo $output;
 }
 ?>
