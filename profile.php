@@ -257,6 +257,34 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						echo "<span>". "Name: ". $profileFname . " " . $profileLname."</span>";
 						echo "<span>". "Username: ". $profileUsername . "</span>";
 						echo "<span>". "Email Address: ". $profileEmail . "</span>";
+	
+						echo "<center><b><u><span>Achievments</span></u></b></center>";
+
+						$queryMessageCount = "SELECT users.id, COUNT(messages.msg_id) AS msg_count FROM messages INNER JOIN users ON '" . $_GET['id']. "' = messages.user_id GROUP BY users.id";
+						$result_msg_count = $conn->query($queryMessageCount);
+						
+						if ($result_msg_count->num_rows > 0) { 
+							// output data of each row
+							$row_msg_count = $result_msg_count->fetch_assoc();
+							$msgCount = $row_msg_count['msg_count'];
+							
+							if($msgCount > 3)
+							echo "<span>:Sociable:</span>";
+						}
+
+						$queryMostLiked = "SELECT DISTINCT messages.msg_id, messages.user_id, MAX(messages.likes) AS most_liked FROM messages INNER JOIN users ON users.id = messages.user_id GROUP BY messages.msg_id ORDER BY most_liked DESC LIMIT 5";
+						$result_most_liked = $conn->query($queryMostLiked);
+						
+						if ($result_most_liked->num_rows > 0) { 
+							$row_most_liked = $result_most_liked->fetch_assoc();
+
+							$mostLikedUser = $row_most_liked['user_id'];
+							$getid = mysqli_real_escape_string($conn, $_GET['id']);
+							
+							if($mostLikedUser == $getid) {
+								echo "<span>:Most Liked Post:</span>";
+							}
+						}
 					}
 				?>
 			</div>
