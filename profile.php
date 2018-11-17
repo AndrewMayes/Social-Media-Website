@@ -269,7 +269,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 							$msgCount = $row_msg_count['msg_count'];
 							
 							if($msgCount > 3)
-							echo "<span>:Sociable:</span>";
+							echo "<span>:Active Poster:</span>";
 						}
 
 						$queryMostLiked = "SELECT DISTINCT messages.msg_id, messages.user_id, MAX(messages.likes) AS most_liked FROM messages INNER JOIN users ON users.id = messages.user_id GROUP BY messages.msg_id ORDER BY most_liked DESC LIMIT 5";
@@ -283,6 +283,18 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 							
 							if($mostLikedUser == $getid) {
 								echo "<span>:Most Liked Post:</span>";
+							}
+						}
+
+						$queryGroupCount = "SELECT group_users.user_id, COUNT(group_users.group_id ) AS group_count FROM group_users INNER JOIN users ON group_users.user_id = '" . $_GET['id']. "' GROUP BY users.id";
+						$result_group_count = $conn->query($queryGroupCount);
+						
+						if ($result_group_count->num_rows > 0) { 
+							// output data of each row
+							$row_group_count = $result_group_count->fetch_assoc();
+							$groupCount = $row_group_count['group_count'];
+							if($groupCount > 3) {
+								echo "<span>:Group Collector:</span>";
 							}
 						}
 					}

@@ -679,7 +679,7 @@ input[type=submit]:hover {
 	font-size: 15 px;
 	padding: 5px;
 	width: 65%;
-	margin-bottom: 3px;
+	margin-bottom: 15px;
 	margin-top: 3px;
 	border-radius: 4px;
 	height: 50px;
@@ -688,7 +688,7 @@ input[type=submit]:hover {
 
 .search_users{
 	background-color: #FFFFFF;
-	width:65%;
+	width: 65%;
 	border: 1px solid black;
 	border-radius: 4px;
 	font-size: 18px;
