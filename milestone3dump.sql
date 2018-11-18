@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2018 at 08:18 PM
+-- Generation Time: Nov 17, 2018 at 09:51 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -87,7 +87,8 @@ INSERT INTO `group_users` (`user_id`, `group_id`) VALUES
 (3, 4),
 (4, 1),
 (5, 1),
-(5, 2);
+(5, 2),
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -229,19 +230,21 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `img` varchar(580) NOT NULL DEFAULT 'profiledefault.png'
+  `img` varchar(580) NOT NULL DEFAULT 'profiledefault.png',
+  `admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'profiledefault.png'),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', 'profiledefault.png'),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', 'profiledefault.png'),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', 'profiledefault.png'),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', 'profiledefault.png');
+INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`, `admin`) VALUES
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'profiledefault.png', 0),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', 'profiledefault.png', 0),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', 'profiledefault.png', 0),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', 'profiledefault.png', 0),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', 'profiledefault.png', 0),
+(6, 'admin', 'admin', 'admin', 'admin', 'admin', 'profiledefault.png', 1);
 
 --
 -- Indexes for dumped tables
@@ -330,7 +333,7 @@ ALTER TABLE `sub_groups`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --
@@ -352,8 +355,8 @@ ALTER TABLE `group_invites`
 -- Constraints for table `group_users`
 --
 ALTER TABLE `group_users`
-  ADD CONSTRAINT `group_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `group_users_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
+  ADD CONSTRAINT `group_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `group_users_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `messages`
@@ -366,7 +369,7 @@ ALTER TABLE `messages`
 -- Constraints for table `messages_dislikes`
 --
 ALTER TABLE `messages_dislikes`
-  ADD CONSTRAINT `messages_dislikes_ibfk_1` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`),
+  ADD CONSTRAINT `messages_dislikes_ibfk_1` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `messages_dislikes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
@@ -374,7 +377,7 @@ ALTER TABLE `messages_dislikes`
 --
 ALTER TABLE `messages_likes`
   ADD CONSTRAINT `messages_likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `messages_likes_ibfk_3` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`);
+  ADD CONSTRAINT `messages_likes_ibfk_3` FOREIGN KEY (`msg_id`) REFERENCES `messages` (`msg_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `sub_groups`
