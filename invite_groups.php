@@ -141,40 +141,84 @@
                     } 
                 }
 
-                $queryGroupMembers = "SELECT distinct username, id from users a inner join group_users b on a.id = b.user_id where b.group_id = $invgroupID";
-                $resultGroupMembers = $conn->query($queryGroupMembers);
-                if ($resultGroupMembers->num_rows > 0) {
-                    while ($row_members = $resultGroupMembers->fetch_assoc()) {
-                        $groupMembersArray[] = $row_members['username'];
+                $archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $invgroupID";
+                $archived = $conn->query($archivedQuery);
+                if ($archived->num_rows > 0) {
+                    while ($row = $archived->fetch_assoc()) {
+                        $resultArchived = $row['isArchived'];
                     }
                 }
-
-                $queryPendingGroupMembers = "SELECT distinct username, id from users a inner join group_invites b on a.id = b.user_id where b.group_id = $invgroupID";
-                $resultPendingGroupMembers = $conn->query($queryPendingGroupMembers);
-                if ($resultPendingGroupMembers->num_rows > 0) {
-                    while ($row_pendingmembers = $resultPendingGroupMembers->fetch_assoc()) {
-                        $pendingGroupMembersArray[] = $row_pendingmembers['username'];
+                if ($resultArchived == 0) {
+                    $queryGroupMembers = "SELECT distinct username, id from users a inner join group_users b on a.id = b.user_id where b.group_id = $invgroupID";
+                    $resultGroupMembers = $conn->query($queryGroupMembers);
+                    if ($resultGroupMembers->num_rows > 0) {
+                        while ($row_members = $resultGroupMembers->fetch_assoc()) {
+                            $groupMembersArray[] = $row_members['username'];
+                        }
                     }
-                }
-            
-                //function retrieved from http://php.net/manual/en/function.in-array.php#89256
-                function in_arrayi($needle, $haystack) {
-                    return in_array(strtolower($needle), array_map('strtolower', $haystack));
-                }
 
-                $queryGetType = "SELECT type FROM groups WHERE group_id = $invgroupID";
-                $resultGetType = $conn->query($queryGetType);
-                if ($resultGetType->num_rows > 0) {
-                    while ($row_type = $resultGetType->fetch_assoc()) {
-                        $type = $row_type['type'];
+                    $queryPendingGroupMembers = "SELECT distinct username, id from users a inner join group_invites b on a.id = b.user_id where b.group_id = $invgroupID";
+                    $resultPendingGroupMembers = $conn->query($queryPendingGroupMembers);
+                    if ($resultPendingGroupMembers->num_rows > 0) {
+                        while ($row_pendingmembers = $resultPendingGroupMembers->fetch_assoc()) {
+                            $pendingGroupMembersArray[] = $row_pendingmembers['username'];
+                        }
                     }
-                } else {
+                
+                    //function retrieved from http://php.net/manual/en/function.in-array.php#89256
+                    function in_arrayi($needle, $haystack) {
+                        return in_array(strtolower($needle), array_map('strtolower', $haystack));
+                    }
 
-                }
+                    $queryGetType = "SELECT type FROM groups WHERE group_id = $invgroupID";
+                    $resultGetType = $conn->query($queryGetType);
+                    if ($resultGetType->num_rows > 0) {
+                        while ($row_type = $resultGetType->fetch_assoc()) {
+                            $type = $row_type['type'];
+                        }
+                    } else {
 
-                if ($type == 'private') {
-                    //can only invite people to groups that you are the owner of.
-                    if (in_arrayi($printGroupName,$ownedGroupsArray)) {
+                    }
+
+                    if ($type == 'private') {
+                        //can only invite people to groups that you are the owner of.
+                        if (in_arrayi($printGroupName,$ownedGroupsArray)) {
+                            if (!in_arrayi($invusername,$groupMembersArray)) {
+                                if (!in_arrayi($invusername,$pendingGroupMembersArray)) {
+
+                                    $getUserID = "SELECT id FROM users WHERE username = '" .$invusername."'";
+                                    $resultUserID = $conn->query($getUserID);
+                                    if ($resultUserID->num_rows > 0) { 
+                                        // output data of each row
+                                        while($row = $resultUserID->fetch_assoc()) {
+                                            $invuserID = $row['id'];
+                                        } 
+                                    }
+                
+                                    $query = "SELECT username FROM users WHERE username = '" . $invusername . "'";
+                                    $resultUsers = $conn->query($query);
+                                    if (!$resultUsers->num_rows > 0) { 
+                                        echo "<p>Username not found</p>";
+                                    } else {
+                                        while($row = $resultUsers->fetch_assoc()) {
+                                            $invquery = "INSERT INTO `group_invites` (`group_id`, `group_name`, `user_id`) VALUES ('$invgroupID','$invgroupname','$invuserID')";
+                                            $conn->query($invquery);
+                                            header("Location: invite_groups.php?inv_success");
+                                        } 
+                                    }
+                
+                                    //header("Location: groups.php"); 
+
+                                } else {
+                                    echo "<center><span>User already has a pending invite</span></center>";
+                                }
+                            } else {
+                                echo "<center><span>User is already in the group</span></center>";  
+                            }
+                        } else {
+                            echo "<center><span>You can not invite people to this group</span></center>";
+                        }                                               
+                    } else if ($type == 'public') {
                         if (!in_arrayi($invusername,$groupMembersArray)) {
                             if (!in_arrayi($invusername,$pendingGroupMembersArray)) {
 
@@ -202,55 +246,21 @@
                                 //header("Location: groups.php"); 
 
                             } else {
-                                echo "<center><span>User already has a pending invite</span></center>";
+                                echo "<center><span>User already has a pending invite</span><center>";
                             }
                         } else {
-                            echo "<center><span>User is already in the group</span></center>";  
+                            echo "<center><span>User is already in the group</span><center>";  
                         }
                     } else {
-                        echo "<center><span>You can not invite people to this group</span></center>";
-                    }                                               
-                } else if ($type == 'public') {
-                    if (!in_arrayi($invusername,$groupMembersArray)) {
-                        if (!in_arrayi($invusername,$pendingGroupMembersArray)) {
-
-                            $getUserID = "SELECT id FROM users WHERE username = '" .$invusername."'";
-                            $resultUserID = $conn->query($getUserID);
-                            if ($resultUserID->num_rows > 0) { 
-                                // output data of each row
-                                while($row = $resultUserID->fetch_assoc()) {
-                                    $invuserID = $row['id'];
-                                } 
-                            }
-        
-                            $query = "SELECT username FROM users WHERE username = '" . $invusername . "'";
-                            $resultUsers = $conn->query($query);
-                            if (!$resultUsers->num_rows > 0) { 
-                                echo "<p>Username not found</p>";
-                            } else {
-                                while($row = $resultUsers->fetch_assoc()) {
-                                    $invquery = "INSERT INTO `group_invites` (`group_id`, `group_name`, `user_id`) VALUES ('$invgroupID','$invgroupname','$invuserID')";
-                                    $conn->query($invquery);
-                                    header("Location: invite_groups.php?inv_success");
-                                } 
-                            }
-        
-                            //header("Location: groups.php"); 
-
-                        } else {
-                            echo "<center><span>User already has a pending invite</span><center>";
-                        }
-                    } else {
-                        echo "<center><span>User is already in the group</span><center>";  
+                        echo "<center><span>Group not found. Try again</span><center>"; 
                     }
-                } else {
-                    echo "<center><span>Group not found. Try again</span><center>"; 
                 }
             }
 
             /*
                 Accepting invites
             */
+            
             $queryInvites = "SELECT * FROM group_invites a WHERE a.user_id = $userID";
             $resultInvites = $conn->query($queryInvites);
             if (!$resultInvites->num_rows > 0) { 
@@ -270,16 +280,26 @@
                     echo "<span><form method='POST'><input id='invites_submit' type='submit' name='$groupID' value='Join Group'></form></span>";
                     echo "<div class='underline'></div>";
                     if (isset($_POST["$groupID"])) {
-
+                        $archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+                        $archived = $conn->query($archivedQuery);
+                        if ($archived->num_rows > 0) {
+                            while ($row = $archived->fetch_assoc()) {
+                                $resultArchived = $row['isArchived'];
+                            }
+                        }
+                        if ($resultArchived == 0) {
     
-                        $queryJoin = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('$userID', '$groupID');";
-                        $conn->query($queryJoin);
-                        $queryRemoveInv =  "DELETE FROM `group_invites` WHERE `group_invites`.`group_id` = $groupID AND `group_invites`.`user_id` = $userID";
-                        $conn->query($queryRemoveInv);
-                        header("Location: invite_groups.php?group_joined");
+                            $queryJoin = "INSERT INTO `group_users` (`user_id`, `group_id`) VALUES ('$userID', '$groupID');";
+                            $conn->query($queryJoin);
+                            $queryRemoveInv =  "DELETE FROM `group_invites` WHERE `group_invites`.`group_id` = $groupID AND `group_invites`.`user_id` = $userID";
+                            $conn->query($queryRemoveInv);
+                            header("Location: invite_groups.php?group_joined");
+                        }
                     }
                 } 
             }
+
+            
             echo"</div>"
         ?>
         </div>

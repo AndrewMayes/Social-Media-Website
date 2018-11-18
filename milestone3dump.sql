@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2018 at 09:51 PM
+-- Generation Time: Nov 18, 2018 at 12:34 AM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -33,18 +33,19 @@ CREATE TABLE `groups` (
   `group_id` int(10) UNSIGNED NOT NULL,
   `group_name` varchar(50) NOT NULL,
   `type` varchar(10) NOT NULL,
-  `owner_id` int(10) UNSIGNED NOT NULL
+  `owner_id` int(10) UNSIGNED NOT NULL,
+  `isArchived` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`group_id`, `group_name`, `type`, `owner_id`) VALUES
-(1, 'Global', 'public', 1),
-(2, 'Gaming', 'private', 1),
-(3, 'Sports', 'private', 1),
-(4, 'Anime', 'private', 1);
+INSERT INTO `groups` (`group_id`, `group_name`, `type`, `owner_id`, `isArchived`) VALUES
+(1, 'Global', 'public', 1, 0),
+(2, 'Gaming', 'private', 1, 0),
+(3, 'Sports', 'private', 1, 0),
+(4, 'Anime', 'private', 1, 0);
 
 -- --------------------------------------------------------
 

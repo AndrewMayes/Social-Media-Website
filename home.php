@@ -86,82 +86,122 @@
 		/
 	*/
 	if (isset($_GET['liked'])) {
-		$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
-		$userLiked = $conn->query($hasUserLikedQuery);
-		if (!$userLiked->num_rows > 0) { 
-			// output data of each row
-			$likedQuery = "UPDATE `messages` SET `likes` = `likes`+1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
-			$postLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['liked'] . "', '" . $userID . "')";
-			$conn->query($likedQuery);
-			$conn->query($postLikesQuery);
-			
-			//make sure user can't like and dislike a post
-			$hasUserDisLikedQuery = "SELECT `user_id` FROM `messages_dislikes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
-			$userDisLiked = $conn->query($hasUserDisLikedQuery);
-			if (!$userDisLiked->num_rows > 0) {
-			} else {
-				$unDislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
-				$postunDisLikesQuery = "DELETE FROM `messages_dislikes` WHERE `messages_dislikes`.`msg_id` = " . $_GET['liked'] . " AND `messages_dislikes`.`user_id` = " . $userID . "";
-				$conn->query($unDislikedQuery);
-				$conn->query($postunDisLikesQuery);
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
 			}
+		}
+		if ($resultArchived == 0) {
+			$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
+			$userLiked = $conn->query($hasUserLikedQuery);
+			if (!$userLiked->num_rows > 0) { 
+				// output data of each row
+				$likedQuery = "UPDATE `messages` SET `likes` = `likes`+1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+				$postLikesQuery = "INSERT INTO `messages_likes` (`msg_id`, `user_id`) VALUES ('" . $_GET['liked'] . "', '" . $userID . "')";
+				$conn->query($likedQuery);
+				$conn->query($postLikesQuery);
+				
+				//make sure user can't like and dislike a post
+				$hasUserDisLikedQuery = "SELECT `user_id` FROM `messages_dislikes` WHERE `msg_id` = " . $_GET['liked'] . " AND `user_id` = " . $userID . "";
+				$userDisLiked = $conn->query($hasUserDisLikedQuery);
+				if (!$userDisLiked->num_rows > 0) {
+				} else {
+					$unDislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+					$postunDisLikesQuery = "DELETE FROM `messages_dislikes` WHERE `messages_dislikes`.`msg_id` = " . $_GET['liked'] . " AND `messages_dislikes`.`user_id` = " . $userID . "";
+					$conn->query($unDislikedQuery);
+					$conn->query($postunDisLikesQuery);
+				}
 
-			header("Location: home.php?id=" . $groupID . "");
+				header("Location: home.php?id=" . $groupID . "");
+			} else {
+				$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
+				$postunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['liked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
+				$conn->query($unlikedQuery);
+				$conn->query($postunLikesQuery);
+				header("Location: home.php?id=" . $groupID . "");
+			}
 		} else {
-			$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['liked'] . "";
-			$postunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['liked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
-			$conn->query($unlikedQuery);
-			$conn->query($postunLikesQuery);
 			header("Location: home.php?id=" . $groupID . "");
 		}
 	}
 
 	if (isset($_GET['disliked'])) {
-		$hasUserDisLikedQuery = "SELECT `user_id` FROM `messages_dislikes` WHERE `msg_id` = " . $_GET['disliked'] . " AND `user_id` = " . $userID . "";
-		$userDisLiked = $conn->query($hasUserDisLikedQuery);
-		if (!$userDisLiked->num_rows > 0) { 
-			// output data of each row
-			$dislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`+1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
-			$postDisLikesQuery = "INSERT INTO `messages_dislikes` (`msg_id`, `user_id`) VALUES ('" . $_GET['disliked'] . "', '" . $userID . "')";
-			$conn->query($dislikedQuery);
-			$conn->query($postDisLikesQuery);
-
-			//make sure user can't like and dislike a post
-			$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['disliked'] . " AND `user_id` = " . $userID . "";
-			$userLiked = $conn->query($hasUserLikedQuery);
-			if (!$userLiked->num_rows > 0) {
-			} else {
-				$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
-				$postunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['disliked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
-				$conn->query($unlikedQuery);
-				$conn->query($postunLikesQuery);
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
 			}
+		}
+		if ($resultArchived == 0) {
+			$hasUserDisLikedQuery = "SELECT `user_id` FROM `messages_dislikes` WHERE `msg_id` = " . $_GET['disliked'] . " AND `user_id` = " . $userID . "";
+			$userDisLiked = $conn->query($hasUserDisLikedQuery);
+			if (!$userDisLiked->num_rows > 0) { 
+				// output data of each row
+				$dislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`+1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+				$postDisLikesQuery = "INSERT INTO `messages_dislikes` (`msg_id`, `user_id`) VALUES ('" . $_GET['disliked'] . "', '" . $userID . "')";
+				$conn->query($dislikedQuery);
+				$conn->query($postDisLikesQuery);
 
-			header("Location: home.php?id=" . $groupID . "");
+				//make sure user can't like and dislike a post
+				$hasUserLikedQuery = "SELECT `user_id` FROM `messages_likes` WHERE `msg_id` = " . $_GET['disliked'] . " AND `user_id` = " . $userID . "";
+				$userLiked = $conn->query($hasUserLikedQuery);
+				if (!$userLiked->num_rows > 0) {
+				} else {
+					$unlikedQuery = "UPDATE `messages` SET `likes` = `likes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+					$postunLikesQuery = "DELETE FROM `messages_likes` WHERE `messages_likes`.`msg_id` = " . $_GET['disliked'] . " AND `messages_likes`.`user_id` = " . $userID . "";
+					$conn->query($unlikedQuery);
+					$conn->query($postunLikesQuery);
+				}
+
+				header("Location: home.php?id=" . $groupID . "");
+			} else {
+				$unDislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
+				$postunDisLikesQuery = "DELETE FROM `messages_dislikes` WHERE `messages_dislikes`.`msg_id` = " . $_GET['disliked'] . " AND `messages_dislikes`.`user_id` = " . $userID . "";
+				$conn->query($unDislikedQuery);
+				$conn->query($postunDisLikesQuery);
+				header("Location: home.php?id=" . $groupID . "");
+			}
 		} else {
-			$unDislikedQuery = "UPDATE `messages` SET `dislikes` = `dislikes`-1 WHERE `messages`.`msg_id` = " . $_GET['disliked'] . "";
-			$postunDisLikesQuery = "DELETE FROM `messages_dislikes` WHERE `messages_dislikes`.`msg_id` = " . $_GET['disliked'] . " AND `messages_dislikes`.`user_id` = " . $userID . "";
-			$conn->query($unDislikedQuery);
-			$conn->query($postunDisLikesQuery);
 			header("Location: home.php?id=" . $groupID . "");
 		}
 	}
 
 	
 	if (isset($_POST['msg'])) {
-		$message = mysqli_real_escape_string($conn, $_POST['msg']);
-		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0);";
-		$conn->query($query); 
-		$conn->close();
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
+			}
+		}
+		if ($resultArchived == 0) {
+			$message = mysqli_real_escape_string($conn, $_POST['msg']);
+			$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0);";
+			$conn->query($query); 
+			$conn->close();
+		}
 	}	
 
 	if (isset($_POST['rply']) && isset($_POST['commentid'])) {
-		$message = mysqli_real_escape_string($conn, $_POST['rply']);
-		$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,".$_POST['commentid'].",0);";
-		$query2 = "UPDATE `messages` SET `hasChildren` = '1' WHERE `messages`.`msg_id` = ".$_POST['commentid']."";
-		$conn->query($query); 
-		$conn->query($query2); 
-		$conn->close();
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
+			}
+		}
+		if ($resultArchived == 0) {
+			$message = mysqli_real_escape_string($conn, $_POST['rply']);
+			$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES (NULL, '" . $userID . "', '" . $message . "', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,".$_POST['commentid'].",0);";
+			$query2 = "UPDATE `messages` SET `hasChildren` = '1' WHERE `messages`.`msg_id` = ".$_POST['commentid']."";
+			$conn->query($query); 
+			$conn->query($query2); 
+			$conn->close();
+		}
 	}	
 
 	if (isset($_POST['deleteID'])) {
@@ -169,6 +209,25 @@
 		$conn->query($query); 
 		$conn->close();
 	}	
+
+	if (isset($_POST['archiveID'])) {
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
+			}
+		}
+		if ($resultArchived == 0) {
+			$query = "UPDATE `groups` SET `isArchived` = '1' WHERE `groups`.`group_id` = ".$_POST['archiveID']."";
+			$conn->query($query); 
+			$conn->close();
+		} else {
+			$query = "UPDATE `groups` SET `isArchived` = '0' WHERE `groups`.`group_id` = ".$_POST['archiveID']."";
+			$conn->query($query); 
+			$conn->close();
+		}
+	}
 
 /*
 	if (isset($_POST['reply_submit'])) {
@@ -315,6 +374,21 @@
 			<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
 			</form>
 			*/
+
+			if ($adminID == $userID) {
+				$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+				$archived = $conn->query($archivedQuery);
+				if ($archived->num_rows > 0) {
+					while ($row = $archived->fetch_assoc()) {
+						$resultArchived = $row['isArchived'];
+					}
+				}
+				if ($resultArchived == 0) {
+					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' type='submit' name='delete' value='Archive' data-id=$groupID></div></form>";
+				} else {
+					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' type='submit' name='delete' value='UnArchive' data-id=$groupID></div></form>";
+				}
+			}
 		?>
 		</div>
 		<script>
@@ -388,6 +462,29 @@
 				displayMessages();
 			}
 
+			function archive(e,num) {
+				e.preventDefault();
+				//var z = $("#archiving"+num).css("color","red");
+				//document.getElementById("#archiving"+num).innerHTML = ;
+
+				//var commentID = document.getElementById('commentID').value;
+				//console.log(num);
+				//var reply = document.getElementById("deleting"+num).value;
+				//var commentID = document.getElementById('commentID').value;
+				var params = "archiveID="+num;
+
+
+				var ID = "<?php echo $groupID ?>";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'home.php?id='+ID,false);
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+				xhr.send(params);
+				//document.getElementById('enterReply').reset();
+				displayMessages();
+			}
+
 			function displayReplies(e,num) {
 				//console.log('heyyyy');
 
@@ -446,7 +543,7 @@
 				//$('#replies').toggle();
 
 				var display = $('#replies').css("display");
-				console.log(display);
+				//console.log(display);
 			}
 	
 		</script>
