@@ -103,6 +103,11 @@
                 <li class="active"><a href="invite_groups.php">Groups Invites</a></li>
                 <li><a href="create_groups.php">Create Groups</a></li>
                 <li><a href="search_groups.php">Search Groups</a></li>
+                <?php
+                    if ($_SESSION['adminID'] == $userID) {
+                        echo "<li><a href='groupadmin.php'>Group Administration</a></li>";
+                    }
+                ?>
             </ul>
 		</div>
         

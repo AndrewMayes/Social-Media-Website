@@ -57,6 +57,16 @@ References:
 	include 'connection.php';
 
 	if (isset($_POST['submit'])) {
+
+		//admin query (the logic for all the admin checks currently holds for only 1 admin. If more are added then it may break)
+		$adminQuery = "SELECT id FROM users WHERE admin = 1";
+		$result = $conn->query($adminQuery);
+		if ($result->num_rows > 0) {
+			while ($row = $result->fetch_assoc()) {
+				$_SESSION['adminID'] = $row['id'];
+			}
+		}
+
 		$email = mysqli_real_escape_string($conn, $_POST['email']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
 

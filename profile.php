@@ -132,6 +132,11 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 				<li><a href="invite_groups.php">Groups Invites</a></li>
                 <li><a href="create_groups.php">Create Groups</a></li>
 				<li><a href="search_groups.php">Search Groups</a></li>
+				<?php
+                    if ($_SESSION['adminID'] == $userID) {
+                        echo "<li><a href='groupadmin.php'>Group Administration</a></li>";
+                    }
+                ?>
             </ul>
 		</div>
 		
@@ -258,7 +263,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						echo "<span>". "Username: ". $profileUsername . "</span>";
 						echo "<span>". "Email Address: ". $profileEmail . "</span>";
 	
-						echo "<center><b><u><span>Achievments</span></u></b></center>";
+						echo "<center><b><u><span>Achievements</span></u></b></center>";
 
 						$queryMessageCount = "SELECT users.id, COUNT(messages.msg_id) AS msg_count FROM messages INNER JOIN users ON '" . $_GET['id']. "' = messages.user_id GROUP BY users.id";
 						$result_msg_count = $conn->query($queryMessageCount);
