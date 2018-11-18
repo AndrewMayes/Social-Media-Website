@@ -11,11 +11,17 @@
 		$groupID = $_GET['gid'];	
 	} else {
 		$groupID = "1";
-	}
+    }
+    
+    if(isset($_GET['cid'])) {
+		$cID = $_GET['cid'];	
+	} else {
+		$cID = "1";
+    }
     
 
 
-				$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = 0 ORDER BY msg_id DESC";
+				$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = $cID";
 				$result = $conn->query($postFeed);
 				if ($result->num_rows > 0) { 
 					// output data of each row
