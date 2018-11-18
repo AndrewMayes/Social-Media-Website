@@ -21,7 +21,7 @@
     
 
 
-				$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = $cID";
+				$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = $cID ORDER BY msg_id DESC";
 				$result = $conn->query($postFeed);
 				if ($result->num_rows > 0) { 
 					// output data of each row
