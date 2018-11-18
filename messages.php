@@ -12,50 +12,64 @@
 	} else {
 		$groupID = "1";
 	}
-    
+
+	$numPerPage = 10; //results per page
+
+	$numMsgs = "SELECT COUNT(msg_id) FROM messages WHERE parent_id = 0 AND group_id = $groupID"; //total number of messages (parents only) in the database
+	$resultNum = $conn->query($numMsgs);
+	if ($resultNum->num_rows > 0) {
+		while($row = $resultNum->fetch_assoc()) {
+			$numOfMsgs = $row['COUNT(msg_id)'];
+		}
+	}
+
+	$numOfPages = ceil($numOfMsgs/$numPerPage); //number of total pages
+
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'];
+	} else {
+		$page = 1;
+	}
 
 
-				$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = 0 ORDER BY msg_id DESC";
-				$result = $conn->query($postFeed);
-				if ($result->num_rows > 0) { 
-					// output data of each row
-					while($row = $result->fetch_assoc()) {
-						
-						$messages[] = $row;
-						/*
-						if($row['img'] == '') {
-							echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Default Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";
-							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form></div>";
-						} else {
-							echo "<span>"."<img id ='chat_avatar' width='50' height='50' src='uploads/".$row['img']."' alt='Profile Pic'>" . "<h2 id ='userName'>" . $row['username'] . ": " . htmlspecialchars($row['msg'])."</h2>" . "<div class='time'>" . $row['post_time'] . "</div>"."</span>";
-							echo "<div class='reply_pos'><form action='home.php?id=" . $groupID . "' method='POST'>
-							<input id='reply' type='text' name='reply' value='' placeholder='Post Your Reply...'>
-							<input id='reply_submit' type='submit' name='reply_submit' value='Reply!'>
-							</form></div>";
-						}
-						
-						echo "<form action='home.php?id=" . $groupID . "&liked=" . $row['msg_id'] . "' method='POST'>
-						<div class='likeys'><input id='like_input'type='submit' name='like' value='Like'>"." ".$row['likes']." likes</div>
-						</form>";
-						echo "<form action='home.php?id=" . $groupID . "&disliked=" . $row['msg_id'] . "' method='POST'>
-						<div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'>"." ".$row['dislikes']." dislikes</div>
-						</form>";
-						echo "<div class='underline'>";
-						echo "</div>";*/
-					} 
-				} else {
-					//echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
-				}
-				
-				foreach ($messages as $key => $msg) {
-					$messages[$key]['msg'] = htmlspecialchars($messages[$key]['msg']);
-				}
+	$pageFirstResult = ($page-1)*$numPerPage; //the limit starting number
 
-				$jsonMessages = json_encode($messages);
-                echo $jsonMessages;
+	/*
+	$query2 = "SELECT * FROM messages WHERE parent_id = 0 AND group_id = $groupID LIMIT ".$pageFirstResult.",".$numPerPage."";
+	$resultQuery2 = $conn->query($query2);
+	if ($resultQuery2->num_rows > 0) {
+		while($row = $resultQuery2->fetch_assoc()) {
+			echo $row['msg_id'] . ' ' . $row['msg'] . '<br>';
+		}
+	}*/
 
-				$conn->close();
-			?>
+	/*
+	for ($page=1;$page<=$numOfPages;$page++) {
+			echo '<a href="messages.php?id='.$groupID.'&page='.$page.'">' .$page. '</a>'; //display page links
+		}
+	*/
+
+
+
+	$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = 0 ORDER BY msg_id DESC LIMIT ".$pageFirstResult.",".$numPerPage."";
+	$result = $conn->query($postFeed);
+	if ($result->num_rows > 0) { 
+		// output data of each row
+		while($row = $result->fetch_assoc()) {
+			
+			$messages[] = $row;
+
+		} 
+	} else {
+		//echo "<h2 id ='userName'>No messages in this channel yet. Come back soon!</h2>";
+	}
+	
+	foreach ($messages as $key => $msg) {
+		$messages[$key]['msg'] = htmlspecialchars($messages[$key]['msg']);
+	}
+
+	$jsonMessages = json_encode($messages);
+	echo $jsonMessages;
+
+	$conn->close();
+?>

@@ -4,6 +4,7 @@
 				https://www.youtube.com/watch?v=tVLHGHshNdU&index=15&list=PLBOh8f9FoHHhRk0Fyus5MMeBsQ_qwlAzG
 				I referenced these 2 videos when writing the 'likes' code 
 				https://www.youtube.com/watch?v=82hnvUYY6QA   <- this one for ajax 
+				https://www.youtube.com/watch?v=gdEpUPMh63s&index=31&list=WL&t=0s  <- this one for pagination in home.php and messages.php
 */
 	include ('connection.php');
 	session_start();
@@ -15,6 +16,12 @@
 		$groupID = $_GET['id'];	
 	} else {
 		$groupID = "1";
+	}
+
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'];
+	} else {
+		$page = 1;
 	}
 	
 	//getUserID();
@@ -263,9 +270,10 @@
 		function displayMessages() {
 			var xhr = new XMLHttpRequest();
 			var ID = "<?php echo $groupID ?>";
+			var page = "<?php echo $page ?>";
 			var adminID = "<?php echo $adminID ?>";
 			var userID = "<?php echo $userID ?>";
-			xhr.open('GET', 'messages.php?gid='+ID, true);
+			xhr.open('GET', 'messages.php?gid='+ID+'&page='+page, true);
 
 			xhr.onload = function (){
 				if(this.status == 200) {
@@ -398,6 +406,36 @@
 					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' type='submit' name='delete' value='UnArchive' data-id=$groupID></div></form>";
 				}
 			}
+
+
+		?>
+		</div>
+		<div class='pagination'>
+		<?php
+
+			/*
+				Section to display pagination links
+				(The actual msg retrieval and display is done through messages.php and displayMessages(), this is simply to show the links 1.2.3.4....)
+			*/
+
+			$numPerPage = 10; //results per page
+
+			$numMsgs = "SELECT COUNT(msg_id) FROM messages WHERE parent_id = 0 AND group_id = $groupID"; //total number of messages (parents only) in the database
+			$resultNum = $conn->query($numMsgs);
+			if ($resultNum->num_rows > 0) {
+				while($row = $resultNum->fetch_assoc()) {
+					$numOfMsgs = $row['COUNT(msg_id)'];
+				}
+			}
+
+			$numOfPages = ceil($numOfMsgs/$numPerPage); //number of total pages
+
+			$pageFirstResult = ($page-1)*$numPerPage; //the limit starting number
+
+			for ($page=1;$page<=$numOfPages;$page++) {
+				echo '<a href="home.php?id='.$groupID.'&page='.$page.'">' .$page. '</a>'; //display page links
+			}
+
 		?>
 		</div>
 		<script>
@@ -559,9 +597,3 @@
 	</body>
 </html>
 
-<?
-
-	
-
-
-?>

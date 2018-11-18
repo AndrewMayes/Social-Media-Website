@@ -721,3 +721,10 @@ input[type=submit]:hover {
 .reply_indent {
 	margin-left: 50px;
 }
+
+.pagination {
+	position: fixed;
+	margin-top: 46%;
+	width: 100%;
+	text-align: center;
+}
