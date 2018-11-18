@@ -164,6 +164,12 @@
 		$conn->close();
 	}	
 
+	if (isset($_POST['deleteID'])) {
+		$query = "DELETE FROM `messages` WHERE `messages`.`msg_id` = ".$_POST['deleteID']."";
+		$conn->query($query); 
+		$conn->close();
+	}	
+
 /*
 	if (isset($_POST['reply_submit'])) {
 		$message = mysqli_real_escape_string($conn, $_POST['reply']);
@@ -202,7 +208,7 @@
 						if (ID == msgs[i].group_id){
 							output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
 							if (adminID == userID){
-								output+= "<form id='deleteMsg'><div class='dislikeys'><input id='delete' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div></div>";
+								output+= "<form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><div class='dislikeys'><input id='deleting"+msgs[i].msg_id+"' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div></div>";
 							} else {
 								output+= "<div class='underline'></div></div>";
 							}
@@ -349,6 +355,26 @@
 				var reply = document.getElementById("replying"+num).value;
 				//var commentID = document.getElementById('commentID').value;
 				var params = "rply="+reply+"&commentid="+num;
+
+
+				var ID = "<?php echo $groupID ?>";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'home.php?id='+ID,false);
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+				xhr.send(params);
+				//document.getElementById('enterReply').reset();
+				displayMessages();
+			}
+
+			function deleteMsg(e,num) {
+				e.preventDefault();
+				//var commentID = document.getElementById('commentID').value;
+				//console.log(num);
+				var reply = document.getElementById("deleting"+num).value;
+				//var commentID = document.getElementById('commentID').value;
+				var params = "deleteID="+num;
 
 
 				var ID = "<?php echo $groupID ?>";
