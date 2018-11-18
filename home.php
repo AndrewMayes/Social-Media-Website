@@ -406,7 +406,7 @@
 							if (ID == msgs[i].group_id){
 								output+= "<div class='reply_indent'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form></div>";
 								if (adminID == userID){
-									output+= "<form id='deleteMsg'><div class='dislikeys'><input id='delete' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div>";
+									output+= "<form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><div class='dislikeys'><input id='deleting"+msgs[i].msg_id+"' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div></div>";
 								} else {
 									output+= "<div class='underline'></div>";
 								}
