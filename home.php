@@ -205,9 +205,18 @@
 	}	
 
 	if (isset($_POST['deleteID'])) {
-		$query = "DELETE FROM `messages` WHERE `messages`.`msg_id` = ".$_POST['deleteID']."";
-		$conn->query($query); 
-		$conn->close();
+		$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+		$archived = $conn->query($archivedQuery);
+		if ($archived->num_rows > 0) {
+			while ($row = $archived->fetch_assoc()) {
+				$resultArchived = $row['isArchived'];
+			}
+		}
+		if ($resultArchived == 0) {
+			$query = "DELETE FROM `messages` WHERE `messages`.`msg_id` = ".$_POST['deleteID']."";
+			$conn->query($query); 
+			$conn->close();
+		}
 	}	
 
 	if (isset($_POST['archiveID'])) {
