@@ -263,7 +263,7 @@
 			$conn->close();
 		} else {
 			$query = "UPDATE `groups` SET `isArchived` = '0' WHERE `groups`.`group_id` = ".$_POST['archiveID']."";
-			$conn->query($query); 
+			$conn->query($query);
 			$conn->close();
 		}
 	}
@@ -307,7 +307,7 @@
 						if (ID == msgs[i].group_id){
 							output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
 							if (adminID == userID){
-								output+= "<form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><div class='dislikeys'><input id='deleting"+msgs[i].msg_id+"' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div></div>";
+								output+= "<span><form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><input id='deleting"+msgs[i].msg_id+"' class='deleting' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></form></span><div class='underline'></div></div>";
 							} else {
 								output+= "<div class='underline'></div></div>";
 							}
@@ -399,6 +399,14 @@
                     if ($_SESSION['adminID'] == $userID) {
                         echo "<li><a href='groupadmin.php'>Group Administration</a></li>";
                     }
+				?>
+				<?php
+                    if ($_SESSION['adminID'] == $userID) {
+                        echo "<li><a href='adminhelp.php'>Help</a></li>";
+                    }
+                    else{
+                        echo "<li><a href='help.php'>Help</a></li>";
+                    }
                 ?>
             </ul>
 		</div>
@@ -429,9 +437,9 @@
 					}
 				}
 				if ($resultArchived == 0) {
-					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' type='submit' name='delete' value='Archive' data-id=$groupID></div></form>";
+					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' class='archive' type='submit' name='delete' value='Archive' data-id=$groupID></div></form>";
 				} else {
-					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' type='submit' name='delete' value='UnArchive' data-id=$groupID></div></form>";
+					echo "<form id='archiveGroup' onsubmit='archive(event, $groupID)'><div class='dislikeys'><input id='archiving$groupID' class='archive' type='submit' name='delete' value='UnArchive' data-id=$groupID></div></form>";
 				}
 			}
 
@@ -578,7 +586,7 @@
 							if (ID == msgs[i].group_id){
 								output+= "<div class='reply_indent'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form></div>";
 								if (adminID == userID){
-									output+= "<form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><div class='dislikeys'><input id='deleting"+msgs[i].msg_id+"' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></div></form><div class='underline'></div></div>";
+									output+= "<span><form id='deleteMsg' onsubmit='deleteMsg(event,"+msgs[i].msg_id+")'><input id='deleting"+msgs[i].msg_id+"' class='deleting' type='submit' name='delete' value='Delete' data-id='"+msgs[i].msg_id+"'></form></span><div class='underline'></div></div>";
 								} else {
 									output+= "<div class='underline'></div>";
 								}
