@@ -120,15 +120,23 @@
             <ul>
                 <li><a href="invite_groups.php">Groups Invites</a></li>
 				<li><a href="create_groups.php">Create Groups</a></li>
-				<li><a href="search_groups.php">Search Groups</a></li>
+                <li><a href="search_groups.php">Search Groups</a></li>
                 <?php
                     if ($_SESSION['adminID'] == $userID) {
                         echo "<li class='active'><a href='groupadmin.php'>Group Administration</a></li>";
                     }
                 ?>
+                <?php
+                    if ($_SESSION['adminID'] == $userID) {
+                        echo "<li><a href='adminhelp.php'>Help</a></li>";
+                    }
+                    else{
+                        echo "<li><a href='help.php'>Help</a></li>";
+                    }
+                ?>
             </ul>
 		</div>
-        <div class = "my_group">
+        <div class = "myadmin_group">
 
             <?php
 
@@ -151,6 +159,7 @@
                 }
    
             ?>
+            <span>
             <form action="./groupadmin.php">
             <label for="groups">Groups</label>
                 <select name="groups">
@@ -174,8 +183,9 @@
                 <label for="choice1">Remove user from group</label>
                 <input type="radio" id="choice3" name="choice" value="invite" required>
                 <label for="choice1">Invite user to group</label>
-                <input type="submit" value="Submit">
+                <input class= "admin_group_submit" type="submit" value="Submit">
             </form>
+            </span>
         </div>
 
 		<div class="group_invite">
