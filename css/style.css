@@ -711,10 +711,9 @@ input[type=submit]:hover {
 	border-radius: 4px;
 	height: 25px;
 	width: 100px;
-	margin-bottom:
 }
 
-#show_replies:hover {
+#show_replies:hover, .pagination a:hover {
 	background-color: #D2CCD9;
 }
 
@@ -722,9 +721,103 @@ input[type=submit]:hover {
 	margin-left: 50px;
 }
 
+.archive {
+	border: none;
+	border-radius: 4px;
+	height: 25px;
+	width: 100px;
+}
 .pagination {
 	position: fixed;
 	margin-top: 46%;
+	left: 6%;
 	width: 100%;
 	text-align: center;
+}
+
+.pagination a{
+	text-decoration: none;
+	border: 1px solid black;
+	padding: 5px 5px 5px 5px;
+	margin: 1px 1px 1px 1px;
+	background-color: #FFFFFF;
+	color: black;
+}
+
+.deleting{
+	border: none;
+	border-radius: 4px;
+	float: right;
+	padding: 5px 5px 5px 5px;
+	margin-top: -37.5px;
+}
+
+.myadmin_group {
+	position: fixed;
+	margin-top: 80px;
+	left: 20%;	
+	height: 15%;
+	width: 75%;
+	overflow-y:auto;
+	overflow: auto;
+	border: 1px solid #666;
+	border-radius: 10px;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+
+.admin_group_submit{
+	border: none;
+	border-radius: 4px;
+	height: 25px;
+	width: 80px;
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+	border: 1px solid #666;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.accordion:hover {
+    background-color: #ccc; 
+}
+
+.panel {
+    padding: 0 18px;
+	display: none;
+
+    background-color: white;
+    overflow: hidden;
+}
+
+.help {
+	position: fixed;
+	margin-top: 56px;
+	left: 15%;	
+	height: 95%;
+	width: 85%;
+	overflow-y:auto;
+	overflow: auto;
+	border: 1px solid #666;
+	background-color: #FFFFFF;
+}
+
+.help_division{
+	margin-bottom: 10px;
+}
+
+.help_paragraph {
+	margin: 15px 5px 5px 5px;
+}
+
+.help_image {
+	margin: 15px 5px 5px 5px;
 }

@@ -107,6 +107,14 @@
                     if ($_SESSION['adminID'] == $userID) {
                         echo "<li><a href='groupadmin.php'>Group Administration</a></li>";
                     }
+				?>
+				<?php
+                    if ($_SESSION['adminID'] == $userID) {
+                        echo "<li><a href='adminhelp.php'>Help</a></li>";
+                    }
+                    else{
+                        echo "<li><a href='help.php'>Help</a></li>";
+                    }
                 ?>
             </ul>
 		</div>
