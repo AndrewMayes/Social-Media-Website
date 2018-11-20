@@ -188,6 +188,19 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 			</div>
 
 			<div class="help_division">
+				<button class="accordion">What are the "Achievements"?</button>
+				<div class="panel">
+					<span><h3>Achievements</h3>
+					<div class='help_paragraph'>You can have achievements in this website. These are the achievements:</div>
+					<div class='help_paragraph'><b>":Active Poster:"</b>: You will have this achievement when you have 3 or more messages posted. </div>
+					<div class='help_paragraph'><b>":Most Liked Post:"</b>: You will have this achievement when you have 3 or more likes in your Post that you have posted. ONLY ONE USER CAN HAVE THIS ACHIEVEMENT! </div>
+					<div class='help_paragraph'><b>":Most Disliked Post:"</b>: You will have this achievement when you have 3 or more dislikes in your Post that you have posted. ONLY ONE USER CAN HAVE THIS ACHIEVEMENT! </div>
+					<div class='help_paragraph'><b>":Group Collector:"</b>: You will have this achievement when you have 3 or more Groups joined. </div>
+					</span>
+				</div>
+			</div>
+
+			<div class="help_division">
 				<button class="accordion">What is "Search Users"?</button>
 				<div class="panel">
 				<span><h3>Search Users</h3>
@@ -204,17 +217,15 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 			</div>
 
 			<div class="help_division">
-				<button class="accordion">What is "Group"?</button>
+				<button class="accordion">What is "Groups"?</button>
 				<div class="panel">
-				<span><h3>Group</h3>
+				<span><h3>Groups</h3>
 					<div class='help_paragraph'>This is where you can view all your groups.</div>
 					<div class="help_image"><img width=75% height=75% src="img/groups.png" border="2"></div>
-					<div class='help_paragraph'><b>The Input Search Box</b>: The box with "Search Users" in it is where you type other user's names or usernames to search them </div>
-					<div class="help_image"><img width=70% height=70% src="img/search_users_box.png" border="2"></div>
-					<div class='help_paragraph'>After you type the username or name you want to search, your search result will display. Click that user to display the profile page</div>
-					<div class="help_image"><img width=50% height=50% src="img/search_users_search.png" border="2"></div>
-					<div class='help_paragraph'>After you click it, it will redirect to that searched user's profile page</div>
-					<div class="help_image"><img width=50% height=50% src="img/search_users_profile.png" border="2"></div>
+					<div class='help_paragraph'><b>Groups</b>: It is located on the side menu. All of your groups will display.</div>
+					<div class="help_image"><img width=30% height=30% src="img/groups_groups.png" border="2"></div>
+					<div class='help_paragraph'>Click one of your groups and it will redirect you to your home group.</div>
+					<div class="help_image"><img width=50% height=50% src="img/groups_home.png" border="2"></div>
 					</span>
 				</div>
 			</div>
@@ -222,21 +233,50 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 			<div class="help_division">
 				<button class="accordion">What is "Group Invites"?</button>
 				<div class="panel">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<span><h3>Group Invites</h3>
+					<div class='help_paragraph'>This is where you can invite other users to your public or private groups.</div>
+					<div class="help_image"><img width=75% height=75% src="img/group_invite.png" border="2"></div>
+					<div class='help_paragraph'><b>The Username and Group Invite Input Boxes</b>: It is the boxes with "Enter Username to Invite" and "Enter Group Name" in it is where you put a username you want to invite and the group that you want the user to join.</div>
+					<div class="help_image"><img width=70% height=70% src="img/group_invite_boxes.png" border="2"></div>
+					<div class='help_paragraph'><b>The Invite Button</b>:Click it to invite a user to a group after you input a username and a group in The Username and Group Invite Input Boxes.</div>
+					<div class="help_image"><img width=30% height=30% src="img/group_invite_button.png" border="2"></div>
+					<div class='help_paragraph'><b>The Group Invitation Box</b>:The box with "You have no group invites" in it is where you can view you group invitation from other users.</div>
+					<div class="help_image"><img width=50% height=50% src="img/group_invite_screen.png" border="2"></div>
+					<div class='help_paragraph'>If you have an invitation, it will display the group name and a "Join" button to join.</div>
+					<div class="help_image"><img width=70% height=70% src="img/group_invite_join.png" border="2"></div>
+					</span>
 				</div>
 			</div>
 
 			<div class="help_division">
 				<button class="accordion">What is "Create Group"?</button>
 				<div class="panel">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<span><h3>Create Group</h3>
+					<div class='help_paragraph'>This is where you can create public or private groups.</div>
+					<div class="help_image"><img width=75% height=75% src="img/create_group.png" border="2"></div>
+					<div class='help_paragraph'><b>The Group Name Input Box</b>: It is the boxes with "Enter Name of Group" in it is where you input the group name you want to create.</div>
+					<div class="help_image"><img width=70% height=70% src="img/create_group_box.png" border="2"></div>
+					<div class='help_paragraph'><b>The Create Button</b>:Click it to create your group after you input your group name in The Group Name Input Box and choose your group type in The Type Options.</div>
+					<div class="help_image"><img width=20% height=20% src="img/create_group_button.png" border="2"></div>
+					<div class='help_paragraph'><b>The Group List Box</b>:The box with the list groups you belong.</div>
+					<div class="help_image"><img width=70% height=70% src="img/create_group_list.png" border="2"></div>
+					</span>
 				</div>
 			</div>
 
 			<div class="help_division">
-				<button class="accordion">What is "Create Group"?</button>
+				<button class="accordion">What is "Search Group"?</button>
 				<div class="panel">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<span><h3>Search Group</h3>
+					<div class='help_paragraph'>This is where you can only search public groups.</div>
+					<div class="help_image"><img width=75% height=75% src="img/search_group.png" border="2"></div>
+					<div class='help_paragraph'><b>The Group Name Input Box</b>: It is the boxes with "Enter Name of Group" in it is where you input the public group name you want to join.</div>
+					<div class="help_image"><img width=70% height=70% src="img/search_group_box.png" border="2"></div>
+					<div class='help_paragraph'><b>The Search Button</b>:Click it to search your group after you input your group name in The Group Name Input Box.</div>
+					<div class="help_image"><img width=20% height=20% src="img/search_group_button.png" border="2"></div>
+					<div class='help_paragraph'><b>The Join Button</b>:Click it to join the group you have searched.</div>
+					<div class="help_image"><img width=20% height=20% src="img/search_group_join.png" border="2"></div>
+					</span>
 				</div>
 			</div>	
 		</div>

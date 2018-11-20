@@ -270,8 +270,13 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						echo "<span>". "Name: ". $profileFname . " " . $profileLname."</span>";
 						echo "<span>". "Username: ". $profileUsername . "</span>";
 						echo "<span>". "Email Address: ". $profileEmail . "</span>";
-	
-						echo "<center><b><u><span>Achievements</span></u></b></center>";
+						
+						if ($_SESSION['adminID'] == $userID) {
+							echo "<center><b><u><span><a class='achievement_link'href='adminhelp.php'>Achievements</a></span></u></b></center>";
+						}
+						else{
+							echo "<center><b><u><span><a class='achievement_link'href='help.php'>Achievements</a></span></u></b></center>";
+						}
 
 						$queryMessageCount = "SELECT users.id, COUNT(messages.msg_id) AS msg_count FROM messages INNER JOIN users ON '" . $_GET['id']. "' = messages.user_id GROUP BY users.id";
 						$result_msg_count = $conn->query($queryMessageCount);
@@ -281,11 +286,17 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 							$row_msg_count = $result_msg_count->fetch_assoc();
 							$msgCount = $row_msg_count['msg_count'];
 							
-							if($msgCount > 3)
-							echo "<span>:Active Poster:</span>";
+							if($msgCount > 3) {
+								if ($_SESSION['adminID'] == $userID) {
+									echo "<span><a class='achievement_link'href='adminhelp.php'>:Active Poster:</a></span>";
+								}
+								else{
+									echo "<span><a class='achievement_link'href='help.php'>:Active Poster:</a></span>";
+								}
+							}
 						}
 
-						$queryMostLiked = "SELECT DISTINCT messages.msg_id, messages.user_id, MAX(messages.likes) AS most_liked FROM messages INNER JOIN users ON users.id = messages.user_id GROUP BY messages.msg_id ORDER BY most_liked DESC LIMIT 5";
+						$queryMostLiked = "SELECT DISTINCT messages.msg_id, messages.user_id, MAX(messages.likes) AS most_liked FROM messages INNER JOIN users ON users.id = messages.user_id GROUP BY messages.msg_id ORDER BY most_liked DESC LIMIT 1";
 						$result_most_liked = $conn->query($queryMostLiked);
 						
 						if ($result_most_liked->num_rows > 0) { 
@@ -295,7 +306,31 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 							$getid = mysqli_real_escape_string($conn, $_GET['id']);
 							
 							if($mostLikedUser == $getid) {
-								echo "<span>:Most Liked Post:</span>";
+								if ($_SESSION['adminID'] == $userID) {
+									echo "<span><a class='achievement_link'href='adminhelp.php'>:Most Liked Post:</a></span>";
+								}
+								else{
+									echo "<span><a class='achievement_link'href='help.php'>:Most Liked Post:</a></span>";
+								}
+							}
+						}
+
+						$queryMostDisliked = "SELECT DISTINCT messages.msg_id, messages.user_id, MAX(messages.dislikes) AS most_disliked FROM messages INNER JOIN users ON users.id = messages.user_id GROUP BY messages.msg_id ORDER BY most_disliked DESC LIMIT 1";
+						$result_most_disliked = $conn->query($queryMostDisliked);
+						
+						if ($result_most_disliked->num_rows > 0) { 
+							$row_most_disliked = $result_most_disliked->fetch_assoc();
+
+							$mostDislikedUser = $row_most_disliked['user_id'];
+							$getid = mysqli_real_escape_string($conn, $_GET['id']);
+							
+							if($mostDislikedUser == $getid) {
+								if ($_SESSION['adminID'] == $userID) {
+									echo "<span><a class='achievement_link'href='adminhelp.php'>:Most Disliked Post:</a></span>";
+								}
+								else{
+									echo "<span><a class='achievement_link'href='help.php'>:Most Disliked Post:</a></span>";
+								}
 							}
 						}
 
@@ -307,7 +342,12 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 							$row_group_count = $result_group_count->fetch_assoc();
 							$groupCount = $row_group_count['group_count'];
 							if($groupCount > 3) {
-								echo "<span>:Group Collector:</span>";
+								if ($_SESSION['adminID'] == $userID) {
+									echo "<span><a class='achievement_link'href='adminhelp.php'>:Group Collector:</a></span>";
+								}
+								else{
+									echo "<span><a class='achievement_link'href='help.php'>:Group Collector:</a></span>";
+								}
 							}
 						}
 					}
