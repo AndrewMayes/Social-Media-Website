@@ -230,6 +230,11 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 					<div class="help_image"><img width=30% height=30% src="img/groups_groups.png" border="2"></div>
 					<div class='help_paragraph'>Click one of your groups and it will redirect you to your home group.</div>
 					<div class="help_image"><img width=50% height=50% src="img/groups_admin.png" border="2"></div>
+					<h3>Group Access</h3>
+						<div class='help_paragraph'>Groups can be <b>public</b> or <b>private.</b></div>
+						<div class='help_paragraph'>You can view (read posts and replies) public groups; however, you must first join the group before you are able to post, reply, like, or dislike.</div>
+						<div class='help_paragraph'>You can not view or interact with private groups unless you are invited to join the group. Once invited, accept your invite to gain access to the group.</div>
+						<div class='help_paragraph'>*This applies to admins as well. To circumvent this, simply add yourself to any group in the "Group Administration" tab*.</div>
 					</span>
 				</div>
 			</div>
