@@ -1,4 +1,10 @@
 <?php
+	/*
+
+	References:	https://www.cs.odu.edu/~jbrunelle/cs518/examples/captcha/captcha.html
+
+	*/
+
 	session_start();
 	if(isset($_SESSION['email'])){
 		header("Location: home.php?msg=" . urlencode('already_has_account'));
@@ -11,6 +17,12 @@
 		<title>Social Media Prototype Testing</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		<script type='text/javascript'>
+			function reCaptchad(){
+				document.getElementById("loggin_submit").disabled = false;
+			}
+     </script>
 	</head>
 	<body>
 		<div class="header">
@@ -33,7 +45,8 @@
 						<input id="loggin_text" type="text" name="signupusername" size="25" placeholder="Username" /> <br /><br />
 						<input id="loggin_text" type="text" name="signupemail" size="25" placeholder="Email Address" /> <br /><br />
 						<input id="loggin_text" type="password" name="signuppassword" size="25" placeholder="Password" /> <br /><br />
-						<input id="loggin_submit" type="submit" name="submit" value="Sign Up"/>
+						<div class="g-recaptcha" data-sitekey="6Le2_XwUAAAAALvzJaxGt3ZIhY-OnFQBrmKcqBUJ" data-callback="reCaptchad"></div>
+						<input id="loggin_submit" type="submit" name="submit" value="Sign Up" disabled='true'/>
 					</form>
 				</td>
 			</tr>
