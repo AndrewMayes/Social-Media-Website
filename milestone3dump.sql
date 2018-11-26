@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2018 at 12:34 AM
+-- Generation Time: Nov 26, 2018 at 05:08 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `cs418` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cs418`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `direct_messages`
+--
+
+DROP TABLE IF EXISTS `direct_messages`;
+CREATE TABLE `direct_messages` (
+  `msg_id` int(10) UNSIGNED NOT NULL,
+  `userid1` int(10) UNSIGNED NOT NULL,
+  `userid2` int(10) UNSIGNED NOT NULL,
+  `msg` varchar(6000) NOT NULL,
+  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `direct_messages`
+--
+
+INSERT INTO `direct_messages` (`msg_id`, `userid1`, `userid2`, `msg`, `post_time`) VALUES
+(1, 1, 2, 'direct message 1', '2018-11-26 22:07:01'),
+(2, 2, 1, 'direct message 2', '2018-11-26 22:07:25');
 
 -- --------------------------------------------------------
 
@@ -252,6 +275,14 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `i
 --
 
 --
+-- Indexes for table `direct_messages`
+--
+ALTER TABLE `direct_messages`
+  ADD PRIMARY KEY (`msg_id`),
+  ADD KEY `userid1` (`userid1`),
+  ADD KEY `userid2` (`userid2`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -316,6 +347,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `direct_messages`
+--
+ALTER TABLE `direct_messages`
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
@@ -338,6 +374,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `direct_messages`
+--
+ALTER TABLE `direct_messages`
+  ADD CONSTRAINT `direct_messages_ibfk_1` FOREIGN KEY (`userid1`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `direct_messages_ibfk_2` FOREIGN KEY (`userid2`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `groups`
