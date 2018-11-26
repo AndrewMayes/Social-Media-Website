@@ -18,6 +18,10 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 		$groupID = "1";
 	}
 
+	if(isset($_GET['id'])) {
+		$uID = $_GET['id'];	
+	}
+	
 	//getUserID();
 	//turn these into functions soon.
 	//retrieve UserID from database
@@ -231,6 +235,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						echo $profileFname;
 						echo " " . $profileLname;
 					echo "</div>";
+					echo '<button type=\'button\' onclick=\'location.href = "dm.php?id='.$uID.'"\'>Direct Message!</button>';
 				?>
 				</b>
 				</center>
