@@ -235,7 +235,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						echo $profileFname;
 						echo " " . $profileLname;
 					echo "</div>";
-					echo '<button type=\'button\' onclick=\'location.href = "dm.php?id='.$uID.'"\'>Direct Message!</button>';
+					echo '<button class="dm" type=\'button\' onclick=\'location.href = "dm.php?id='.$uID.'"\'>Direct Message!</button>';
 				?>
 				</b>
 				</center>
