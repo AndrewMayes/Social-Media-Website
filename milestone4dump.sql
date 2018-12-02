@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2018 at 05:08 PM
--- Server version: 5.7.24-0ubuntu0.16.04.1
+-- Generation Time: Dec 02, 2018 at 05:31 PM
+-- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -263,12 +263,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `username`, `img`, `admin`) VALUES
-(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', 'profiledefault.png', 0),
-(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', 'profiledefault.png', 0),
-(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', 'profiledefault.png', 0),
-(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', 'profiledefault.png', 0),
-(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', 'profiledefault.png', 0),
-(6, 'admin', 'admin', 'admin', 'admin', 'admin', 'profiledefault.png', 1);
+(1, 'Tow', 'Mater', '@mater', 'mater@rsprings.gov', 'mater', '', 0),
+(2, 'Sally', 'Carrera', '@sally', 'porsche@rsprings.gov', 'sally', '', 0),
+(3, 'Doc', 'Hudson', '@doc', 'hornet@rsprings.gov', 'doc', '', 0),
+(4, 'Finn', 'McMissile', '@mcmissile', 'topsecret@agent.org', 'mcmissile', '', 0),
+(5, 'Lightning', 'McQueen', '@mcqueen', 'kachow@rusteze.com', 'mcqueen', '', 0),
+(6, 'admin', 'admin', 'admin', 'admin', 'admin', '', 1);
 
 --
 -- Indexes for dumped tables
