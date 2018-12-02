@@ -254,7 +254,7 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `img` varchar(580) NOT NULL DEFAULT 'profiledefault.png',
+  `img` varchar(580) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
