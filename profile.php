@@ -213,7 +213,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 					
                 ?>
 
-				<?php if(isset($_SESSION['username'])){ ?>
+				<?php if($userID == $uID){ ?>
 					<a href="#modal" class="modal-trigger">Change Picture</a>
 					<form action="deleteimg.php" method="post">
 						<button class="delete_img" type="submit" name="delete">Default Picture</button>
