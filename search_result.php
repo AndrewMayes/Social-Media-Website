@@ -32,7 +32,7 @@
 				
 					<a class="search_user_a" href= profile.php?id='. $userID . '>
 						<div class="search_users">
-							<span><img id="search_avatar"width="50" height="50" src="https://www.gravatar.com/avatar/'.md5($row['email']).'?d=retro" alt= "Profile Pic">'.$row["fname"].' '.$row["lname"].' ('.$row["username"].')</span>
+							<span><img id="search_avatar"width="50" height="50" src="uploads/'.$row['img'].'" alt= "Profile Pic">'.$row["fname"].' '.$row["lname"].' ('.$row["username"].')</span>
 						</div>
 					</a>		
 					

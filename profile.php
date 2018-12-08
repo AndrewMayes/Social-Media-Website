@@ -156,11 +156,13 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 			<div class="profile">
 			<center>
 				<?php
-				if(isset($_SESSION['username'])) {
+				if(isset($_SESSION['email'])) {
 
 				?>
 
                 <?php
+
+
 					if(isset($_POST['upload'])){
 
 						$file = $_FILES['file'];
@@ -179,9 +181,10 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 						if(in_array($fileActualExt, $allowed)) {
 							if ($fileError === 0) {
 								if ($fileSize < 1000000) {
-									$fileDestination = 'uploads/'.$fileName;
+									$fileNewName = "profile".$profileUsername.".". $fileActualExt;
+									$fileDestination = 'uploads/'.$fileNewName;
 									move_uploaded_file($fileTmpName, $fileDestination);
-									$result = mysqli_query($conn,"UPDATE users SET img = '".$fileName."' WHERE username = '".$profileUsername."'");
+									$result = mysqli_query($conn,"UPDATE users SET img = '".$fileNewName."' WHERE username = '".$profileUsername."'");
 									header("Location: profile.php?upload_success");
 								} else {
 									echo "Your file is too big!";
@@ -207,10 +210,15 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 									echo "<img id='avatar' width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
 							}
 							echo "<br>";
-					}
+					
                 ?>
-				<a href="#modal" class="modal-trigger">Change Picture</a>
 
+				<?php if(isset($_SESSION['username'])){ ?>
+					<a href="#modal" class="modal-trigger">Change Picture</a>
+					<form action="deleteimg.php" method="post">
+						<button class="delete_img" type="submit" name="delete">Default Picture</button>
+					</form>
+				<?php }?>
 				<div class="modal" id="modal">
 					<div class="modal__dialog">
 						<section class="modal__content">
@@ -263,6 +271,7 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 								echo "<span>"."User is only in the global group"."</span>";
 							}
 						}
+					}
 					?>
 				</ul>
 			</div>

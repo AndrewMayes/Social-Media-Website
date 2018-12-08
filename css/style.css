@@ -834,3 +834,11 @@ input[type=submit]:hover {
 	width: 120px;
 	margin: 5px 5px 5px 5px;
 }
+
+.delete_img{
+	border: none;
+	border-radius: 4px;
+	height: 25px;
+	width: 120px;
+	margin: 5px 5px 5px 5px;
+}
