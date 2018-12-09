@@ -309,13 +309,27 @@
 								var gravatar = "https://www.gravatar.com/avatar/"+msgs[i].email+"?d=retro";
 
 								if(gravatar){
-									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "
+									if(msgs[i].image!=null) {
+										output+= "<img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+									} else {
+										output+= msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+									}
 								} else {
-									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
-
+									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "
+									if(msgs[i].image!=null) {
+										output+= "<img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+									} else {
+										output+= msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>"; 
+									}
 								}
 							} else {
-								output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+								output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "
+								if(msgs[i].image!=null) {
+									output+= "<img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+								} else {
+									output+= msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='reply_pos'><form id="+msgs[i].msg_id+" onsubmit='postReply(event,"+msgs[i].msg_id+")'><input id='replying"+msgs[i].msg_id+"' class='replying' type='text' name='reply' placeholder='Post Your Reply...'><input type='hidden' name='commentID' id='commentID' value='"+msgs[i].msg_id+"'/><input id='reply_submit' type='submit' name='reply_submit' value='Reply!'></form></div><form action='home.php?id="+ID+" &liked="+msgs[i].msg_id+"' method='POST'><div class='likeys'><input id='like_input'type='submit' name='like' value='Like'> "+msgs[i].likes+" likes</div></form><form action='home.php?id="+ID+" &disliked="+msgs[i].msg_id+"' method='POST'><div class='dislikeys'><input id='dislike_input'type='submit' name='dislike' value='Dislike'> "+msgs[i].dislikes+" dislikes</div></form><span><button type='button' id='show_replies' onclick='toggleReplies(event,"+msgs[i].msg_id+")'>Show Replies</button></span>";
+								}
 							}
 						
 							if (adminID == userID){
@@ -427,9 +441,58 @@
 		</div>
 		
 		<div class="posting">
-		<?php			
+		<?php
+		
+			if(isset($_POST['imgurl'])){
+				$archivedQuery = "SELECT isArchived FROM groups WHERE group_id = $groupID";
+				$archived = $conn->query($archivedQuery);
+				if ($archived->num_rows > 0) {
+					while ($row = $archived->fetch_assoc()) {
+						$resultArchived = $row['isArchived'];
+					}
+				}
+				if ($resultArchived == 0) {
+					$isinQuery = "SELECT * FROM group_users a WHERE a.user_id = $userID AND a.group_id = $groupID";
+					$isinResult = $conn->query($isinQuery);
+					if ($isinResult->num_rows > 0) {
+						/*
+						$safeurl = mysqli_real_escape_string($conn, $_POST['imgurl']);
+						$url = $_POST['imgurl'];
+						//*reference for this is shown at top of file*
+						//add time to the current filename
+						$name = basename($url);
+						list($txt, $ext) = explode(".", $name);
+						$name = $txt.time();
+						$name = $name.".".$ext;
+						
+						//check if the files are only image
+						if($ext == "jpg" or $ext == "png" or $ext == "gif" or $ext == "jpeg"){
+						//here is the actual code to get the file from the url and save it to the uploads folder
+						//get the file from the url using file_get_contents and put it into the folder using file_put_contents
+						$upload = file_put_contents("uploads/$name",file_get_contents($url));
+						}*/
+
+						$safeurl = mysqli_real_escape_string($conn, $_POST['imgurl']);
+						$url = $_POST['imgurl'];
+						$data = file_get_contents($url);
+						$new = basename($url);
+						$upload = file_put_contents("uploads/$new",$data);
+
+						$query = "INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`, `file`, `image`) VALUES (NULL, '" . $userID . "', '', CURRENT_TIMESTAMP, '" . $groupID . "',0,0,0,0,NULL,'".$safeurl."');";
+						$conn->query($query); 
+						$conn->close();
+					} else {
+		
+					}
+				}
+			}
+
 			echo "<form id=enterMsg>
 			<input id='messeging' type='text' required='required' name='message' placeholder='Post Your Status...'>
+			<input id='msg_submit' type='submit' name='submit' value='Post!'>
+			</form>";
+			echo "<form id=enterUrl>
+			<input id='url' type='text' required='required' name='message' placeholder='Post Your Status...'>
 			<input id='msg_submit' type='submit' name='submit' value='Post!'>
 			</form>";
 
@@ -489,6 +552,7 @@
 		<script>
 		
 			document.getElementById('enterMsg').addEventListener('submit', postMessage);
+			document.getElementById('enterUrl').addEventListener('submit', postImgUrl);
 			document.getElementById('enterMsg').addEventListener('submit', displayMessages);
 			/*
 			function myFunction() {
@@ -514,6 +578,22 @@
 
 				xhr.send(params);
 				document.getElementById('enterMsg').reset();
+			}
+
+			function postImgUrl(e) {
+				e.preventDefault();
+				
+				var msg = document.getElementById('url').value;
+				var params = "imgurl="+msg;
+
+				var ID = "<?php echo $groupID ?>";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'home.php?id='+ID,false);
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+				xhr.send(params);
+				document.getElementById('enterUrl').reset();
 			}
 
 			function postReply(e,num) {
