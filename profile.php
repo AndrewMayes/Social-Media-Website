@@ -205,7 +205,13 @@ References: https://www.youtube.com/watch?v=JNtZl9SMmLQ
 					while($row_img = mysqli_fetch_assoc($result_img)){
 							
 							if($row_img['img'] == ''){
-									echo "<img id='avatar' width='300' height='300' src='https://www.gravatar.com/avatar/".md5($row_img['email'])."?d=retro' alt='Default Profile Pic'>";
+								$gravatar = "https://www.gravatar.com/avatar/".md5($row_img['email'])."?d=retro";
+								
+								if(isset($gravatar)){
+									echo "<img id='avatar' width='300' height='300' src= $gravatar alt='Default Profile Pic'>";
+								} else {
+									echo "<img id='avatar' width='300' height='300' src='uploads/profiledefault.png' alt='Default Profile Pic'>";
+								}
 							} else {
 									echo "<img id='avatar' width='300' height='300' src='uploads/".$row_img['img']."' alt='Profile Pic'>";
 							}
