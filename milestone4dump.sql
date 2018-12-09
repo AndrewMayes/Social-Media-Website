@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2018 at 10:28 PM
--- Server version: 5.7.24-0ubuntu0.16.04.1
+-- Generation Time: Dec 02, 2018 at 05:31 PM
+-- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -43,8 +43,7 @@ CREATE TABLE `direct_messages` (
 
 INSERT INTO `direct_messages` (`msg_id`, `userid1`, `userid2`, `msg`, `post_time`) VALUES
 (1, 1, 2, 'direct message 1', '2018-11-26 22:07:01'),
-(2, 2, 1, 'direct message 2', '2018-11-26 22:07:25'),
-(3, 1, 1, 'howdy ', '2018-12-09 03:13:42');
+(2, 2, 1, 'direct message 2', '2018-11-26 22:07:25');
 
 -- --------------------------------------------------------
 
@@ -131,48 +130,44 @@ CREATE TABLE `messages` (
   `likes` int(10) UNSIGNED NOT NULL,
   `dislikes` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `hasChildren` tinyint(1) NOT NULL DEFAULT '0',
-  `file` varchar(580) DEFAULT NULL,
-  `image` varchar(580) DEFAULT NULL
+  `hasChildren` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`, `file`, `image`) VALUES
-(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0, 0, NULL, NULL),
-(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0, 0, NULL, NULL),
-(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0, 0, NULL, NULL),
-(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0, 0, NULL, NULL),
-(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0, 0, NULL, NULL),
-(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0, 0, NULL, NULL),
-(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0, 0, NULL, NULL),
-(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0, 1, NULL, NULL),
-(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0, 0, NULL, NULL),
-(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0, 0, NULL, NULL),
-(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0, 0, NULL, NULL),
-(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0, 0, 0, 0, NULL, NULL),
-(13, 1, '1', '2018-10-30 18:44:04', 1, 2, 1, 0, 0, NULL, NULL),
-(14, 1, '2', '2018-10-30 18:44:05', 1, 1, 0, 0, 1, NULL, NULL),
-(15, 1, '1', '2018-10-30 18:46:16', 4, 0, 1, 0, 0, NULL, NULL),
-(16, 1, '2', '2018-10-30 18:46:17', 4, 0, 0, 0, 1, NULL, NULL),
-(17, 1, 'main', '2018-10-30 18:49:24', 2, 0, 0, 0, 1, NULL, NULL),
-(18, 1, 'mainnn', '2018-10-30 18:51:33', 4, 0, 0, 0, 0, NULL, NULL),
-(19, 1, 'new post', '2018-11-09 23:39:02', 1, 1, 1, 0, 0, NULL, NULL),
-(20, 1, 'postttttt', '2018-11-09 23:47:43', 1, 1, 1, 0, 0, NULL, NULL),
-(21, 1, 'weeeeeeeeeeee', '2018-11-09 23:49:15', 1, 1, 0, 0, 0, NULL, NULL),
-(22, 1, 'pop', '2018-11-09 23:50:43', 1, 1, 1, 0, 0, NULL, NULL),
-(23, 1, 'k', '2018-11-09 23:53:18', 1, 1, 0, 0, 0, NULL, NULL),
-(24, 1, 'u', '2018-11-09 23:55:36', 1, 1, 0, 0, 0, NULL, NULL),
-(25, 1, 'ppppp', '2018-11-09 23:57:58', 1, 1, 1, 0, 0, NULL, NULL),
-(26, 1, 'kkkkk', '2018-11-09 23:58:05', 1, 1, 1, 0, 0, NULL, NULL),
-(27, 1, 'llll', '2018-11-10 00:02:37', 1, 0, 0, 0, 0, NULL, NULL),
-(28, 1, 'top', '2018-11-10 00:06:05', 1, 0, 0, 0, 0, NULL, NULL),
-(29, 1, 'hiii', '2018-11-10 00:20:42', 1, 1, 0, 0, 0, NULL, NULL),
-(30, 1, 'newest', '2018-11-10 00:21:45', 1, 0, 1, 0, 0, NULL, NULL),
-(31, 1, 'test', '2018-12-09 03:13:27', 1, 0, 0, 0, 0, NULL, NULL),
-(32, 1, '1', '2018-12-09 03:15:22', 1, 0, 0, 0, 0, NULL, NULL);
+INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES
+(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0, 0),
+(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0, 0),
+(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0, 0),
+(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0, 0),
+(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0, 0),
+(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0, 0),
+(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0, 0),
+(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0, 1),
+(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0, 0),
+(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0, 0),
+(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0, 0),
+(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0, 0, 0, 0),
+(13, 1, '1', '2018-10-30 18:44:04', 1, 2, 1, 0, 0),
+(14, 1, '2', '2018-10-30 18:44:05', 1, 1, 0, 0, 1),
+(15, 1, '1', '2018-10-30 18:46:16', 4, 0, 1, 0, 0),
+(16, 1, '2', '2018-10-30 18:46:17', 4, 0, 0, 0, 1),
+(17, 1, 'main', '2018-10-30 18:49:24', 2, 0, 0, 0, 1),
+(18, 1, 'mainnn', '2018-10-30 18:51:33', 4, 0, 0, 0, 0),
+(19, 1, 'new post', '2018-11-09 23:39:02', 1, 1, 1, 0, 0),
+(20, 1, 'postttttt', '2018-11-09 23:47:43', 1, 1, 1, 0, 0),
+(21, 1, 'weeeeeeeeeeee', '2018-11-09 23:49:15', 1, 1, 0, 0, 0),
+(22, 1, 'pop', '2018-11-09 23:50:43', 1, 1, 1, 0, 0),
+(23, 1, 'k', '2018-11-09 23:53:18', 1, 1, 0, 0, 0),
+(24, 1, 'u', '2018-11-09 23:55:36', 1, 1, 0, 0, 0),
+(25, 1, 'ppppp', '2018-11-09 23:57:58', 1, 1, 1, 0, 0),
+(26, 1, 'kkkkk', '2018-11-09 23:58:05', 1, 1, 1, 0, 0),
+(27, 1, 'llll', '2018-11-10 00:02:37', 1, 0, 0, 0, 0),
+(28, 1, 'top', '2018-11-10 00:06:05', 1, 0, 0, 0, 0),
+(29, 1, 'hiii', '2018-11-10 00:20:42', 1, 1, 0, 0, 0),
+(30, 1, 'newest', '2018-11-10 00:21:45', 1, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -355,7 +350,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `direct_messages`
 --
 ALTER TABLE `direct_messages`
-  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -365,7 +360,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `msg_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `sub_groups`
 --

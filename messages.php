@@ -51,7 +51,7 @@
 
 
 
-	$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes, email, image from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = 0 ORDER BY msg_id DESC LIMIT ".$pageFirstResult.",".$numPerPage."";
+	$postFeed = "SELECT group_id, img, username, msg, post_time, msg_id, likes, dislikes, email from users inner join messages on users.id = messages.user_id WHERE group_id = $groupID AND parent_id = 0 ORDER BY msg_id DESC LIMIT ".$pageFirstResult.",".$numPerPage."";
 	$result = $conn->query($postFeed);
 	if ($result->num_rows > 0) { 
 		// output data of each row
