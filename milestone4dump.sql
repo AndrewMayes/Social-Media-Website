@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2018 at 05:31 PM
--- Server version: 5.7.23-0ubuntu0.16.04.1
+-- Generation Time: Dec 10, 2018 at 01:00 AM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -21,7 +21,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `cs418` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cs418`;
-
 -- --------------------------------------------------------
 
 --
@@ -130,44 +129,47 @@ CREATE TABLE `messages` (
   `likes` int(10) UNSIGNED NOT NULL,
   `dislikes` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `hasChildren` tinyint(1) NOT NULL DEFAULT '0'
+  `hasChildren` tinyint(1) NOT NULL DEFAULT '0',
+  `image` varchar(580) DEFAULT NULL,
+  `file` varchar(580) DEFAULT NULL,
+  `cleanName` varchar(580) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`) VALUES
-(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0, 0),
-(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0, 0),
-(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0, 0),
-(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0, 0),
-(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0, 0),
-(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0, 0),
-(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0, 0),
-(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0, 1),
-(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0, 0),
-(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0, 0),
-(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0, 0),
-(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0, 0, 0, 0),
-(13, 1, '1', '2018-10-30 18:44:04', 1, 2, 1, 0, 0),
-(14, 1, '2', '2018-10-30 18:44:05', 1, 1, 0, 0, 1),
-(15, 1, '1', '2018-10-30 18:46:16', 4, 0, 1, 0, 0),
-(16, 1, '2', '2018-10-30 18:46:17', 4, 0, 0, 0, 1),
-(17, 1, 'main', '2018-10-30 18:49:24', 2, 0, 0, 0, 1),
-(18, 1, 'mainnn', '2018-10-30 18:51:33', 4, 0, 0, 0, 0),
-(19, 1, 'new post', '2018-11-09 23:39:02', 1, 1, 1, 0, 0),
-(20, 1, 'postttttt', '2018-11-09 23:47:43', 1, 1, 1, 0, 0),
-(21, 1, 'weeeeeeeeeeee', '2018-11-09 23:49:15', 1, 1, 0, 0, 0),
-(22, 1, 'pop', '2018-11-09 23:50:43', 1, 1, 1, 0, 0),
-(23, 1, 'k', '2018-11-09 23:53:18', 1, 1, 0, 0, 0),
-(24, 1, 'u', '2018-11-09 23:55:36', 1, 1, 0, 0, 0),
-(25, 1, 'ppppp', '2018-11-09 23:57:58', 1, 1, 1, 0, 0),
-(26, 1, 'kkkkk', '2018-11-09 23:58:05', 1, 1, 1, 0, 0),
-(27, 1, 'llll', '2018-11-10 00:02:37', 1, 0, 0, 0, 0),
-(28, 1, 'top', '2018-11-10 00:06:05', 1, 0, 0, 0, 0),
-(29, 1, 'hiii', '2018-11-10 00:20:42', 1, 1, 0, 0, 0),
-(30, 1, 'newest', '2018-11-10 00:21:45', 1, 0, 1, 0, 0);
+INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `post_time`, `group_id`, `likes`, `dislikes`, `parent_id`, `hasChildren`, `image`, `file`, `cleanName`) VALUES
+(1, 5, 'Hello. This is my first post!', '2018-10-23 02:52:11', 1, 1, 0, 0, 0, NULL, NULL, NULL),
+(2, 2, '<b>hello there friends</b>', '2018-10-23 02:53:45', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(3, 3, 'Is this the home group?', '2018-10-23 02:54:33', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(4, 4, 'Hey', '2018-10-23 02:55:02', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(5, 5, 'I hate racing games', '2018-10-23 02:55:24', 2, 0, 0, 0, 0, NULL, NULL, NULL),
+(6, 4, 'Are there any good spy video games?', '2018-10-23 02:57:46', 2, 1, 0, 0, 0, NULL, NULL, NULL),
+(7, 4, 'Howdy!', '2018-10-23 02:58:17', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(8, 3, 'testing testing', '2018-10-23 02:58:52', 3, 0, 0, 0, 1, NULL, NULL, NULL),
+(9, 1, 'where am I?', '2018-10-23 02:59:38', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(10, 5, 'kachow', '2018-10-23 03:00:17', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(11, 1, 'hello bois?', '2018-10-26 00:05:09', 1, 2, 0, 0, 0, NULL, NULL, NULL),
+(12, 5, 'nicely done!', '2018-10-26 00:35:26', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(13, 1, '1', '2018-10-30 18:44:04', 1, 2, 1, 0, 0, NULL, NULL, NULL),
+(14, 1, '2', '2018-10-30 18:44:05', 1, 1, 0, 0, 1, NULL, NULL, NULL),
+(15, 1, '1', '2018-10-30 18:46:16', 4, 0, 1, 0, 0, NULL, NULL, NULL),
+(16, 1, '2', '2018-10-30 18:46:17', 4, 0, 0, 0, 1, NULL, NULL, NULL),
+(17, 1, 'main', '2018-10-30 18:49:24', 2, 0, 0, 0, 1, NULL, NULL, NULL),
+(18, 1, 'mainnn', '2018-10-30 18:51:33', 4, 0, 0, 0, 0, NULL, NULL, NULL),
+(19, 1, 'new post', '2018-11-09 23:39:02', 1, 1, 1, 0, 0, NULL, NULL, NULL),
+(20, 1, 'postttttt', '2018-11-09 23:47:43', 1, 1, 1, 0, 0, NULL, NULL, NULL),
+(21, 1, 'weeeeeeeeeeee', '2018-11-09 23:49:15', 1, 1, 0, 0, 0, NULL, NULL, NULL),
+(22, 1, 'pop', '2018-11-09 23:50:43', 1, 1, 1, 0, 0, NULL, NULL, NULL),
+(23, 1, 'k', '2018-11-09 23:53:18', 1, 1, 0, 0, 0, NULL, NULL, NULL),
+(24, 1, 'u', '2018-11-09 23:55:36', 1, 1, 0, 0, 0, NULL, NULL, NULL),
+(25, 1, 'ppppp', '2018-11-09 23:57:58', 1, 1, 1, 0, 0, NULL, NULL, NULL),
+(26, 1, 'kkkkk', '2018-11-09 23:58:05', 1, 1, 1, 0, 0, NULL, NULL, NULL),
+(27, 1, 'llll', '2018-11-10 00:02:37', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(28, 1, 'top', '2018-11-10 00:06:05', 1, 0, 0, 0, 0, NULL, NULL, NULL),
+(29, 1, 'hiii', '2018-11-10 00:20:42', 1, 1, 0, 0, 0, NULL, NULL, NULL),
+(30, 1, 'newest', '2018-11-10 00:21:45', 1, 0, 1, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
