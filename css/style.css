@@ -835,7 +835,22 @@ input[type=submit]:hover {
 	margin: 5px 5px 5px 5px;
 }
 
+.default_pos {
+	margin-left: 135px;
+}
+
 .delete_img{
+	border: none;
+	display: inline;
+	position: absolute;
+	left: 48.5%;
+	border-radius: 4px;
+	height: 25px;
+	width: 120px;
+	margin: 5px 5px 5px 5px;
+}
+
+.default_img{
 	border: none;
 	border-radius: 4px;
 	height: 25px;
