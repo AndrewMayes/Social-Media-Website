@@ -111,6 +111,18 @@
 		<script src="script/dropdown.js" type="text/javascript"></script>
 		<script>
 
+		/*
+		Reference: https://www.youtube.com/watch?v=BkcOqyq8W2M
+		*/
+		function imagepreview(input) {
+			if (input.files && input.files[0]) {
+				var filerd = new FileReader();
+				filerd.onload=function (e) {
+					$("#imgpreview").attr("src", e.target.result);
+				};
+				filerd.readAsDataURL(input.files[0]);
+			}
+		}
 
 		function displayMessages() {
 			var xhr = new XMLHttpRequest();
@@ -130,13 +142,31 @@
 								var gravatar = "https://www.gravatar.com/avatar/"+msgs[i].email+"?d=retro";
 
 								if(gravatar){
-									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									if (msgs[i].image != null) {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <img class='msgimage' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									} else if (msgs[i].file != null) {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <a href='uploads/"+msgs[i].file+"' download>"+msgs[i].cleanName+"</a></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									} else {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src="+gravatar+" alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									}
 								} else {
-									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									if (msgs[i].image != null) {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <img class='msgimage' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									} else if (msgs[i].file != null) {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <a href='uploads/"+msgs[i].file+"' download>"+msgs[i].cleanName+"</a></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									} else {
+										output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/profiledefault.png' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+									}
 	
 								}
 							} else {
-								output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+								if (msgs[i].image != null) {
+									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <img class='msgimage' src='uploads/"+msgs[i].image+"' alt='Profile Pic'></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+								} else if (msgs[i].file != null) {
+									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": <a href='uploads/"+msgs[i].file+"' download>"+msgs[i].cleanName+"</a></h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+								} else {
+									output+= "<div id='msgWrapper"+msgs[i].msg_id+"'><span><img id ='chat_avatar' width='50' height='50' src='uploads/"+msgs[i].img+"' alt='Profile Pic'><h2 id ='userName'>"+msgs[i].username+": "+msgs[i].msg+"</h2><div class='time'>"+msgs[i].post_time+"</div></span><div class='underline'></div></div>";
+								}
 							}
 						
 					}
@@ -236,6 +266,28 @@
 			<input id='messeging' type='text' required='required' name='message' placeholder='Post Your Message...'>
 			<input id='msg_submit' type='submit' name='submit' value='Post!'>
 			</form>";
+
+			//reference: https://www.youtube.com/watch?v=BkcOqyq8W2M
+			echo "<a href='#modal' class='modal-trigger-img'>Upload!</a>";
+
+			echo	"<div class='modal' id='modal'>
+						<div class='modal__dialog'>
+							<section class='modal__content'>
+								<header class='modal__header'>
+									Upload Files and Images
+									<a href='#' class='modal__close'>Close</a>
+								</header>
+
+								<div class='modal__body'>
+								<form action='dmupload.php?uID=$uID' method='post' enctype='multipart/form-data'>
+									<input type='file' name='fileToUpload' id='fileToUpload' onchange='imagepreview(this);'>
+									<img id='imgpreview' alt='Image Preview'/>
+									<input id='up_submit' type='submit' value='Upload!' name='submit'>
+								</form>
+								</div>
+							</section>
+						</div>
+					</div>";
 
 		?>
 		</div>

@@ -52,7 +52,7 @@
 
 	$pageFirstResult = ($page-1)*$numPerPage; //the limit starting number
 
-	$postFeed = "SELECT img, username, msg, post_time, msg_id, email from users inner join direct_messages on users.id = direct_messages.userid1 WHERE (userid1 = $userID AND userid2 = $uID) OR (userid1 = $uID AND userid2 = $userID) ORDER BY msg_id DESC LIMIT ".$pageFirstResult.",".$numPerPage."";
+	$postFeed = "SELECT img, username, msg, post_time, msg_id, email, file, image, cleanName from users inner join direct_messages on users.id = direct_messages.userid1 WHERE (userid1 = $userID AND userid2 = $uID) OR (userid1 = $uID AND userid2 = $userID) ORDER BY msg_id DESC LIMIT ".$pageFirstResult.",".$numPerPage."";
 	$result = $conn->query($postFeed);
 	if ($result->num_rows > 0) { 
 		// output data of each row

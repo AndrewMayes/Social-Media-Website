@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2018 at 01:00 AM
+-- Generation Time: Dec 11, 2018 at 01:12 AM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -33,16 +33,19 @@ CREATE TABLE `direct_messages` (
   `userid1` int(10) UNSIGNED NOT NULL,
   `userid2` int(10) UNSIGNED NOT NULL,
   `msg` varchar(6000) NOT NULL,
-  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `image` varchar(580) DEFAULT NULL,
+  `file` varchar(580) DEFAULT NULL,
+  `cleanName` varchar(580) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `direct_messages`
 --
 
-INSERT INTO `direct_messages` (`msg_id`, `userid1`, `userid2`, `msg`, `post_time`) VALUES
-(1, 1, 2, 'direct message 1', '2018-11-26 22:07:01'),
-(2, 2, 1, 'direct message 2', '2018-11-26 22:07:25');
+INSERT INTO `direct_messages` (`msg_id`, `userid1`, `userid2`, `msg`, `post_time`, `image`, `file`, `cleanName`) VALUES
+(1, 1, 2, 'direct message 1', '2018-11-26 22:07:01', NULL, NULL, NULL),
+(2, 2, 1, 'direct message 2', '2018-11-26 22:07:25', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
