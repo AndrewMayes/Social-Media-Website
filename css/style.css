@@ -507,7 +507,6 @@ input[type=submit]:hover {
 	border-radius: 3px;
 	margin-top: 3px;
 	color: black;
-
 }
 
 .modal-trigger:hover {
@@ -871,7 +870,7 @@ input[type=submit]:hover {
 .modal-trigger-img{
 	text-decoration: none;
 	padding: 12px 5px 5px 5px;
-	background: #D2CCD9;
+	background: #cccccc;
 	border-radius: 3px;
 	position: absolute;
 	height: 45px;
@@ -880,4 +879,7 @@ input[type=submit]:hover {
 	text-align: center;
 	left: 86%;
 	color: black;
+}
+.modal-trigger-img:hover, .delete_img:hover, .default_img:hover{
+	background-color: #D2CCD9;
 }
