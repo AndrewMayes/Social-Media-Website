@@ -440,11 +440,26 @@
 			</form>";
 
 			//reference: https://www.youtube.com/watch?v=BkcOqyq8W2M
-			echo "<form action='upload.php?gID=$groupID' method='post' enctype='multipart/form-data'>
-			<input type='file' name='fileToUpload' id='fileToUpload' onchange='imagepreview(this);'>
-			<img id='imgpreview' alt='Image Preview'/>
-			<input type='submit' value='Upload Image' name='submit'>
-			</form>";
+			echo "<a href='#modal' class='modal-trigger-img'>Upload!</a>";
+
+			echo	"<div class='modal' id='modal'>
+						<div class='modal__dialog'>
+							<section class='modal__content'>
+								<header class='modal__header'>
+									Upload Files and Images
+									<a href='#' class='modal__close'>Close</a>
+								</header>
+
+								<div class='modal__body'>
+								<form action='upload.php?gID=$groupID' method='post' enctype='multipart/form-data'>
+									<input type='file' name='fileToUpload' id='fileToUpload' onchange='imagepreview(this);'>
+									<img id='imgpreview' alt='Image Preview'/>
+									<input id='up_submit' type='submit' value='Upload!' name='submit'>
+								</form>
+								</div>
+							</section>
+						</div>
+					</div>";
 
 			/*
 			<form id=enterReply>
