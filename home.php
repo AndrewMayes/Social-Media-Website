@@ -439,7 +439,10 @@
 			<input id='msg_submit' type='submit' name='submit' value='Post!'>
 			</form>";
 
-			//reference: https://www.youtube.com/watch?v=BkcOqyq8W2M
+			/*
+			references: https://www.youtube.com/watch?v=BkcOqyq8W2M
+						http://talkerscode.com/webtricks/upload-image-from-url-using-php.php
+			*/
 			echo "<a href='#modal' class='modal-trigger-img'>Upload!</a>";
 
 			echo	"<div class='modal' id='modal'>
@@ -455,6 +458,12 @@
 									<input type='file' name='fileToUpload' id='fileToUpload' onchange='imagepreview(this);'>
 									<img id='imgpreview' alt='Image Preview'/>
 									<input id='up_submit' type='submit' value='Upload!' name='submit'>
+								</form>
+								</div>
+								<div class='modal__body'>
+								<form action='urlimage.php?gID=$groupID' method='post'>
+									<input type='text' name='img_url' placeholder='Enter Image URL'>
+									<input id='up_submit' type='submit' value='Upload!' name='urlimg'>
 								</form>
 								</div>
 							</section>
